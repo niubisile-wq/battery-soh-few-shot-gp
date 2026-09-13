@@ -1,15 +1,15 @@
 % Editable vector artwork. Coordinates in cm; colour is reinforced by labels.
 \begin{tikzpicture}[x=1cm,y=1cm,font=\fontsize{8.5}{10.5}\selectfont,align=center,
-  box/.style={draw=black!45,line width=.65pt,rounded corners=2pt,fill=white,inner sep=6pt},
+  box/.style={draw=black!45,line width=.65pt,rounded corners=1.5pt,fill=white,inner sep=6pt},
   flow/.style={-{Latex[length=2mm]},line width=.85pt,draw=black!70},
   tag/.style={font=\fontsize{8.5}{10.5}\selectfont\bfseries,anchor=west},
   note/.style={font=\fontsize{7.5}{9}\selectfont,text=black!70}]
-\definecolor{srcblue}{HTML}{285A80}
-\definecolor{targetgreen}{HTML}{247A73}
-\definecolor{evalorange}{HTML}{A96326}
-\fill[fill=srcblue!5,rounded corners=3pt] (0,0) rectangle (4.25,-6.15);
-\fill[fill=targetgreen!5,rounded corners=3pt] (4.55,0) rectangle (10.35,-6.15);
-\fill[fill=evalorange!5,rounded corners=3pt] (10.65,0) rectangle (14.9,-6.15);
+\definecolor{srcblue}{HTML}{1F5A85}
+\definecolor{targetgreen}{HTML}{1F756F}
+\definecolor{evalorange}{HTML}{A65E24}
+\fill[fill=srcblue!4,draw=srcblue!18,line width=.4pt,rounded corners=3pt] (0,0) rectangle (4.25,-6.15);
+\fill[fill=targetgreen!4,draw=targetgreen!18,line width=.4pt,rounded corners=3pt] (4.55,0) rectangle (10.35,-6.15);
+\fill[fill=evalorange!4,draw=evalorange!18,line width=.4pt,rounded corners=3pt] (10.65,0) rectangle (14.9,-6.15);
 \node[tag,text=srcblue] at (.2,-.35) {(a) Source fitting};
 \node[tag,text=targetgreen] at (4.75,-.35) {(b) Target prediction};
 \node[tag,text=evalorange] at (10.85,-.35) {(c) Evaluation only};
@@ -38,5 +38,5 @@
 \node[note,text width=3.65cm] at (12.775,-5.65) {No label-feedback path\\to target prediction};
 \node[anchor=north west,align=left,font=\fontsize{7.5}{9}\selectfont,text=black!75,text width=14.6cm] at (.05,-6.4)
   {\textbf{Development scope.} XJTU, MATR and Tongji scores informed architecture and global-strength selection.\\
-   \textbf{Frozen evaluation.} The selected XJTU models and weights were fixed before the CALCE evaluation.};
+   \textbf{Frozen external evaluation.} Selected XJTU models and weights were fixed before external evaluation.};
 \end{tikzpicture}

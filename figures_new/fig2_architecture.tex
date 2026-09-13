@@ -1,17 +1,17 @@
 % Shared style with Figure 1; solid arrows carry predictions, dashed arrows inputs.
 \begin{tikzpicture}[x=1cm,y=1cm,font=\fontsize{8.5}{10.5}\selectfont,align=center,
- box/.style={draw=black!45,line width=.7pt,rounded corners=2pt,fill=white,inner sep=6pt},
+ box/.style={draw=black!45,line width=.7pt,rounded corners=1.5pt,fill=white,inner sep=6pt},
  flow/.style={-{Latex[length=2mm]},line width=1pt,draw=black!75},
- info/.style={-{Latex[length=1.8mm]},line width=.65pt,dashed,draw=black!50},
+ info/.style={-{Latex[length=1.8mm]},line width=.7pt,dashed,draw=black!50},
  note/.style={font=\fontsize{7.5}{9}\selectfont,text=black!70}]
-\definecolor{srcblue}{HTML}{285A80}
-\definecolor{targetgreen}{HTML}{247A73}
+\definecolor{srcblue}{HTML}{1F5A85}
+\definecolor{targetgreen}{HTML}{1F756F}
 \definecolor{funcpurple}{HTML}{73568A}
-\node[box,fill=black!3,text width=14cm,minimum height=.9cm] (inputs) at (7.45,.3)
- {\textbf{Common information for prediction}\\Fitted source state\quad +\quad early target support $S_c$ ($K=10$)\quad +\quad current query signal $x_{cj}$};
-\fill[srcblue!5,rounded corners=3pt] (.05,-.85) rectangle (4.65,-4.95);
-\fill[targetgreen!5,rounded corners=3pt] (5.15,-.85) rectangle (9.75,-4.95);
-\fill[funcpurple!5,rounded corners=3pt] (10.25,-.85) rectangle (14.85,-4.95);
+\node[box,fill=black!2,text width=14cm,minimum height=.9cm] (inputs) at (7.45,.3)
+ {\textbf{Permitted information for query prediction}\\Fitted source state\quad +\quad early target support $S_c$ ($K=10$)\quad +\quad current query signal $x_{cj}$};
+\fill[srcblue!4,draw=srcblue!16,line width=.4pt,rounded corners=3pt] (.05,-.85) rectangle (4.65,-4.95);
+\fill[targetgreen!4,draw=targetgreen!16,line width=.4pt,rounded corners=3pt] (5.15,-.85) rectangle (9.75,-4.95);
+\fill[funcpurple!4,draw=funcpurple!16,line width=.4pt,rounded corners=3pt] (10.25,-.85) rectangle (14.85,-4.95);
 \node[font=\fontsize{8.5}{10.5}\selectfont\bfseries,text=srcblue] at (2.35,-1.15) {Source prediction};
 \node[font=\fontsize{8.5}{10.5}\selectfont\bfseries,text=targetgreen] at (7.45,-1.15) {Waveform conditioning};
 \node[font=\fontsize{8.5}{10.5}\selectfont\bfseries,text=funcpurple] at (12.55,-1.15) {Function conditioning};
@@ -25,6 +25,7 @@
 \node[box,draw=funcpurple,text width=3.65cm,minimum height=2.35cm] (m4) at (12.55,-3.05)
  {\textbf{M4}\quad Random-function GP\\[5pt]Multiscale signal encoding\\Shared/private covariance\\Early-label Helmert contrasts\\[5pt]Conditional SOH estimate $q_4$};
 \draw[info] (inputs.south -| m1.north)--(m1.north);
+\draw[info] (inputs.south west) .. controls (.00,-1.05) and (.00,-3.45) .. (m2.west);
 \draw[info] (inputs.south -| m3.north)--(m3.north);
 \draw[info] (inputs.south -| m4.north)--(m4.north);
 \node[box,draw=targetgreen,fill=targetgreen!8,text width=3.9cm,minimum height=1.1cm] (blend3) at (7.45,-6.05)
