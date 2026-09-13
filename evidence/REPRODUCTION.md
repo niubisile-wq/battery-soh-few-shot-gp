@@ -4,7 +4,7 @@ This package compiles the paper without Python or access to the original researc
 
 ## Numerical checks
 
-Run `python evidence/verify_evidence.py` from the source directory. Only the Python standard library is required. The script checks supplied source hashes, M2/M3/M4 identity records, aggregate metrics and displayed derived quantities. It neither trains a model nor replays model inference or bootstrap sampling.
+Run `python evidence/verify_public_evidence.py` from the repository root. Only the Python standard library is required. The public script checks aggregate metrics, module-effect records, paired intervals and supplied trajectory summaries. It neither trains a model nor replays model inference or bootstrap sampling.
 
 ## Figure regeneration
 
@@ -14,7 +14,7 @@ Install Python with NumPy, pandas and Matplotlib. Run:
 python evidence/regenerate_figures.py
 ```
 
-The default output is `evidence/regenerated_figures/`. To deliberately replace the four manuscript figure files, use `--output figures_revision`. Each figure is saved as PDF and PNG. The saved curves are plotted separately for each source model, without averaging them into an ensemble. PDF bytes can differ across software versions; the numerical inputs are protected by SHA-256 in `provenance.json`.
+The default output is `evidence/regenerated_figures/`. To deliberately replace the four manuscript figure files, use `--output figures_revision`. Each figure is saved as PDF and PNG. The saved curves are plotted separately for each source model, without averaging them into an ensemble. PDF bytes can differ across software versions; the released numerical records are the frozen inputs for comparison.
 
 | Supplementary figure | Output basename | Frozen inputs |
 | --- | --- | --- |
@@ -42,7 +42,7 @@ All CSV/JSON values remain unrounded. Round only after computing a displayed dif
 | s_ranges.tex | calce_ranges.csv, calce_210_trajectories.csv, supplied trajectory arrays |
 | s_cost.tex | stage_cost.csv, aggregate.csv |
 | calce_protocols.tex / combined calce_main.tex | calce_protocols.csv, calce_protocols_original.csv |
-| evidence index | provenance.json |
+| public evidence checks | verify_public_evidence.py |
 
 The M3 candidate and release-acceptance hashes are checked against `m3_selection.json`. M2 remains the frozen v3 candidate. M4 remains the private-function candidate with global multiplier 0.5; fold-specific selected gains can be zero.
 

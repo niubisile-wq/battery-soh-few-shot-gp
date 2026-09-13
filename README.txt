@@ -36,8 +36,7 @@ Overleaf
 
 证据与检查
   evidence/ 包含本轮新增表格对应的未舍入 CSV/JSON，并包含绘图用的保存查询数组，不包含原始测量数据集和模型。
-  evidence/provenance.json 记录源文件位置及 SHA-256。
-  可选：python evidence/verify_evidence.py（只需 Python 标准库）。
+  可选：python evidence/verify_public_evidence.py（只需 Python 标准库）。
   该脚本检查源摘要哈希、模型身份、数值派生和正文一致性；不重训、不做模型推理，
   不重新运行 bootstrap。历史审查记录与本轮检查的范围见 supplementary.pdf。
 
