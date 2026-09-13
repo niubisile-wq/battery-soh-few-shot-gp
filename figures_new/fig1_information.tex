@@ -33,10 +33,6 @@
   {\textbf{Error calculation}\\MAE / RMSE / P95\\Aggregate by cell and group};
 \draw[flow,draw=evalorange,dashed] (truth)--(metrics);
 \draw[flow] (predict.east)--(metrics.west);
-\node[note,text width=3.65cm] at (2.125,-5.65) {No target-query labels\\in fold-level fitting};
-\node[note,text width=5.15cm] at (7.45,-5.65) {No future signals or query-label updates\\No cycle index as a predictive feature};
-\node[note,text width=3.65cm] at (12.775,-5.65) {No label-feedback path\\to target prediction};
-\node[anchor=north west,align=left,font=\fontsize{7.5}{9}\selectfont,text=black!75,text width=14.6cm] at (.05,-6.4)
-  {\textbf{Development scope.} XJTU, MATR and Tongji scores informed architecture and global-strength selection.\\
-   \textbf{Frozen external evaluation.} Selected XJTU models and weights were fixed before external evaluation.};
+% Information restrictions are stated in the caption and main text; the diagram
+% retains only the computational information flow.
 \end{tikzpicture}

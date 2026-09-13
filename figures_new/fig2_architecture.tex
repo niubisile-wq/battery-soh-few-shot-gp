@@ -39,8 +39,6 @@
 \node[box,draw=black!70,text width=3.9cm,minimum height=.65cm] (out) at (12.55,-7.65)
  {\textbf{Current-query SOH}\quad $\widehat y_{cj}$};
 \draw[flow] (blend4)--(out);
-\node[align=left,anchor=west,font=\fontsize{7.5}{9}\selectfont,text=black!75,text width=9.3cm] at (.25,-7.55)
- {\textbf{Fixed blending:} $\gamma_{3f}=0.5w_{3f}$; $\gamma_{4f}=0.5w_{4f}$.\\
- Source validation selects $w_{3f}$ and $w_{4f}$; development selects global multipliers.\\
- Solid arrows: predictions. Dashed arrows: permitted input information.};
+% Blending and arrow conventions are defined in the caption and equations;
+% the diagram retains only the prediction flow and permitted inputs.
 \end{tikzpicture}
