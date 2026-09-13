@@ -11,37 +11,36 @@
 \definecolor{lightgray}{HTML}{F3F4F5}
 \definecolor{lightteal}{HTML}{EAF5F3}
 \definecolor{lightpurple}{HTML}{F2EDF5}
-\fill[lightblue] (0,0) rectangle (15,-2.25);
-\fill[lightgray] (0,-2.25) rectangle (15,-6.55);
-\draw[black!20,line width=.55pt] (0,0) rectangle (15,-6.55);
+\fill[lightblue] (0,0) rectangle (15,-3.00);
+\fill[lightgray] (0,-3.00) rectangle (15,-7.85);
+\draw[black!20,line width=.55pt] (0,0) rectangle (15,-7.85);
 \node[hdr,text=navy] at (.18,-.28) {AUXILIARY BRANCHES};
-\node[hdr,text=black!75] at (.18,-2.53) {MAIN BRANCH: SOURCE PREDICTION AND COMBINATION};
-\node[box,text width=8.0cm,minimum height=.42cm,font=\fontsize{7.2}{8.4}\selectfont] (info) at (7.5,-.62)
+\node[hdr,text=black!75] at (.18,-3.30) {MAIN BRANCH: SOURCE PREDICTION AND COMBINATION};
+\node[box,text width=7.0cm,minimum height=.42cm,font=\fontsize{7.0}{8.2}\selectfont] (info) at (7.5,-.70)
   {\textbf{Permitted inputs:} fitted source state $+$ support $S_c$ ($K=10$) $+$ query $x_{cj}$};
-\node[box,draw=teal,fill=lightteal,text width=3.05cm,minimum height=.92cm] (m3) at (5.0,-1.62)
+\node[box,draw=teal,fill=lightteal,text width=3.05cm,minimum height=.92cm] (m3) at (5.0,-2.08)
   {\textbf{M3: paired-waveform GP}\\Query/support difference\\Source PCA/GP $\rightarrow q_3$};
-\node[box,draw=purple,fill=lightpurple,text width=3.05cm,minimum height=.92cm] (m4) at (10.0,-1.62)
+\node[box,draw=purple,fill=lightpurple,text width=3.05cm,minimum height=.92cm] (m4) at (10.0,-2.08)
   {\textbf{M4: random-function GP}\\Multiscale covariance\\Support contrasts $\rightarrow q_4$};
 \draw[inarr] (info.south -| m3.north)--(m3.north);
 \draw[inarr] (info.south -| m4.north)--(m4.north);
-\node[box,draw=navy,text width=2.7cm,minimum height=.85cm] (m1) at (1.7,-3.62)
+\node[box,draw=navy,text width=2.7cm,minimum height=.85cm] (m1) at (1.7,-4.30)
   {\textbf{B1: B + M1}\\Indicators, PLS GP\\and adaptation};
-\node[box,draw=navy,text width=2.7cm,minimum height=1.0cm] (m2) at (1.7,-5.02)
-  {\textbf{M2: risk selection}\\Parent, bias and physical experts\\40 candidates; 24 bags};
+\node[box,draw=navy,text width=2.7cm,minimum height=1.0cm] (m2) at (1.7,-5.65)
+  {\textbf{M2: risk selection}\\Early-support descriptors\\Parent, bias and physical experts\\40 candidates; 24 bags};
 \draw[arr,draw=navy] (m1)--(m2);
-\draw[inarr] (info.south west) .. controls (-.08,-2.15) and (-.08,-4.8) .. (m2.west);
-\node[box,draw=navy,fill=lightblue,text width=2.15cm,minimum height=.7cm] (p12) at (4.45,-5.45)
+\node[box,draw=navy,fill=lightblue,text width=2.15cm,minimum height=.7cm] (p12) at (4.45,-6.85)
   {\textbf{$p_{B12}$}\\Source prediction};
 \draw[arr,draw=navy] (m2.east)--(p12.west);
-\node[box,draw=teal,fill=lightteal,text width=2.35cm,minimum height=.72cm] (b123) at (7.05,-5.45)
+\node[box,draw=teal,fill=lightteal,text width=2.35cm,minimum height=.72cm] (b123) at (7.05,-6.85)
   {\textbf{B123}\\$(1-\gamma_{3f})p_{B12}+\gamma_{3f}q_3$};
 \draw[arr,draw=navy] (p12.east)--(b123.west);
 \draw[arr,draw=teal] (m3.south)--(b123.north);
-\node[box,draw=purple,fill=lightpurple,text width=2.35cm,minimum height=.72cm] (b1234) at (9.75,-5.45)
+\node[box,draw=purple,fill=lightpurple,text width=2.35cm,minimum height=.72cm] (b1234) at (9.75,-6.85)
   {\textbf{B1234}\\$(1-\gamma_{4f})p_{B123}+\gamma_{4f}q_4$};
 \draw[arr,draw=teal] (b123.east)--(b1234.west);
 \draw[arr,draw=purple] (m4.south)--(b1234.north);
-\node[box,text width=2.1cm,minimum height=.7cm] (out) at (12.65,-5.45)
+\node[box,text width=2.1cm,minimum height=.7cm] (out) at (12.65,-6.85)
   {\textbf{Current-query SOH}\\$\widehat y_{cj}$};
 \draw[arr] (b1234.east)--(out.west);
 \end{tikzpicture}
