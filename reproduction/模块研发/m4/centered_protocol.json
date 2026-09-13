@@ -1,0 +1,12 @@
+{
+  "phase": "Source-domain residual mean separation",
+  "features": ["state", "signal"],
+  "learners": {"ridge": [1, 10, 100], "rbf": [1, 10]},
+  "gains": [0, 0.1, 0.25, 0.5, 1],
+  "clip_soh": 0.05,
+  "mechanism": "For each source domain compute equal-cell mean of complete-parent OOF residual y-parent. Subtract this domain mean from source residual training targets; keep source features unchanged. Never add domain offsets at inference. Offsets stored only for provenance.",
+  "selection": "Original B123 validation domain-equal MAE chooses feature/learner/alpha/gain shared across8parents. All21fold choices frozen before query scoring. Ties smaller gain then key.",
+  "control": "Centered constant is numerically zero and is an identity control, not a new bias correction. Matched ordinary residual with same key/gain required, plus independently selected original plain screen.",
+  "acceptance": "All3dataset MAE/RMSE/P95 independent and incremental improvement;16group complementarity, paired uncertainty and risk stability unchanged",
+  "limits": ["Only source query labels already in original budget are used", "No query-domain truth, inference offsets, datasetwise switches or additional labels", "Demeaning can discard useful signal and is not proof of invariant or causal representation", "Centering targets alone is not joint fixed-effects regression or feature residualization", "Existing parent configuration selection inherited; reused development cohorts, not independent confirmation", "Standard residual centering is not claimed novel; CALCE excluded; M1-M3 unchanged"]
+}

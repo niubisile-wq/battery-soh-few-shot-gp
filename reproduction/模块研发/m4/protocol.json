@@ -1,0 +1,13 @@
+{
+  "phase": "M4 complete-parent conditional residual development",
+  "frozen_parent": "模块研发/results/m3_waveform_candidate_v1",
+  "datasets": ["XJTU", "MATR", "Tongji"],
+  "source_budget": "Exact original per-fold source_keys, at most1000 distinct labels; never replenish after holding domains out",
+  "target_support": 10,
+  "first_step": "Build complete B/B1/B2/B12/B3/B13/B23/B123 source-LODO predictions with nested M2 risk training",
+  "nested_rule": "For meta-held source domain H, base and waveform exclude H; M2 risk training episodes on domain D use base/physical GPs excluding both H and D. Risk head is fitted only on domains other than H.",
+  "configuration_boundary": "Inherit frozen outer configurations, support modes, M2 risk setting index and M3 weight. This nests parameter fitting and risk construction, not historical architecture/configuration selection; development evidence only.",
+  "first_pilot": "MATR:b1 source-only; no new outer query scoring",
+  "acceptance": "M4 independently improves GPR and incrementally improves B123 on all3 datasets MAE/RMSE/P95; full16-group ablation must retain contributions of earlier modules. Report paired intervals, fixed-GP risk sensitivity, simple matched controls and failure cases before selection.",
+  "limits": ["Existing three-module release unchanged", "CALCE excluded from M4 tuning", "No oracle SOH bins at inference", "No guarantee of a passing fourth module", "Residual correction itself not claimed novel"]
+}

@@ -1,0 +1,13 @@
+{
+  "phase": "M3 reference-relative charge geometry development screen v1",
+  "datasets": ["XJTU", "MATR", "Tongji"],
+  "K": 10,
+  "source_budget": "Exact original fold source_keys, at most 1000 distinct labels shared across branches",
+  "frozen": "m2_reference_candidate_v3",
+  "views": ["relative", "relative_absolute"],
+  "kernels": ["rbf", "matern"],
+  "weights": [0, 0.1, 0.25, 0.5, 0.75, 1],
+  "selection": "Per parent and fold, domain-equal validation MAE only; ties prefer lower weight; freeze before outer scoring",
+  "acceptance": "All three datasets MAE/RMSE/P95: B3<B, B123<B12, B123<B13, B123<B23, B123<B3. Report all remaining ablation edges, paired intervals, and risk sensitivity before adoption.",
+  "limits": ["Development screen is not independent confirmation", "No CALCE confirmation cohort for selection", "No changes to M1 or M2", "No guarantee of a successful third module", "Ordinary GP fusion alone is not a demonstrated novelty", "Previous two failed point-correction probes remain archived"]
+}

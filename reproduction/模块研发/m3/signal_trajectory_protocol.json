@@ -1,0 +1,11 @@
+{
+  "phase": "Signal-conditioned causal trajectory screen v1",
+  "candidates": ["identity", "signal_5_0.1", "signal_5_1", "signal_15_0.1", "signal_15_1", "signal_31_0.1", "signal_31_1"],
+  "weights": [0, 0.25, 0.5, 1],
+  "clip": 0.05,
+  "information": "Current/past partial charge integral and cycle coordinate, support SOH followed by frozen predictions; no query labels or future windows",
+  "mechanism": "Rolling linear time trend plus ridge-shrunk regression of detrended prediction on detrended log partial charge; all moments causal",
+  "selection": "Original validation domain-equal MAE per fold and parent; freeze before test scoring",
+  "acceptance": "Unchanged eight-group three-dataset three-metric requirements",
+  "limits": ["Causal trajectory v1 remains the ordinary temporal control", "Novelty unproven", "CALCE excluded", "Development screen, not independent confirmation"]
+}

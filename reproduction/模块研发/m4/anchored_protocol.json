@@ -1,0 +1,14 @@
+{
+  "phase": "M4 reference-zero residual second screen",
+  "motivation": "First residual screen harms XJTU Sim_satellite and3C tail; inherited residual offsets may not transfer. New hypothesis applies to all datasets, no per-test-domain switching.",
+  "features": ["state", "signal"],
+  "learners": {"ridge": [1, 10, 100], "rbf": [1, 10]},
+  "gains": [0, 0.1, 0.25, 0.5, 1],
+  "clip_soh": 0.05,
+  "reference": "Parent prediction equals first10 SOH mean, current HI equals first10 mean HI; residual exactly zero at this reference",
+  "model": "No-intercept linear difference or RBF difference kernel k(x,x')-k(x0,x')-k(x,x0')+k(x0,x0')",
+  "training": "Reuse audited complete-parent nested source OOF; exact original source label budget, no new GP fits",
+  "selection": "B123 original validation domain-equal MAE selects shared configuration/gain, all8 parent residual functions fit separately",
+  "controls": "Identity and original non-anchored residual family; constant anchored function is identically zero",
+  "limits": ["Reference-zero is a modeling assumption, not a physical law or non-regression guarantee", "Difference kernels and residual learning not claimed novel", "Development-stage adaptation after first screen, not independent confirmation", "Original M1/M2/M3 unchanged; CALCE excluded"]
+}

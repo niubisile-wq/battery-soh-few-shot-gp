@@ -1,0 +1,31 @@
+{
+  "version": "m1_development_v1",
+  "scope": "Find an independently useful first GPR module with large, multi-dataset development gains; preserve all failed probes. No claim of universal improvement.",
+  "development_datasets": ["XJTU", "MATR", "Tongji"],
+  "K": 10,
+  "voltage_offsets_below_recorded_cutoff": [0.3, 0.1],
+  "points": 128,
+  "capacity_reference": "first eligible measured capacity in the chronological support",
+  "source_label_budget": 1000,
+  "max_source_cells": 60,
+  "source_cell_selection": "If over 60 train cells, deterministic round-robin across dataset/domain groups, selecting equally spaced natural-order cells within each group; before inspecting labels or errors.",
+  "source_sample_selection": "Same as champion: balanced per-cell quota, include first K, uniformly spaced remaining eligible cycles. Exact source keys shared by all candidates.",
+  "inner_validation": "Last naturally numbered cell of each non-heldout domain; all other non-heldout cells eligible for source selection.",
+  "folds": "XJTU: six original conditions; MATR: leave one batch out; Tongji: leave one recorded chemistry-temperature-charge/discharge protocol group out. Additional leave-one-development-dataset folds are separately named.",
+  "rank_metric": "Per-cell MAE then equal domain weights within each dataset; report each dataset, RMSE, P95 AE, low-SOH and per-cell changes separately.",
+  "search": "Per candidate specify hyperparameter list before its run. Inner validation chooses configuration, never outer development-target query labels. Architecture search uses explicitly declared development results and must be confirmed after freezing.",
+  "screen_seeds": [0, 1, 2],
+  "confirmation_seeds": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+  "permissions": {
+    "source": "Only the same 1000 or fewer labeled source sample keys; source support signals within first K allowed.",
+    "target": "First K signals and labels, current query signal only; no future lifecycle, no future query labels in fitting.",
+    "held_for_frozen_evaluation": ["HUST", "SNL", "CALCE", "Oxford", "NASA"],
+    "history": "Previous historical benchmark access must be disclosed; these files do not restore virgin test status."
+  },
+  "notes": [
+    "For XJTU the cell cap is inactive; source keys and original GPR predictions must reproduce the champion exactly.",
+    "The 60-cell source cap allows all first-K labels and later-life source labels within 1000 samples for larger datasets. All eligible cells are still evaluated in their respective outer folds.",
+    "Ordinary feature processing, kernel changes, posterior adaptation and label-budget changes cannot be presented as original module contributions.",
+    "10-15% mean MAE reduction is a research target, not a result; all-dataset improvement requires actual paired evidence on every declared dataset."
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "phase": "Full waveform reference-pair encoding GP v1",
+  "datasets": ["XJTU", "MATR", "Tongji"],
+  "views": ["wave_absolute_pca8", "wave_absolute_pls4", "wave_pair_pca8", "wave_pair_pls4"],
+  "kernels": ["rbf", "matern"],
+  "modes": ["source_bias", "posterior"],
+  "weights": [0, 0.1, 0.25, 0.5, 0.75],
+  "shared_full": true,
+  "input": "Full3x128 current V/I/time window, physical channel scaling and optional difference from mean first10 waveform. No cycle-age features or query labels.",
+  "source_fit": "Exact original source_keys; raw scaler, resolved-column pruning, PCA8/PLS4 and GP fit only those rows. Discard latent source std<=1e-6 to avoid numerical nullspace amplification.",
+  "selection": "Full B12 original validation domain-equal MAE; same chosen branch/weight across four ablation parents",
+  "controls": "Separately validation-selected absolute versus paired, PCA versus PLS families",
+  "acceptance": "Unchanged all-dataset all-metric independent/incremental/complementarity gates",
+  "limits": ["Ordinary PCA/PLS is not itself claimed novel", "Reference capacity and first10 labels are allowed support information", "No CALCE tuning; original model artifacts immutable", "Development not independent confirmation"]
+}

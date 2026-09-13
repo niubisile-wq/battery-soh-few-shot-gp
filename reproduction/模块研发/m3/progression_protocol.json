@@ -1,0 +1,13 @@
+{
+  "phase": "Causal progression and reference-relative charge geometry GP screen v1",
+  "datasets": ["XJTU", "MATR", "Tongji"],
+  "views": ["progress_only", "progress_relative", "progress_absolute"],
+  "kernels": ["rbf", "matern"],
+  "modes": ["source_bias", "posterior"],
+  "weights": [0, 0.1, 0.25, 0.5, 0.75, 1],
+  "source": "Exact original fold source_keys, at most1000 unique labels shared across configurations",
+  "information": "Explicitly added physical cycle coordinate; log elapsed cycles and log elapsed/support-span. Support span uses first10 cycles only. No final life or future length.",
+  "selection": "Original fold domain-equal validation MAE before outer test scoring. Progress-only is a declared ordinary control in the candidate pool; a winner using only progress cannot establish charge-geometry novelty.",
+  "acceptance": "Same eight-group all-dataset all-metric gates; later separately tuned matched input controls required before adoption",
+  "limits": ["Added cycle input means not identical input to original window-only GPR", "Exploratory development not independent confirmation", "CALCE excluded", "M1/M2 fixed"]
+}

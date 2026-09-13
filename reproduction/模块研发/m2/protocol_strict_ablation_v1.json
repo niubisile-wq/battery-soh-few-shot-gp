@@ -1,0 +1,31 @@
+{
+  "version": "m2_strict_ablation_v1",
+  "purpose": "Correct M2 evaluation; run the complete two-factor ablation; decide whether M3 is justified from the corrected evidence.",
+  "datasets": ["XJTU", "MATR", "Tongji"],
+  "folds": "Original 21 leave-one-domain-out development folds; never pool folds for parameter selection.",
+  "expected_cells": {"XJTU": 55, "MATR": 180, "Tongji": 130},
+  "K": 10,
+  "source_labels": "Exactly the frozen C00/P07/P02 source keys, at most 1000 per fold. Cross-fitting only partitions these keys; it never replenishes quotas. Calibration uses only permitted non-support keys.",
+  "groups": {
+    "Base": "Frozen C00_original GPR and its original fold-local selected source_only mode.",
+    "Base+M1": "Frozen P07_pls_concat package including pruning, PLS bypass and its fold-local selected support mode.",
+    "Base+M2": "Same calibration, support correction and physical expert fusion applied to frozen C00_original.",
+    "Base+M1+M2": "Identical M2 applied to frozen P07_pls_concat."
+  },
+  "m2": {
+    "calibrator": "Increasing isotonic regression on two-fold source-cell cross-fitted predictions and permitted source labels only.",
+    "source_folds": "Deterministic seeded random balanced partitions within source domains; each cell is held out once.",
+    "correction_alpha": [0.0, 0.25, 0.5, 0.75, 1.0],
+    "support_beta": [-0.5, -0.25, 0.0, 0.25, 0.5],
+    "fusion_weight_a": "0.00,0.01,...,1.00",
+    "selection": "Within each outer fold: select alpha/beta by validation macro MAE, RMSE, P95; freeze A; select A/B weight on the same fold's validation cells; then score the outer fold once.",
+    "physical_branch": "Frozen P02_anchor_physics. Always use GPModel.predict so source anchoring is included."
+  },
+  "seeds": [0, 1, 2, 3, 4],
+  "seed_meaning": "Source-cell cross-fit partitions vary. Frozen GPR controls are deterministic; duplicate control predictions are not independent random training runs.",
+  "selection_boundary": "Training gets only permitted source labels. Validation gets only this fold's validation query labels. Inference gets target first K labels and current query signal. Scoring alone reads outer query labels.",
+  "aggregation": "Compute MAE/RMSE/P95 per cell first, then mean within domain, then equal-domain mean within dataset. A macro mean of cell P95 values is not the pooled 95% quantile.",
+  "audits": ["all 365 cells and 21 folds", "saved query predictions and exact recomputation", "frozen base and physical prediction reproduction", "source-key subset and cross-fit disjointness", "target-query label permutation invariance", "future-signal prefix invariance", "fold-local parameter selection", "paired cell and domain evidence", "low-SOH y<0.90 errors"],
+  "decision": "Report failures honestly. M2 is supported only if the full model consistently improves all three metrics on all three datasets, with paired uncertainty and full four-group evidence. Defer M3 if M2 fails or is not independently useful.",
+  "limits": ["Development datasets have already informed architecture exploration; this run does not restore untouched final-test status.", "M1 is the existing package, not a pure PLS-only causal intervention. A new-feature-only claim requires matched pruning/adaptation controls.", "No locked external datasets are used in this correction."]
+}

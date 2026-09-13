@@ -1,0 +1,15 @@
+{
+  "phase": "Development validation, frozen source models, not independent confirmation",
+  "source": "Audited m4_mixed_effects_batch_v1 mixed-family RBF and Matern source models only; no new source fitting or extra labels",
+  "families": ["private", "shared", "bias"],
+  "kernels": ["rbf", "matern"],
+  "gains": [0, 0.1, 0.25, 0.5, 1],
+  "private": "First10 orthonormal label contrasts condition shared posterior and independent target random-slope prior; then anchor predicted support mean",
+  "shared": "Same source model and first10 conditioning, target random-slope covariance set0 only; source random-slope nuisance retained",
+  "bias": "Original mixed-effects shared mean plus first10 mean bias, no posterior contrast update",
+  "selection": "Each family independently chooses kernel and gain by original B123 validation domain-equal MAE; ties smaller gain then key. 10trials/family,30/fold. Same choice all8parents. All21fold choices frozen before held-domain scoring.",
+  "noise": "Source and target use fitted iid measurement noise, shared-endpoint contrast correlations retained. Target random slopes use source-learned rho, no target likelihood tuning.",
+  "controls": "All3families reported, private-vs-shared and private-vs-bias independent and full-parent comparisons. No per-dataset winner mixing.",
+  "acceptance": "Independent and incremental full-parent improvement all3datasets all3metrics, full16 complementarity, controls, paired uncertainty and source-risk stability before adoption",
+  "limits": ["Only first10 target labels, no later SOH or full-sequence fitting", "No extra GP hyperparameter optimization", "Conditioning and random effects are standard methods, not new basic algorithms", "Ten early observations may carry little late-life slope information", "Repeated development reuse, not independent confirmation", "No CALCE tuning", "Original3modules unchanged, no M4 adopted"]
+}

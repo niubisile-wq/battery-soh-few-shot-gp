@@ -1,0 +1,14 @@
+{
+  "phase": "First-K support-calibrated degradation clock with charge geometry",
+  "datasets": ["XJTU", "MATR", "Tongji"],
+  "views": ["clock_only", "clock_joint"],
+  "kernels": ["rbf", "matern"],
+  "modes": ["source_bias", "posterior"],
+  "weights": [0, 0.1, 0.25, 0.5, 0.75],
+  "shared_full": true,
+  "features": "First10 median pairwise SOH/cycle slope, MAD residual noise proxy, signed elapsed*slope clock and uncertainty clock, elapsed-cycle coordinates; optional current reference-relative/absolute charge geometry",
+  "selection": "Full B12 validation domain-equal MAE chooses common branch/weight for all four ablation parents. No test labels or total future length in inputs.",
+  "controls": "clock_only family and separately validation-weighted ordinary first10 trend extrapolation; prior cycle-only controls retained",
+  "acceptance": "Unchanged all-dataset all-metric independent/incremental/complementarity gates",
+  "limits": ["Noise proxy is not a calibrated confidence interval", "Label-conditioned features do not imply calibrated Bayesian uncertainty", "Added cycle input disclosed", "Same source budget, original M1/M2 immutable, CALCE excluded", "Development screen not independent confirmation"]
+}

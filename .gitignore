@@ -53,4 +53,19 @@ evidence/prior_scan_summary.json
 核验/
 layout_*/
 
+# Temporary transfers and extraction directories
+repro_code*.tar.gz
+repro_deployment.tar.gz
+reproduction_stage/
+reproduction/deployment/
+reproduction/m1/
+reproduction/m2/
+reproduction/m3/
+reproduction/m4/
+reproduction/evaluation_v3/
+**/__pycache__/
+reproduction/实验部署/*.txt
+!reproduction/实验部署/README.txt
+!reproduction/实验部署/requirements.lock.txt
+
 # Keep the final manuscript PDFs and source figures under version control.

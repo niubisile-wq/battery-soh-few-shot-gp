@@ -1,0 +1,25 @@
+{
+  "status": "DEFINED_BEFORE_NEW_CONTROL_SCORING",
+  "purpose": "Frozen v3 diagnosis and ordinary-alternative audit, not independent final testing",
+  "frozen_candidate": "模块研发/results/m2_reference_candidate_v3",
+  "development_datasets": ["XJTU", "MATR", "Tongji"],
+  "simple_controls": {
+    "parents": ["M1", "ordinary_PLS"],
+    "physical_weights": [0.0, 0.25, 0.5, 0.75, 1.0],
+    "selection": "Original inner validation only; equal-domain cell MAE; ties prefer smaller weight",
+    "fixed_half": "Report 0.5 without tuning as well",
+    "warning": "Stored PLS is the existing P04 source-trained projection plus GPR, not PLSR"
+  },
+  "diagnosis": {
+    "soh_bins": [0.8, 0.9, 0.95],
+    "quality": "Processed V/I/time proxies only; no inference about raw dropout from interpolated 128-point arrays",
+    "duration_ratio_bounds": [0.5, 2.0],
+    "current_cv_threshold": 0.1,
+    "negative_voltage_increment_fraction_threshold": 0.01,
+    "tail_fraction": 0.05,
+    "aggregation": "Points within cell, cells within domain, domains equally within dataset; report bin coverage"
+  },
+  "M3": "Not enabled. Diagnose gap first; separate prospective protocol required before any M3 scores.",
+  "external": "No held-out labels opened by this evaluation. Audit historical usage before separate frozen final confirmation.",
+  "limits": ["Development labels permitted for retrospective diagnosis only", "No retraining or mutation of v3", "Simple-control performance is not a bibliographic novelty proof"]
+}

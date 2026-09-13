@@ -1,0 +1,32 @@
+{
+  "status": "DEFINED_BEFORE_M3_SCORING",
+  "basis": "frozen_v3_evaluation_v2: systematic positive low-SOH bias, especially Tongji; not merely rare spikes",
+  "parent": "frozen original GPR + M1 + M2(v3), unchanged",
+  "purpose": "Two bounded mechanism probes, not automatically publishable innovations",
+  "candidates": {
+    "degradation_gain": {
+      "formula": "p - min(0.05, gain * max(mean(first10 SOH)-p, 0))",
+      "grid": [0.0, 0.1, 0.25, 0.5],
+      "hypothesis": "Frozen estimate underestimates degradation amplitude; permit recovery, no forced monotone trajectory"
+    },
+    "charge_anchor": {
+      "formula": "p + weight * clip(mean(first10 SOH)*current_window_charge/mean(first10 window_charge)-p, -0.05, 0.05)",
+      "grid": [0.0, 0.1, 0.25, 0.5],
+      "hypothesis": "Support-anchored measured charge adds an orthogonal current-signal correction; rate changes may invalidate it"
+    }
+  },
+  "selection": "Per fold and candidate, original inner validation equal-domain MAE; tie prefers zero/smaller strength; no new fitted label-bearing regression",
+  "budget": "2 directions, 4 strengths each, original 21 folds; no new GP fits, no new source labels, no retry grid after results; one screening run, at most 30 CPU-minutes excluding integrity tests",
+  "adoption_gate": {
+    "three_dataset_equal_mean_MAE_min_improvement_pp": 0.05,
+    "three_dataset_equal_mean_MAE_min_relative_improvement": 0.02,
+    "each_dataset_MAE": "strictly lower than fixed v3",
+    "each_dataset_RMSE_and_P95_max_increase_pp": 0.05,
+    "each_domain_MAE_max_increase_pp": 0.2,
+    "uncertainty": "Report paired cell-stratified and whole-domain intervals; point gate is exploratory, not statistical significance",
+    "final_adoption": "Requires genuinely independent confirmation and novelty argument, not this gate alone"
+  },
+  "privacy_boundary": "Only first K target labels and current/past signals used for prediction; counterfactual future labels and prefix checks required",
+  "failed_candidates": "Report both; no replacing frozen v3 or quietly retuning failed probes",
+  "external": "No external target labels used. Historical usage audit has found prior results for HUST/SNL/CALCE/Oxford/NASA; none assumed untouched."
+}

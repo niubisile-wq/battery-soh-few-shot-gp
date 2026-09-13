@@ -1,0 +1,11 @@
+{
+  "phase": "Source-kernel coverage gated third branch v1",
+  "sources": {"m3_progression_screen_v1": ["progress_relative", "progress_absolute"], "m3_support_clock_screen_v1": ["clock_joint"]},
+  "gates": [["none", 0], ["query", 1], ["query", 2], ["product", 1], ["product", 2]],
+  "weights": [0, 0.1, 0.25, 0.5, 0.75],
+  "coverage": "Maximum normalized signal-kernel correlation to original budgeted source training rows. Reference coverage averages first10 target-to-source-support maxima. Product multiplies query and reference coverage. Never use target query labels as source rows.",
+  "selection": "Full B12 domain-equal validation MAE chooses shared source branch, gate, power, weight for all four parents; freeze before scoring outer test",
+  "controls": "Same selected branch and weight but no coverage gate for each parent",
+  "acceptance": "Unchanged all-three-dataset all-three-metric independent/incremental/complementarity gates",
+  "limits": ["Kernel correlation is not calibrated correctness probability", "Added cycle input disclosed", "All earlier failed screens retained", "Original models immutable and CALCE excluded", "Development evidence is not independent confirmation"]
+}

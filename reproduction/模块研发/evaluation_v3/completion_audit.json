@@ -1,0 +1,34 @@
+{
+  "status": "PASS_EVALUATION_REQUIREMENTS_COMPLETED",
+  "requirements": {
+    "1": "Frozen 365-cell/21-fold error and observable quality diagnosis completed; raw-cache observability limits disclosed.",
+    "2": "Ordinary PLS and simple fusion alternatives measured; novelty risk assessed, not declared resolved positively.",
+    "3": "Two prospectively bounded probes completed and rejected; original v3 unchanged.",
+    "4": "Frozen previously unscored cell-cohort confirmation completed; historical source exposure, small sample and post-score data correction disclosed."
+  },
+  "frozen_artifacts_verified": 42,
+  "unit_tests": 14,
+  "unit_test_output": "test_cumulative_counter (test_calce_events.EventTests.test_cumulative_counter) ... ok\ntest_negative_invalid (test_calce_events.EventTests.test_negative_invalid) ... ok\ntest_reset_counter (test_calce_events.EventTests.test_reset_counter) ... ok\ntest_runs_ignore_cycle_id (test_calce_events.EventTests.test_runs_ignore_cycle_id) ... ok\ntest_timer_reset_splits_observed_sessions (test_calce_events.EventTests.test_timer_reset_splits_observed_sessions) ... ok\ntest_unobserved_gap_breaks_charge (test_calce_events.EventTests.test_unobserved_gap_breaks_charge) ... ok\ntest_missing (test_calce_raw.DateTests.test_missing) ... ok\ntest_seconds (test_calce_raw.DateTests.test_seconds) ... ok\ntest_timezone_requires_review (test_calce_raw.DateTests.test_timezone_requires_review) ... ok\ntest_bias_and_tail (test_evaluate.DiagnosisTests.test_bias_and_tail) ... ok\ntest_equal_domains (test_evaluate.DiagnosisTests.test_equal_domains) ... ok\ntest_quality_label_free (test_evaluate.DiagnosisTests.test_quality_label_free) ... ok\ntest_causal_and_zero (test_probe_m3.ProbeTests.test_causal_and_zero) ... ok\ntest_recovery_not_suppressed (test_probe_m3.ProbeTests.test_recovery_not_suppressed) ... ok\n\n----------------------------------------------------------------------\nRan 14 tests in 0.006s\n\nOK\n",
+  "evidence_sha256": {
+    "模块研发/results/frozen_v3_evaluation_v2/summary.json": "8a76aef48d614b560cc54808ead989baf298b915f22dcb9aa0628cfbba1580de",
+    "模块研发/results/frozen_v3_evaluation_v2/verification.json": "6b819d7b3cdfab6765fa2a03ca82f61c7b1f60b04b58641864bf00b62bb6b14c",
+    "模块研发/results/frozen_v3_m3_probe_v1/summary.json": "1a914ba964fbb6561ba7ba6c7121c5d2b0c0b9195bdbfb1ca503dbab92c161bb",
+    "模块研发/results/calce_unused_cohort_audit_v1/audit.json": "15c9e14878a916edfbce1bbeba8b54f08e6cd44213ade5fab72246557cc0d73b",
+    "模块研发/results/calce_cohort_extraction_v3/verification.json": "72796bed19d5f8e05b2b22b69dc516d5263d25e150c11f51337ee51e6fa30d4c",
+    "模块研发/results/calce_frozen_confirmation_v2/verification.json": "c574e37eff074298c4e9a1f28be905ac006715bc700aba60e23320b5c9eae0a5",
+    "模块研发/results/calce_frozen_confirmation_v2/summary.json": "6ba3846e516660dae988adeb470b6c85ce3dc0aff28d60b688ac0d82150ea486",
+    "模块研发/results/calce_frozen_confirmation_v2/correction_verification.json": "1f0f800aca13b7541932f241709f29c95b187a54acc4e7d9630a13f8c2d8c138",
+    "模块研发/m2/selected_candidate.json": "1ff2fad42bffb1c45ecf431ebbac5e3e5e3dd011c12a3e6bd2a6c2da7dacc4ef",
+    "模块研发/results/m2_reference_candidate_v3/candidate.json": "a513e88448b09226cb21d0ec23fae0fce38f3f44002e9c0c12de73d26fdb9306",
+    "心路历程/v3四项评估最终结论_20260908.md": "d6128ab1457d3576525c2b7b952a86bc7605a5ec5fcb2fd11028b001c4c5c0c2"
+  },
+  "remaining_work_within_requested_evaluation": [],
+  "not_claimed": [
+    "Journal acceptance",
+    "Established novelty",
+    "Universal or practically adequate cross-source accuracy",
+    "A never-before-used laboratory",
+    "A wholly blind one-pass dataset-cleaning process"
+  ],
+  "code_sha256": "f0564154453cacabd315eb7e0fd6ec7b135c82087cfa16ce7018d4f99a8519c8"
+}

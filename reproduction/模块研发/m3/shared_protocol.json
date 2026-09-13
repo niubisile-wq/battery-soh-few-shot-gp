@@ -1,0 +1,11 @@
+{
+  "phase": "Shared parent-preserving progression-geometry fusion v1",
+  "source_run": "m3_progression_screen_v1",
+  "weights": [0, 0.1, 0.25, 0.5, 0.75],
+  "policies": ["balanced", "full"],
+  "balanced": "Minimize mean of four parent-relative validation MAE ratios, equal parent weights",
+  "full": "Minimize frozen B12 validation MAE, transfer same chosen branch/weight to all ablations",
+  "invariant": "One branch and weight per outer fold shared by B/B1/B2/B12. Parent contribution at least25%; no source refits or extra labels",
+  "acceptance": "Unchanged all-three-dataset all-three-metric independent/incremental/complementarity gates. Report both policies; no datasetwise picking.",
+  "limits": ["Added cycle input disclosed", "Exploratory development following prior failure, not independent test", "Ordinary fusion is not proven novel", "M1/M2 frozen and CALCE excluded"]
+}

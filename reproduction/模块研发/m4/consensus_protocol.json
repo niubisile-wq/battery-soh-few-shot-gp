@@ -1,0 +1,12 @@
+{
+  "phase": "Source-domain deletion correction ensemble with sign-consensus attenuation",
+  "features": ["state", "signal"],
+  "learners": {"ridge": [10, 100], "rbf": [10]},
+  "gains": [0, 0.1, 0.25, 0.5, 1],
+  "clip_soh": 0.05,
+  "mechanism": "Fit one correction member excluding each source domain. Compute mean r and mean absolute member correction a; multiply mean r by abs(r)/a, zero if a<=1e-12. Identical-sign members retain full ensemble mean. Mixed signs attenuate it. No reliability target or fitted gate.",
+  "selection": "B123 original validation domain-equal MAE chooses feature/learner/alpha/gain shared across all8 parents. Ties smaller gain then key. All21 choices frozen before outer scoring.",
+  "control": "Full-source balanced constant residual. If candidate passes, also compare ungated same-member ensemble and same-config full-source residual; no mechanism claim without these controls.",
+  "acceptance": "Original three-dataset three-metric independent and incremental requirements, full16-group complementarity, paired intervals and risk stability unchanged.",
+  "limits": ["Source-domain deletion concerns residual fitting only; inherited parent OOF training is not additionally nested for each deletion", "No correction in-sample errors used as reliability labels; there are no reliability labels", "Consensus can be confidently wrong and is not calibrated uncertainty", "Previously exposed development cohorts, not independent confirmation", "No CALCE tuning; no new source labels; original models unchanged", "Ensembling and sign-consensus attenuation are not claimed novel primitives"]
+}

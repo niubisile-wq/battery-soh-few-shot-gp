@@ -1,0 +1,15 @@
+{
+  "phase": "Development screening, not independent confirmation",
+  "representation": "Reuse source-budget-only Haar168/PCA8 encoder from audited difference branch; verify hashes, exact source keys and latent replay",
+  "families": ["mixed", "zero"],
+  "kernels": ["rbf", "matern"],
+  "gains": [0, 0.1, 0.25, 0.5, 1],
+  "mixed": {"rho_initial": 0.1, "rho_bounds": [0.000001, 1000], "learn_rho": true},
+  "zero": {"rho": 0, "learn_rho": false},
+  "optimization": "Source marginal likelihood, L-BFGS-B maxiter100, no restarts. Shared kernel uses original difference prior initialization/bounds, not fitted optimum. Report failures and rho boundary hits, do not silently retune.",
+  "adaptation": "Shared GP cross-covariance only, first10 mean bias; no target-specific slope fitting",
+  "selection": "Each family independently selects kernel/gain by original B123 validation domain-equal MAE, ties smaller gain then key. Same choice all8parents. All21 choices frozen before query scoring.",
+  "controls": "rho0 refitted under same optimizer and compared against previous difference branch; all families reported, no per-dataset winner mixing",
+  "acceptance": "Independent and full-parent incremental all3datasets all3metrics, full16 complementarity, controls, paired uncertainty and source-risk stability",
+  "limits": ["Original source label budget at most1000, no replenishment", "Random effects are standard prior modeling, not invented primitive", "Extra covariance parameter changes capacity", "Repeated development data, not independent confirmation", "No CALCE tuning", "No M4 adopted"]
+}

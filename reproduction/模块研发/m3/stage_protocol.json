@@ -1,0 +1,10 @@
+{
+  "phase": "M3 query correction inserted before frozen M2 reference routing",
+  "source_run": "m3_progression_screen_v1",
+  "weights": [0, 0.1, 0.25, 0.5, 0.75],
+  "policies": ["balanced", "full"],
+  "architecture": "B/B1 -> M3 query prediction correction -> frozen M2 mixture. M2 source parameters, support residual and physical branch unchanged. M2 coefficient derived from frozen reference head, not query labels.",
+  "selection": "Recompute original validation predictions for this insertion; shared branch/weight chosen by balanced parent-relative MAE or B12 MAE; freeze before outer scoring",
+  "acceptance": "Unchanged all-dataset all-metric eight-group gates; no per-dataset choice between policies",
+  "limits": ["Insertion differs from M3-after-M2; report order explicitly", "M2 routing calibrated before M3: transfer is a hypothesis", "Not proof of novelty", "Added cycle input disclosed; CALCE excluded"]
+}

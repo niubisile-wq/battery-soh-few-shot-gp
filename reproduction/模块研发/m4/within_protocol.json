@@ -1,0 +1,12 @@
+{
+  "phase": "Within-domain feature and residual regression with reference-zero inference",
+  "features": ["state", "signal"],
+  "learners": {"ridge": [1, 10, 100], "rbf": [1, 10]},
+  "gains": [0, 0.1, 0.25, 0.5, 1],
+  "clip_soh": 0.05,
+  "mechanism": "Weighted within-domain projection H removes domain averages from both source features and residual target. Ridge fits HZ to Hy without intercept. RBF fits centered feature-space kernel HKH^T to Hy. Inference returns f(current)-f(first10-reference); no target-domain mean is estimated.",
+  "selection": "B123 validation domain-equal MAE chooses shared key/gain across8parents, original tie rules, all21 choices frozen before scoring",
+  "control": "Constant is exact identity. Same-key/gain anchored residual control isolates within-domain fitting; same-key/gain centered-target and plain controls if promising. Source budget unchanged.",
+  "acceptance": "Original all3dataset all3metric independent,incremental and16group complementarity,paired intervals and risk stability requirements unchanged",
+  "limits": ["Shared within-domain relation and reference-zero error are hypotheses, not established physics", "No test-domain truth or inference domain ID is used", "Weighted centering/kernel ridge are standard methods, not claimed novel", "Inherited parent configurations and repeatedly exposed development cohorts; not independent confirmation", "Reference normalization may remove real offsets; CALCE excluded; M1-M3 unchanged"]
+}

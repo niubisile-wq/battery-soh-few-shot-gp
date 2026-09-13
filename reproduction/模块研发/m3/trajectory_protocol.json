@@ -1,0 +1,10 @@
+{
+  "phase": "Causal trajectory consistency screen v1",
+  "candidates": ["identity", "linear_5", "linear_15", "linear_31", "median_5", "median_15", "ema_0.2", "ema_0.5", "holt_0.4_0.1", "holt_0.4_0.3"],
+  "weights": [0, 0.25, 0.5, 1],
+  "clip": 0.05,
+  "information": "First10 true support SOH then current/past frozen parent predictions only; actual cycle coordinates for linear/Holt; no query labels, centered windows or future observations",
+  "selection": "Per fold and parent original validation domain-equal MAE only; freeze selection before test scoring, ties smaller weight",
+  "acceptance": "Same three-dataset three-metric eight-group gates; report intervals and lag/recovery limitations",
+  "limits": ["Ordinary filters are mechanism probes, not sufficient evidence of novelty", "Development not independent confirmation", "No CALCE tuning", "No monotonic projection; recovery is permitted", "Frozen M1/M2 unchanged"]
+}

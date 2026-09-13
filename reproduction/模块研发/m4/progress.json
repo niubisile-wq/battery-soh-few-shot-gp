@@ -1,0 +1,9 @@
+{
+  "status": "SELECTED_EXPERIMENTAL_M4_RELEASE",
+  "frozen_parent": "m3_waveform_candidate_v1",
+  "current_artifact": "模块研发/results/m4_random_function_candidate_v1",
+  "completed": "Private0.5 experimental release selected. Full365-cell/168-adapter independent audit passed,5840rows/16groups/32edges. Isolated snapshot3cells24adapters replay0 after preserving first failed dependency probe and adding evaluation_v3/evaluate.py. Finalizer55727exit0 revalidated evidence gate, captured code, all model/data/prediction digests, frozen M2/M3, and independently reaggregated cells/comparison table. Final acceptance and selection records created; report and README updated.",
+  "next": "M4 development delivery complete. No further model search scheduled; paper validation/significance/novelty are separate from this experimental release.",
+  "not_done": [],
+  "limits": ["Nested parameter fits do not nest inherited historical outer configuration selection", "Development cohorts repeatedly exposed, not independent confirmation", "Fixed-GP risk all8M4edges10of10 but all32edges8of10", "XJTU/MATR intervals partly cross zero; XJTU incremental gain is small", "No CALCE tuning", "Original M1/M2/M3 unchanged; not a single newly trained production model"]
+}

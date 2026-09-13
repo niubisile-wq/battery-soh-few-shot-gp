@@ -1,0 +1,9 @@
+{
+  "phase": "Post-screen exploratory mechanism controls fixed before new control predictions",
+  "candidate": "function_private with global step0.5, original per-fold private-selected kernel/gain frozen",
+  "families": ["function_private", "function_shared", "slope_private", "slope_shared"],
+  "matching": "Every family uses EXACT candidate private-selected kernel and effective gain0.5*original gain for every fold and all8parents. Same audited encoder,source label budget,target first10 labels. Function sourceGP and slope sourceGP each reused from audited full-source fits.",
+  "factorial": "2x2: source covariance smooth cell function vs linear cell slope; target private adaptation enabled vs disabled. In enabled cells target private covariance follows source family. Compare private vs shared within each source fit, and source families at fixed target mode; source-family comparison with private enabled changes both source and target covariance,not isolated source effect.",
+  "report": "All four families full16/32edges and all9metrics; exact candidate replay vs previously audited private0.5; paired comparisons, convergence and limitations. No kernel/gain/mode/step selection in these controls.",
+  "limits": ["Controls proposed after development nomination,not independent confirmation", "No new GP fitting here; source-fit sensitivity remains separate", "All M1/M2/M3 unchanged,no CALCE tuning", "Standard GP covariance and shrinkage are not claimed as inventions", "Control losses will not select a per-dataset family or change the frozen primary screen"]
+}

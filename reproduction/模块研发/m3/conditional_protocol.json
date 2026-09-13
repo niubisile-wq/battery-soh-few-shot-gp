@@ -1,0 +1,12 @@
+{
+  "phase": "Reference-relative geometry GP first-K conditional adaptation",
+  "datasets": ["XJTU", "MATR", "Tongji"],
+  "views": ["relative", "relative_absolute"],
+  "kernels": ["rbf", "matern"],
+  "modes": ["source_only", "source_bias", "posterior"],
+  "weights": [0, 0.1, 0.25, 0.5, 0.75, 1],
+  "source": "Reuse exact first geometry screen source GP fits with identical original source_keys; no extra labels or GP refit",
+  "selection": "Per fold and parent original validation domain-equal MAE chooses representation/kernel/conditioning/weight before test scoring",
+  "acceptance": "Unchanged all-three-dataset all-three-metric independent/incremental/complementarity gates",
+  "limits": ["Ordinary GP conditioning is not itself novel; matched controls required", "CALCE excluded", "Exploratory development not independent confirmation", "No frozen M1/M2 changes"]
+}

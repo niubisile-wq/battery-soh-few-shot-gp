@@ -1,0 +1,13 @@
+{
+  "phase": "Direct local multiscale curve branch, not source residual transfer",
+  "representation": "Five orthonormal Haar stages on normalized V/I/time. Retain signed approximation5/detail5/detail4 and four local RMS bins for each of detail1/detail2/detail3. Concatenate absolute and first10-reference difference.",
+  "encoders": ["pca8", "pls4"],
+  "kernels": ["rbf", "matern"],
+  "modes": ["source_bias", "posterior"],
+  "gains": [0, 0.1, 0.25, 0.5, 1],
+  "labels": "Direct y-first10mean SOH target. Exact original source_keys<=1000; source-only scalers/encoders/GP. Target adaptation uses only first10 labels.",
+  "selection": "B123 original validation domain-equal MAE selects branch encoder/kernel/mode/gain shared across8parents. All21 choices frozen before query scoring. Full output parent+gain*(branch-parent).",
+  "acceptance": "All3datasets MAE/RMSE/P95 independent and incremental improvement;16group complementarity,paired uncertainty and risk stability unchanged",
+  "controls": "If promising: same-configuration ordinary waveform branch and local-signed-only branch; absolute-only separately selected control. No novelty claim without evidence of mechanism contribution.",
+  "limits": ["Haar decomposition,PCA,PLS andGP are standard methods,not novel primitives", "Energy features may represent noise or operating regime rather than health", "Existing waveform M3 already includes curve information; complementarity is unproven", "Previously exposed development cohorts,not independent confirmation", "No new labels or CALCE tuning; original M1-M3 unchanged"]
+}

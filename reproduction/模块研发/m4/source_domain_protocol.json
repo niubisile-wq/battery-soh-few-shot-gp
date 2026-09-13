@@ -1,0 +1,13 @@
+{
+  "phase": "Development source-held-domain branch selection,registered before inner candidate fits",
+  "families": ["cv", "uniform"],
+  "kernels": ["rbf", "matern"],
+  "gains": [0, 0.1, 0.25, 0.5, 1],
+  "inner_fits": "For each outer fold and each source domain,exclude that domain entirely from branch source fitting and refit feature column selection,raw scaler,PCA8,latent scaler and MixedEffectsGP from remaining exact original budget keys. No replenishment. Initial DifferenceBranch with optimize=False provides fresh encoder/prior,followed by original MixedEffectsGP optimized fit. Report both fit stages.",
+  "inner_targets": "Use each held source cell first10 for support; score only original-budget query_indices>=10 against audited complete_parent_source_oof predictions. No outer validation/test labels used in new M4 selection.",
+  "selection": "After all inner domains for an outer fold are complete and audited,select kernel/gain independently per family using cell-first,held-source-domain-equal B123 MAE; ties smaller gain then key. Same choice all8parents. Freeze all21outer choices before scoring.",
+  "full_source": "Reuse matching audited full-source single-level MixedEffectsGP branches and unchanged CV/uniform support rules; no extra final source labels",
+  "controls": "Report both CV and uniform. Compare with previous original-validation-selected branches as development selection controls,not independently confirmed gains. No additive-innovation family in this branch-selection probe.",
+  "fit_settings": "Same fixed original kernel initialization,rho0.1,bounds1e-6..1e3,max100 iterations,no restarts. No fit excluded by convergence or boundary.",
+  "limits": ["Audited parent source OOF fits exclude held source domain but inherit historical outer parent configuration choices; not fully nested architecture selection", "Source scoring is sparse original-budget labels,not full trajectories; some domains have only12 query labels", "Different sample sizes and held-domain validation do not guarantee stronger generalization", "Repeated exposed outer development cohorts; no independent confirmation", "OriginalM1/M2/M3 unchanged,no CALCE tuning"]
+}

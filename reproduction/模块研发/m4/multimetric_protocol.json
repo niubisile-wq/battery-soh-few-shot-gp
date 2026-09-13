@@ -1,0 +1,16 @@
+{
+  "phase": "M4 third screen: validation selection aligned with independent and incremental multi-metric objectives",
+  "families": ["plain", "anchored"],
+  "reuse": "All existing11 corrector types per family per fold, trained on the same audited source OOF; no new labels or GP fits",
+  "gains": [0, 0.1, 0.25, 0.5, 1],
+  "endpoints": ["B", "B123"],
+  "metrics": ["mae", "rmse", "p95_ae"],
+  "aggregation": "Compute each validation cell metric, then equal-domain means",
+  "policies": {
+    "balanced": "Minimize mean relative metric to corresponding uncorrected parent over2 endpoints x3 metrics",
+    "constrained": "Require none of the6 validation endpoint metrics exceeds its parent by more than1e-12 SOH; among eligible configs minimize same balanced objective, with identity fallback"
+  },
+  "selection": "Shared family/type/gain for all8 parent combinations per fold; ties prefer lower gain then family/key. Report both global policies without datasetwise mixing.",
+  "controls": "Retain previous plain/anchored MAE-only selection results and constant controls",
+  "limits": ["Motivated after2 failed development screens, not independent preregistration", "Validation nonregression does not imply held-domain nonregression", "No manual per-test-domain switching", "No M4 adoption unless actual all-dataset ablation and stability requirements pass"]
+}

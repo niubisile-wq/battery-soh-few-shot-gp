@@ -1,0 +1,14 @@
+{
+  "phase": "Development source fitting and original validation",
+  "families": ["hierarchical", "cell_only"],
+  "kernels": ["rbf", "matern"],
+  "gains": [0, 0.1, 0.25, 0.5, 1],
+  "source": "Same original at most1000 labels and audited Haar168/PCA8 encoder; original prior kernel parameters, no warm start",
+  "covariance": "Shared GP plus cell-slope and domain-slope covariance; cell-only control fits same old single-level random slope",
+  "random_effects": "Both rho initialize0.1, learned source marginal likelihood bounds1e-6..1e3; max100 L-BFGS-B iterations, no restarts, all convergence/bounds reported",
+  "adaptation": "Fixed0.5 shared posterior and0.5 private posterior anchored first10. Target private rho=sum of source cell/domain rho for hierarchical; cellrho for control. Never uses target domain ID or other target cells.",
+  "selection": "Each family independently selects kernel/gain by original B123 validation domain-equal MAE; ties smaller gain then key. Same choice all8parents, all21fold choices frozen before held-domain scoring.",
+  "controls": "cell_only must replay previous uniform conditional predictions/selection; both families fully reported; no datasetwise mixing",
+  "acceptance": "Independent and full incremental all3datasets all3metrics, full16 complementarity, mechanisms, paired uncertainty and source-risk stability",
+  "limits": ["Standard hierarchical random effects,not invented basic algorithm", "One additional variance parameter changes capacity", "Validation cells share named source domains but inference deliberately treats each target as a new independent episode and ignores its domain ID; not exact conditional prediction for a known source domain", "Original validation is not nested held-source-domain architecture selection", "Repeated development reuse, no independent confirmation", "No CALCE tuning, no M4 adopted"]
+}

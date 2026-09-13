@@ -1,0 +1,14 @@
+{
+  "phase": "M4 fourth screen: source-fitted operating-condition residualization",
+  "hypothesis": "Reference/global HI residual maps may mix charging conditions with health. Test a budget-matched local charge geometry representation and an explicit condition-removal control.",
+  "views": ["geometry_raw", "geometry_residualized"],
+  "health_features": "Existing reference-relative8 voltage-bin charges, total charge, duration and mean current; together with parent prediction and early support anchor",
+  "context": "First10 reference21HI, current-window7 current summaries, voltage start and span; no domain IDs or query SOH",
+  "residualization": "Source-budget weighted StandardScaler then Ridge alpha10 maps context to11 relative-geometry coordinates. Subtract predicted geometry before final residual learning. Compare same learner/gain with unresidualized geometry.",
+  "learners": {"ridge": [1, 10, 100], "rbf": [1, 10]},
+  "gains": [0, 0.1, 0.25, 0.5, 1],
+  "clip_soh": 0.05,
+  "selection": "Original B123 validation domain-equal MAE selects shared view/type/gain for all8 parent groups. Do not reuse failed multi-metric policy as though it succeeded.",
+  "data": "All21 audited complete-parent source-OOF artifacts, exact original source budget. No new target labels or GP fits.",
+  "limits": ["Linear condition removal may also remove useful health information; control is required", "Residualized coordinates are not proven pure health factors or causally invariant", "Development hypothesis after3 failed rounds", "Original frozen M1/M2/M3 unchanged; CALCE excluded", "Residualization and ordinary regressors themselves not claimed novel"]
+}

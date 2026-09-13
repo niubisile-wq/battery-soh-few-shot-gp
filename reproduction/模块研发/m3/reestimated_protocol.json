@@ -1,0 +1,10 @@
+{
+  "phase": "Same-v3 risk re-estimation for M3-augmented GP parent",
+  "branch_configuration": "Per fold key selected by full policy in shared progression screen; that key used validation only. Fix representation/kernel/mode before generating source OOF.",
+  "weights": [0, 0.1, 0.25, 0.5, 0.75],
+  "source_oof": "Hold an entire source domain out; fit chosen ProgressionGP only remaining ORIGINAL source_keys, no quota replenishment. Predict held budgeted query rows. Original B/B1/physical OOF episodes share exact domain exclusions.",
+  "m2": "Same reference_gate.fit(metric=True,bagged=True),24 bags and settings/params as v3. Re-estimate costs for augmented query parent; original support residual and physical predictions unchanged. Old artifacts immutable.",
+  "selection": "Validation-only full-model MAE chooses common M3 weight; M2 reference setting separately selected by validation MAE for B23 and B123. At weight0 use original frozen setting and audit original predictions.",
+  "acceptance": "Original eight-group all-dataset all-metric independent/incremental/complementarity gates",
+  "limits": ["Separate new candidate, not replacement of selected v3", "Added cycle input disclosed", "Development not independent confirmation", "CALCE excluded", "Same-weight old-risk controls required"]
+}

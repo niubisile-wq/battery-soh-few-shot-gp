@@ -1,0 +1,12 @@
+{
+  "phase": "Source-LODO conditional residual correction v1",
+  "views": ["relative", "relative_absolute"],
+  "learners": ["ridge", "gp"],
+  "weights": [0, 0.1, 0.25, 0.5, 1],
+  "clip": 0.05,
+  "training": "Only budgeted source-LODO query errors of frozen B and B1; no M2 risk pseudo-out-of-fold labels. B-trained corrector applies to B/B2; B1-trained to B1/B12, with parent prediction as covariate.",
+  "features": "Relative charge geometry plus parent prediction minus firstK SOH mean; ridge alpha=10 or scalar RBF GP",
+  "selection": "Original fold validation domain-equal MAE, ties prefer smaller correction. Freeze before test predictions opened.",
+  "acceptance": "Same eight-group, three-dataset three-metric gates as geometry screen; statistical intervals separate.",
+  "limits": ["Parent-distribution transfer to M2 is a hypothesis, not guaranteed", "CALCE excluded", "No new distinct source labels", "Development results are not independent confirmation"]
+}

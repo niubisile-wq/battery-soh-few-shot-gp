@@ -1,0 +1,13 @@
+{
+  "phase": "Development screening, not independent confirmation",
+  "source": "Reuse audited mixed source GPs and conditional validation predictions; no source refits or extra labels",
+  "families": ["evidence", "uniform"],
+  "kernels": ["rbf", "matern"],
+  "gains": [0, 0.1, 0.25, 0.5, 1],
+  "prior": "shared/private probabilities fixed0.5; no prior tuning or temperature",
+  "weight": "Gaussian marginal evidence of first10 orthonormal label contrasts only, fixed source hyperparameters; uniform control weights0.5",
+  "selection": "Each family independently selects kernel/gain using original B123 validation domain-equal MAE; ties smaller gain then key. 20trials/fold; same choice all8parents; all21 choices frozen before held-domain scoring.",
+  "controls": "Both families reported; compare evidence weighting against uniform at independent and full-parent levels; no per-dataset winners",
+  "acceptance": "Independent and incremental all3datasets all3metrics, full16 complementarity, controls, paired uncertainty and source-risk stability",
+  "limits": ["Weights use only first10 inputs and labels, not later cycles or dataset ID", "Standard Gaussian evidence weighting,not invented basic algorithm", "Early support evidence need not predict late-life reliability", "Repeated development reuse, not independent confirmation", "No CALCE tuning", "No M4 adopted"]
+}

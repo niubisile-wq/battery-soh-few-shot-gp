@@ -1,0 +1,43 @@
+{
+  "status": "EVALUATION_COMPLETE_WITH_NEGATIVE_FINDINGS_AND_LIMITED_COHORT_CONFIRMATION",
+  "objective_preserved": true,
+  "items": {
+    "1_frozen_error_analysis": {
+      "status": "COMPLETED_WITH_OBSERVABILITY_LIMITS",
+      "evidence": ["模块研发/results/frozen_v3_evaluation_v2/summary.json", "模块研发/results/frozen_v3_data_usage_audit_v1/audit.json"],
+      "limits": "Processed signal quality proxies and historical rejection metadata assessed; accepted-window raw density is not available in cache. No accuracy claim for rejected windows."
+    },
+    "2_ordinary_alternative_and_novelty_evaluation": {
+      "status": "EVALUATED_NOT_A_CLAIM_OF_ESTABLISHED_NOVELTY",
+      "evidence": ["模块研发/results/frozen_v3_evaluation_v2/comparison.csv", "心路历程/v3误差创新性与第三模块评估_20260908.md"],
+      "finding": "Ordinary PLS competitive with M1; simple fusion beats full v3 on MATR MAE but not XJTU/Tongji. Bibliographic novelty not established by these tests."
+    },
+    "3_conditional_bounded_M3": {
+      "status": "COMPLETED_BOTH_PROBES_REJECTED",
+      "protocol": "模块研发/evaluation_v3/m3_protocol.json",
+      "evidence": "模块研发/results/frozen_v3_m3_probe_v1/summary.json",
+      "decision": "No M3 adopted, selected v3 unchanged; no expanded grids"
+    },
+    "4_independent_final_confirmation": {
+      "status": "COMPLETED_FROZEN_CELL_COHORT_CONFIRMATION_WITH_LIMITATIONS",
+      "evidence_for_current_obstacle": "模块研发/results/frozen_v3_data_usage_audit_v1/audit.json",
+      "reason": "Four previously unscored CALCE cells passed raw pairing/chronology checks; final corrected cohort has 3875 measured points and 3835 query points. Frozen v3 scored without tuning. Same previously used source, not new laboratory.",
+      "user_question": "Resolved through an in-scope local cell cohort; no additional data-source choice needed for this evaluation.",
+      "cohort_audit": "模块研发/results/calce_unused_cohort_audit_v1/audit.json",
+      "schema_audit": "模块研发/results/calce_cohort_schema_audit_v1/audit.json",
+      "prospective_protocol": "模块研发/evaluation_v3/calce_cohort_protocol.json",
+      "pairing_verification": "模块研发/results/calce_cohort_extraction_v3/verification.json",
+      "final_verification": "模块研发/results/calce_frozen_confirmation_v2/verification.json",
+      "correction_disclosure": "模块研发/results/calce_frozen_confirmation_v2/correction_verification.json",
+      "outcome": "v3 relative gains but large absolute MAE16.9630pp; simpler fusion wins one cell, comparison interval crosses zero. Four signal-continuity exclusions after preliminary scoring disclosed; retained predictions and support unchanged.",
+      "next": "No further model selection or M3 repair using this final cohort. Further model research is a new decision beyond this completed evaluation."
+    }
+  },
+  "verification": "模块研发/results/frozen_v3_evaluation_v2/verification.json",
+  "verified_rows": 4745,
+  "verified_frozen_artifacts": 42,
+  "new_unit_tests_passed": 14,
+  "final_report": "心路历程/v3四项评估最终结论_20260908.md",
+  "goal_complete": true,
+  "completion_scope": "Requested four-part evaluation completed, not proof of novelty, good absolute accuracy, all possible M3 failures, or journal acceptance."
+}

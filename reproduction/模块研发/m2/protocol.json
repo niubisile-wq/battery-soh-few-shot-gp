@@ -1,0 +1,20 @@
+{
+  "version": "m2_support_adapter_v1",
+  "base": "P07_pls_concat SHB, frozen per outer fold",
+  "development_datasets": ["XJTU", "MATR", "Tongji"],
+  "target_support": "first K=10 labeled cycles only",
+  "candidate": "support residual adapter: base prediction plus lambda times mean early-support residual",
+  "lambda_grid": [-0.5, 0.0, 0.25, 0.5, 0.75, 1.0, 1.25],
+  "controls": ["frozen SHB selected mode", "source_bias", "standard GP posterior"],
+  "selection": "mode and lambda selected on inner validation only, equal domain macro MAE then RMSE/P95",
+  "permissions": {
+    "allowed": ["source labels used by frozen SHB", "target first ten signals and labels", "current query signal"],
+    "forbidden": ["target future labels", "future lifecycle/cycle number", "query-label-based routing"]
+  },
+  "acceptance": [
+    "beats frozen SHB on all three development datasets in MAE, RMSE and P95-AE",
+    "paired cell-level evidence and low-SOH results reported",
+    "improvement is not equivalent to source_bias or standard posterior",
+    "all fold predictions and choices reproducible"
+  ]
+}

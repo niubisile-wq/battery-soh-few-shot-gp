@@ -1,0 +1,31 @@
+{
+  "status": "PROSPECTIVE_COMPATIBILITY_PROTOCOL_NO_TARGET_SCORES",
+  "purpose": "Attempt independent cell-cohort confirmation within already available CALCE; not a new laboratory",
+  "exposure_gate": "Every admitted cell must have no scored or modeling references in the audited pre-existing workspace history; stop if contradictory evidence appears",
+  "primary_candidates": ["CS2_3", "CS2_9", "CX2_8", "CX2_32"],
+  "selection_basis": "Previously unscored raw candidates with Arbin seconds/A/Ah XLSX signals and full-discharge rather than partial-SOC/variable-cutoff descriptions; chosen before reading full capacity trajectories or generating predictions",
+  "other_candidates": {
+    "CS2_7": "Variable cutoff: full capacity comparability not established",
+    "CS2_5,CS2_6,CS2_24,CS2_25": "Partial-SOC cycling mixed with periodic full measurements: separate RPT protocol needed",
+    "CS2_8,CS2_21,CX2_31,CX2_4": "Different TXT acquisition schema; time/capacity units and temperature/cycle stitching require separate validation",
+    "CX2_3": "Alternating full and partial pulse discharge measurements: separate reference-cycle protocol needed"
+  },
+  "source_reference": "https://web.calce.umd.edu/batteries/data/",
+  "signal_schema": ["Data_Point", "Test_Time(s)", "Date_Time", "Cycle_Index", "Current(A)", "Voltage(V)", "Discharge_Capacity(Ah)"],
+  "nominal_capacity_Ah": {"CS2_3": 1.1, "CS2_9": 1.1, "CX2_8": 1.35, "CX2_32": 1.35},
+  "window_V": [3.9, 4.1],
+  "reference_capacity_rule": "Recorded full discharge capacity under load reaching fixed 2.7 V (+0.02 tolerance), following charging to >=4.18 V; operational reference, not a claim all variable-rate capacities are rate-independent",
+  "K": 10,
+  "normalization": "First eligible measured support capacity only",
+  "exclusions": "No magnitude-based capacity-outlier filtering, no prediction-based cell exclusion; reject nonfinite signals, ambiguous duplicate timestamps, incomplete charge windows or incomplete full discharge",
+  "chronology": "Use acquisition Date_Time to order records. Duplicate identical observations are deduplicated; conflicting observations stop the cell. Repeated file-local cycle counters must not silently join different sessions.",
+  "model_freeze": "Original six XJTU source-fold v3 adapters, GPR/M1 parents and matching ordinary PLS models, all already trained; no retraining, no M3, no target-based choice of source fold",
+  "groups": ["GPR", "M1", "GPR_M2", "Full_v3", "ordinary_PLS", "ordinary_PLS_half_physical"],
+  "source_budget": "Each reported source-fold model retains its original <=1000 source-label budget. Do not ensemble source-fold predictions or claim the union uses <=1000 labels.",
+  "aggregation": "Report all six source folds, each cell and protocol group; primary mean of per-cell metrics within protocol, then equal protocol groups, then equal source-fold reports. Source folds are overlapping training repetitions, not independent target cells.",
+  "protocol_groups": {"CS2_3": "CS2_alternating_discharge", "CS2_9": "CS2_alternating_discharge", "CX2_8": "CX2_3C_discharge", "CX2_32": "CX2_pulsed_discharge"},
+  "outcome_reporting": "MAE/RMSE/P95 and paired differences versus all frozen controls, report failure or no improvement without retuning. Small-cohort uncertainty must be explicit.",
+  "no_selection_on_final": true,
+  "compatibility_gate": "No final evaluation until chronology, units, duplicate handling, signal-label alignment and >=11 eligible measured cycles are audited. An ineligible or ambiguous cohort is not a completed final test.",
+  "scope_limit": "This is a prospective 4-cell compatibility candidate, not evidence all four are eligible or never used outside audited records. New dataset authorization is unnecessary for auditing these already in-scope local archives."
+}

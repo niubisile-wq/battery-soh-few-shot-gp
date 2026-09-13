@@ -1,0 +1,14 @@
+{
+  "phase": "Shallow conditional residual boosting: absolute versus squared loss",
+  "features": ["state", "signal"],
+  "learners": {"absolute": [10, 30], "squared": [10, 30]},
+  "alpha_semantics": "Minimum samples per tree leaf, not ridge regularization",
+  "architecture": "HistGradientBoostingRegressor depth2, max4leaves,60iterations,learning_rate0.05,l2regularization10,early_stoppingFalse,random_state0",
+  "gains": [0, 0.1, 0.25, 0.5, 1],
+  "clip_soh": 0.05,
+  "labels": "Same audited complete-parent source OOF, same exact source query budget, domain-cell-query balanced weights; no additional labels",
+  "selection": "Original B123 validation domain-equal MAE selects shared key/gain for all8parents. Ties lower gain then key. All21fold choices frozen before scoring.",
+  "control": "Full-source balanced constant correction. Absolute/squared objectives both in fixed grid; if promising, same-config loss-swapped and separately validation-selected loss-family controls required.",
+  "acceptance": "All3datasets MAE/RMSE/P95 independent and incremental improvement; full16group complementarity, paired uncertainty and risk stability unchanged",
+  "limits": ["Trees and absolute loss are standard methods, not claimed novel primitives", "Absolute loss can reduce tail accuracy; no guaranteed comprehensive improvement", "Source parent OOF inherits historical outer configuration selection", "Repeatedly exposed development cohorts, not independent confirmation", "Original M1-M3 and source budget unchanged; CALCE excluded"]
+}

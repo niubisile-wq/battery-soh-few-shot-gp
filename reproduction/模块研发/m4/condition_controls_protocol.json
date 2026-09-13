@@ -1,0 +1,10 @@
+{
+  "phase": "Condition-feature family controls followed by uniform-step sensitivity",
+  "families": ["geometry_raw", "geometry_residualized"],
+  "family_selection": "Within each family choose existing B123 validation MAE best key/gain per fold; shared across8 parents. Include identity from same family gain0.",
+  "sensitivity_steps": [0.1, 0.25, 0.5, 0.75, 1],
+  "sensitivity_sources": ["plain", "anchored", "multimetric_balanced", "multimetric_constrained", "condition_mixed", "condition_geometry_raw", "condition_geometry_residualized"],
+  "step_rule": "One scalar step per candidate applied to all datasets/folds/cells/parent groups; report all35 combinations, never mix dataset-best steps",
+  "acceptance": "Original all-dataset all-metric independent, incremental and full complementarity requirements unchanged; all32 addition edges reported",
+  "limits": ["Family comparison is a control; sensitivity follows four observed development screens and is not independent validation", "No new fitting labels or GP fits", "A smaller step does not guarantee improvement or statistical significance", "All failed candidates retained; no M4 selected yet"]
+}

@@ -1,0 +1,12 @@
+{
+  "phase": "Development screening, not independent confirmation",
+  "representation": "Fixed existing paired Haar168, source-budget-only StandardScaler/PCA8/latent StandardScaler; no label-supervised encoder",
+  "targets": ["difference", "direct"],
+  "kernels": ["rbf", "matern"],
+  "gains": [0, 0.1, 0.25, 0.5, 1],
+  "adaptation": "first10 support mean bias only, no future labels",
+  "selection": "Each target family independently selects kernel and gain by original B123 validation domain-equal MAE; ties smaller gain then kernel. Same choice applied to all8 parents. Freeze all21 choices before held-domain scoring.",
+  "comparison": "Same representation, budget, kernel families, support anchoring and contrast-RMS target units. Difference discards per-cell constant components; direct retains reference-centered levels. GP likelihood optimization differs in observations; not an entirely new primitive.",
+  "acceptance": "Independent B4 and incremental B1234 improve all3 metrics on all3 datasets, full16 complementarity, controls and stability audit before adoption",
+  "limits": ["Source labels original at most1000, never replenished", "Shared-endpoint differences not independent extra labels", "No CALCE tuning", "Repeated development reuse", "Single fold validation is not performance acceptance"]
+}

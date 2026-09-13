@@ -1,0 +1,106 @@
+"""Independent additive/control prediction replay, metrics, edges and intervals."""
+import csv,itertools,json
+from collections import defaultdict
+from pathlib import Path
+import joblib
+import numpy as np
+from threadpoolctl import threadpool_limits
+from source_oof import sa,HERE,FROZEN
+from audit_support_cv import independent_weight
+from audit_conditional_mixed import independent_predict
+from summarize_strict import paired_stats
+
+
+def mapped(g,f):
+    return g+('_'+f if '4' in g and f!='cv_innovation' else '')
+
+
+def main():
+    results=HERE.parent/'results';root=results/'m4_innovation_screen_v1';parent=results/'m3_waveform_candidate_v1'
+    frozen=json.loads((root/'frozen_selections.json').read_text());summary=json.loads((root/'summary.json').read_text())
+    assert sa.digest(parent/'candidate.json')==frozen['parent_manifest_sha256']
+    assert sa.digest(FROZEN/'candidate.json')==frozen['m2_manifest_sha256']
+    validation=results/'m4_innovation_validation_v1'
+    assert sa.digest(validation/'verification.json')==frozen['validation_audit_sha256']
+    assert sa.digest(HERE/'score_innovation.py')==frozen['code_sha256']
+    control=results/'m4_support_cv_screen_v1';ca=json.loads((control/'verification.json').read_text())
+    assert ca['status']=='PASS' and ca['summary_sha256']==sa.digest(control/'summary.json')
+    parents=['B'+''.join(s) for n in range(4) for s in itertools.combinations('123',n)]
+    families=('cv_innovation','uniform_innovation','cv_blend');datasets=('XJTU','MATR','Tongji')
+    rows=list(csv.DictReader((root/'cells.csv').open()));lookup={(r['cell_id'],r['group']):r for r in rows}
+    weights=list(csv.DictReader((root/'weights.csv').open()));wl={(r['cell_id'],r['family']):r for r in weights}
+    assert len(rows)==len(lookup)==11680 and len(weights)==len(wl)==1095
+    cells=[c for ds in datasets for c in sa.load_cells(ds)]
+    errors=dict(prediction=0.,metric=0.,weight=0.,control=0.);buckets=defaultdict(list);cm={};seen=set()
+    with threadpool_limits(limits=1):
+        for fold in frozen['selections']:
+            vr=Path(fold['validation_root']);assert sa.digest(vr/'result.json')==fold['validation_result_sha256']
+            models={}
+            for f,s in fold['choices'].items():
+                assert sa.digest(Path(s['model']['path']))==s['model']['sha256'];models[f]=joblib.load(s['model']['path'])
+            _,_,test=sa.split(cells,fold['fold'])
+            for c in test:
+                tail=Path('folds')/fold['fold'].replace(':','__')/'predictions'/(c.id+'.npz')
+                with np.load(parent/tail) as z:y=z['y'].copy();expected={g:z[g].copy() for g in parents}
+                assert np.array_equal(y,c.y[sa.K:])
+                for f,model in models.items():
+                    masked=sa.inference_view(c);details=independent_weight(model,masked)
+                    w=.5 if f=='uniform_innovation' else details['private']
+                    details.update(private=w,shared=1-w)
+                    errors['weight']=max(errors['weight'],max(abs(v-float(wl[c.id,f][k])) for k,v in details.items()))
+                    shared=independent_predict(model,masked,'shared',point_mean=True)
+                    private=independent_predict(model,masked,'private',point_mean=True)
+                    q=shared+w*(private-shared)
+                    correction=q if f=='cv_blend' else q-independent_predict(model,masked,'bias',point_mean=True)
+                    a=fold['choices'][f]['selected']['gain']
+                    for g in parents:
+                        expected[mapped(g+'4',f)]=(1-a)*expected[g]+a*q if f=='cv_blend' else expected[g]+a*correction
+                    expected['branch_'+f]=correction
+                with np.load(root/tail) as z,np.load(control/tail) as old:
+                    assert set(z.files)==set(expected)|{'y'} and np.array_equal(z['y'],y)
+                    for g in parents:errors['control']=max(errors['control'],float(np.max(abs(z[g+'4_cv_blend']-old[g+'4']))))
+                    for g,p in expected.items():
+                        errors['prediction']=max(errors['prediction'],float(np.max(abs(z[g]-p))))
+                        if g.startswith('branch_'):continue
+                        e=(np.asarray(p,float)-np.asarray(y,float))*100
+                        values=np.array([np.mean(abs(e)),np.sqrt(np.mean(e*e)),np.quantile(abs(e),.95)])
+                        row=lookup[c.id,g];assert row['dataset']==c.dataset and row['domain']==c.domain
+                        errors['metric']=max(errors['metric'],float(np.max(abs(values-[float(row[k]) for k in ('mae','rmse','p95_ae')]))))
+                        buckets[c.dataset,g,c.domain].append(values);cm[c.id,g]=(c.dataset,c.domain,values);seen.add((c.id,g))
+            print(fold['fold'],'independent innovation replay',flush=True)
+    assert seen==set(lookup)
+    means=defaultdict(list)
+    for (ds,g,_),values in buckets.items():means[ds,g].append(np.mean(values,axis=0))
+    table={key:np.mean(values,axis=0) for key,values in means.items()};assert len(table)==len(summary['table'])==96
+    for r in summary['table']:errors['metric']=max(errors['metric'],float(np.max(abs(table[r['dataset'],r['group']]-[r[k] for k in ('mae','rmse','p95_ae')]))))
+    assert max(errors.values())<1e-8,errors
+    edges=[]
+    for n in range(4):
+        for subset in itertools.combinations('1234',n):
+            for add in sorted(set('1234')-set(subset)):
+                edges.append(('B'+''.join(sorted((*subset,add))),'B'+''.join(subset)))
+    assert len(edges)==32;comparisons=[]
+    for f in families:
+        gates={a+'<'+b:bool(all(np.all(table[ds,mapped(a,f)]<table[ds,mapped(b,f)]) for ds in datasets)) for a,b in edges}
+        assert gates==summary['gates'][f]
+        comparisons.extend((f,mapped(a,f),mapped(b,f)) for a,b in edges)
+    for f in ('uniform_innovation','cv_blend'):
+        comparisons.extend(('mechanism_control',g,mapped(g,f)) for g in ('B4','B1234'))
+    pairs=[]
+    for family,a,b in comparisons:
+        for ds in datasets:
+            ids=sorted(cid for cid,g in cm if g==a and cm[cid,g][0]==ds)
+            for i,k in enumerate(('mae','rmse','p95_ae')):
+                delta=[(cm[cid,a][2][i]-cm[cid,b][2][i])/100 for cid in ids]
+                domains=[cm[cid,a][1] for cid in ids]
+                pairs.append(dict(family=family,comparison=a+'-'+b,dataset=ds,metric=k,**paired_stats(delta,domains)))
+        print(family,a,b,'paired intervals',flush=True)
+    assert len(pairs)==900
+    sa.write_json(root/'verification.json',dict(status='PASS',rows=11680,edges=96,errors=errors,paired_comparisons=pairs,
+        summary_sha256=sa.digest(root/'summary.json'),code_sha256=sa.digest(Path(__file__)),
+        helper_hashes={n:sa.digest(HERE/n) for n in ('audit_support_cv.py','audit_conditional_mixed.py')},
+        limits='Independent target arithmetic on saved audited source GPs; no full retraining. Intervals uncorrected for repeated development selection. Corrections are not scored as standalone SOH.'))
+    print('PASS11680rows96edges900pairs',errors,flush=True)
+
+
+if __name__=='__main__':main()

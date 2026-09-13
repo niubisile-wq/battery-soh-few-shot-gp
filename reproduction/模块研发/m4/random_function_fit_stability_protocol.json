@@ -1,0 +1,10 @@
+{
+  "phase": "Exploratory source GP optimizer-initialization sensitivity, fixed before refits",
+  "candidate": "Frozen function_private global0.5; keep all21 selected kernels/gains and original M1/M2/M3",
+  "initial_length_multipliers": [1.0, 0.5, 0.8, 1.25, 2.0],
+  "source": "Refit the selected source RandomFunctionGP from scratch with the exact original labels/keys and audited deterministic encoder. Change only the initial shared/private tied length scale relative to original prior, clipped to original bounds if needed. Keep amplitude/noise/rho initial values, bounds,max100iterations and no restarts within a run.",
+  "report": "All five fits for every one of21 folds, all optimization and boundary flags. Multiplier1 must replay original candidate GP before interpreting alternatives. No best-run selection by likelihood or query error, no discarded failures. Complete all source fits and audits before outer metrics for alternatives.",
+  "audit": "Fresh GP refit and independent target posterior replay for saved artifacts, label masks and source-budget keys. Reuse audited source encoder, explicitly not a fresh representation search.",
+  "metrics": "All five global initialization settings across all datasets and full16ablation groups with same effective candidate gains; report independent/full and all32edges. Existing original parents remain untouched. Do not retune validation settings per initialization.",
+  "limits": ["This tests source numerical-fit sensitivity, not new data or whole-pipeline random retraining", "No source data resampling or extra label budget", "Nonconverged endpoints retained and labeled; refit replay does not make them converged", "Repeated development cohorts,not independent confirmation", "No CALCE tuning or posthoc initialization refinement"]
+}

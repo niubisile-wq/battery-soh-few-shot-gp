@@ -1,0 +1,14 @@
+{
+  "phase": "Complete-parent source-OOF residual correction first grid",
+  "features": ["state", "signal"],
+  "state": "Parent predicted SOH, first10 mean SOH, their difference and squared difference; no true query SOH",
+  "signal": "State plus current-minus-first10-mean 21HI and first10-mean21HI",
+  "learners": {"ridge": [1, 10, 100], "rbf": [1, 10]},
+  "control": "Domain-cell-query balanced constant source residual",
+  "gains": [0, 0.1, 0.25, 0.5, 1],
+  "clip_soh": 0.05,
+  "selection": "Original B123 validation domain-equal MAE selects shared feature/learner/alpha/gain for all8 parents; separately fit each parent residual on its own complete-parent source-OOF predictions. Ties prefer smaller gain then key.",
+  "labels": "Correction training uses only original budgeted source query labels; no target query labels or validation labels in correction fitting",
+  "pilot": "MATR:b1 source fitting plus original validation; no outer query scoring",
+  "limits": ["Inherited outer configuration selection not nested", "Bounded correction not guaranteed beneficial", "Constant/Ridge/RBF residual learning itself not claimed novel"]
+}

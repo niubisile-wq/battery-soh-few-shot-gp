@@ -1,0 +1,13 @@
+{
+  "phase": "Development smooth cell-function candidate, fixed before source fits",
+  "hypothesis": "Replace unbounded linear private slopes by stationary smooth cell functions; shared length scale and learned variance ratio. Bounded private covariance is not a guarantee of bounded error or improvement.",
+  "families": ["function_private", "function_shared", "function_uniform", "slope_uniform"],
+  "kernels": ["rbf", "matern"],
+  "gains": [0, 0.1, 0.25, 0.5, 1],
+  "primary": "function_uniform; private/shared are matched source-GP controls, slope_uniform is the existing audited architecture control",
+  "source": "Same original <=1000 labels, audited Haar/PCA8 encoding reused; each kernel refits shared plus same-cell signal-kernel covariance from original prior, rho0.1 ratio bounded1e-6..1e3. Original kernel bounds, max100iterations,no restarts. Retain all failure flags.",
+  "target": "Use only first10 curves/labels for reference and contrast conditioning. Independent private function for each target cell, no domain-ID dependence. Uniform fixed half private/half shared; no fitted CV weight.",
+  "selection": "Original validation cells, cell-first/domain-equal B123 MAE; ties smaller gain then key; same selected key/gain for all8parents. Complete21fold choices before outer scoring. Report all families, do not switch primary after observing query results.",
+  "controls": "Private/shared/uniform use identical source-function GP. Compare slope_uniform at both its own selected configuration and function_uniform matching kernel/gain when full scoring is implemented; distinguish source covariance change from target conditioning by controls.",
+  "limits": ["Standard GP random-function construction, not a claimed mathematical invention", "Shared and private kernels use tied length scale; identifiability and support extrapolation require diagnosis", "Historical outer parent configurations inherited; not fully nested architecture selection", "Repeated development datasets, not independent confirmation", "No CALCE tuning, no target future labels, no original M1/M2/M3 modification", "Single MATR:b1 pilot is engineering validation, not performance acceptance"]
+}

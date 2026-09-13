@@ -1,0 +1,13 @@
+{
+  "phase": "Source-LODO error-trained bounded reliability gate v1",
+  "source_oof_run": "m3_reestimated_risk_screen_v1",
+  "views": ["state", "signal"],
+  "alphas": [1, 10, 100],
+  "gains": [0, 0.25, 0.5, 1],
+  "target": "clip((branch-parent)*(y-parent)/((branch-parent)^2+0.01^2),0,0.75); domain/cell-equal weighting times disagreement squared+0.01^2, mean-normalized",
+  "fit": "Weighted Ridge on budgeted source-LODO B and B1 errors; B gate applies B/B2 and B1 gate applies B1/B12. No pseudo-OOF M2 training examples.",
+  "selection": "B12 original validation domain-equal MAE selects shared view/alpha/gain. No target query labels for fitting or inference.",
+  "controls": "Same branch/gain with source-weighted constant gate per parent family",
+  "acceptance": "Unchanged all-dataset all-metric independent/incremental/complementarity gates",
+  "limits": ["B/B1-to-post-M2 gate transfer is a hypothesis", "Reliability score is not calibrated probability", "Added cycle input disclosed", "Frozen originals and CALCE exclusion preserved", "Development not independent confirmation"]
+}

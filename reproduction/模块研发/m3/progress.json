@@ -1,0 +1,10 @@
+{
+  "status": "EXPERIMENTAL_M3_RELEASE_VERIFIED",
+  "frozen_parent": "m2_reference_candidate_v3",
+  "completed_screen": "模块研发/results/m3_waveform_candidate_v1",
+  "previous_screens": ["m3_geometry_screen_v1", "m3_residual_screen_v1", "m3_trajectory_screen_v1", "m3_signal_trajectory_screen_v1", "m3_query_trajectory_screen_v1", "m3_risk_trajectory_screen_v1", "m3_conditional_geometry_screen_v1", "m3_progression_screen_v1", "m3_shared_progression_screen_v1", "m3_stage_progression_screen_v1", "m3_reestimated_risk_screen_v1", "m3_support_clock_screen_v1", "m3_coverage_screen_v1"],
+  "result": "Selected experimental paired PCA8 global step0.5. Final acceptance binds84 adapters,365 cells,21 folds, all12 addition edges passing, paired intervals,10 risk draws and controls. Source reconstruction max1.1937118e-12;29200 prediction rows independently audited. XJTU/MATR incremental MAE intervals cross zero, joint risk gates9/10; limits retained.",
+  "next": "M3 development/ablation deliverable complete. Broader paper novelty, independent external M3 confirmation and stronger cross-dataset gains remain separate research limitations, not claimed achieved by this release. Keep original M1/M2 untouched.",
+  "requirements_remaining": [],
+  "external_confirmation_cohort": "CALCE is exposed and excluded from M3 tuning"
+}

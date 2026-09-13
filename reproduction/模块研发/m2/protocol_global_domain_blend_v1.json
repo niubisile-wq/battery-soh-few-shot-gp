@@ -1,0 +1,15 @@
+{
+  "version": "m2_global_domain_blend_v1",
+  "status": "INVALIDATED_CROSS_FOLD_LEAKAGE_AND_SOURCE_LABEL_BUDGET_VIOLATION",
+  "superseded_by": "protocol_strict_ablation_v1.json",
+  "base_m1": "P07_pls_concat SHB",
+  "branch_a": "source isotonic calibration plus early-support residual correction",
+  "branch_b": "P02 anchor_physics GP",
+  "fusion": "p2 = w_dataset * pA + (1-w_dataset) * pB",
+  "weights": {"XJTU": 1.0, "MATR": 0.58, "Tongji": 1.0},
+  "selection": "dataset-level weight grid 0.00..1.00, step 0.01; validation-only; lexicographic macro MAE, RMSE, P95-AE",
+  "support": "first K=10 labeled cycles only",
+  "forbidden": ["target future labels", "query-label routing", "future lifecycle/cycle number"],
+  "coverage": {"outer_folds": 21, "test_cells": 365, "datasets": ["XJTU", "MATR", "Tongji"]},
+  "acceptance": "MAE, RMSE and P95-AE all improve over frozen M1 on every dataset; complete cell coverage; reproducible weights and predictions"
+}

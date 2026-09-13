@@ -1,0 +1,8 @@
+# Captured from the active paper-2 experiment environment (2026-09-07).
+python==3.12.3
+numpy==2.5.2
+pandas==2.3.3
+scipy==1.17.1
+scikit-learn==1.9.0
+torch==2.8.0+cu128
+xgboost==3.4.1

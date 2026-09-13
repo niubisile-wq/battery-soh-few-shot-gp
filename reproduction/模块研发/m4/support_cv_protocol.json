@@ -1,0 +1,14 @@
+{
+  "phase": "Development protocol fixed before real-cell validation",
+  "families": ["cv", "uniform"],
+  "source": "Reuse audited single-level MixedEffectsGP RBF/Matern and exact original source-budget encoders; no additional source labels or GP refit",
+  "inner_support": "First10 only. Train labels0:t, predict t for t=5..9. Feature reference uses all first10 allowed curves, so this is inner-support prediction,not an online causal forecasting experiment.",
+  "mixing": "Minimize sum of five squared inner predictive errors plus lambda*(private_weight-0.5)^2 over [0,1]. Lambda=5*source_GP_WhiteKernel_variance*source_y_scale^2, fixed multiplier1; no tuning of inner split or penalty.",
+  "final_adaptation": "Both shared and private target posteriors use all first10 permitted labels; same selected weight for every later query of this cell, no query label or future-input weight update",
+  "kernels": ["rbf", "matern"],
+  "gains": [0, 0.1, 0.25, 0.5, 1],
+  "selection": "Each family independently selected by original B123 validation domain-equal MAE, ties lower gain then key. Same fold choice all8parents. Freeze all21folds before outer query scoring.",
+  "controls": "Uniform0.5 must reproduce audited previous uniform predictions and selections. Report both families including no-gain choices and all failures.",
+  "acceptance": "Independent and full incremental all3datasets all3metrics, full16 complementarity, paired uncertainty, fixed-GP source-risk sensitivity and mechanism controls before adoption",
+  "limits": ["Five inner points may be noisy and unrepresentative of later degradation", "Source noise scale is a fixed regularizer,not a calibrated target uncertainty estimate", "Predictive convex mixing and GP conditioning are standard operations,not claimed basic inventions", "Repeated development data,not independent confirmation", "No CALCE tuning,original M1/M2/M3 unchanged"]
+}

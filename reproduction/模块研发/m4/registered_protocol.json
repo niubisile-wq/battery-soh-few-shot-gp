@@ -1,0 +1,14 @@
+{
+  "phase": "First10-reference-voltage registered dense partial-charge profile",
+  "encoders": ["pca8", "pls4"],
+  "kernels": ["rbf", "matern"],
+  "modes": ["source_bias", "posterior"],
+  "gains": [0, 0.1, 0.25, 0.5, 1],
+  "representation": "64fixed voltage landmarks between mean first10 min/maxV. Positive trapezoidal current*time charge; monotone voltage envelope, last charge at duplicates; interpolate and subtract charge at first landmark. Normalize by reference_capacity. Concatenate profile,first10profile difference,coverage mask and6context scalars.",
+  "boundary": "Outside observed voltage envelope interpolation clamps at endpoint; coverage mask explicitly marks those positions. Never determine grid from future cycles or true querySOH.",
+  "selection": "4sourceGPs,8adaptation branches,40B123validation objectives; original domain-equalMAE shared choice across8parents; all21choices frozen before scoring",
+  "labels": "Exact originalsource_keys<=1000,directSOH minusfirst10mean; targetadaptation first10only",
+  "acceptance": "Original all3dataset all3metric independent/incremental gains,16group complementarity,paired uncertainty andriskstability unchanged",
+  "controls": "If promising compare same64point profile with per-cycle normalized voltage grid andwithoutcoverage; ordinary8bin geometry andsameconfigwaveform remain relevant controls",
+  "limits": ["Voltage registration/integration/interpolation are standardmethods,not novelprimitives", "Voltage may shift with current or temperature; registration not guaranteed physical invariance", "Plateau/envelope policy discards some trajectory information; coverage may encode operating regime", "Denseprofile differs from previous8bin geometry but overlap must be disclosed", "Reused developmentcohorts,not independentconfirmation; noCALCE; originalM1-M3unchanged"]
+}

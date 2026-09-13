@@ -1,0 +1,10 @@
+{
+  "phase": "Source-neighborhood gated multiscale branch",
+  "multipliers": [0.25, 1, 4],
+  "gains": [0, 0.1, 0.25, 0.5, 1],
+  "rule": "In standardized source-trained branch latent coordinates, compute each source row nearest squared distance to a different source cell. Scale is median of per-cell medians, floored1e-8. At inference gate=1/(1+nearest_source_distance_squared/(scale*multiplier)). Multiply selected branch gain by gate, shared across all8parents.",
+  "selection": "Reuse all4 trainedGPs and8validation branches; evaluate3multipliers*5gains for each branch. Original B123 domain-equal validation MAE selects shared choice. All21choices frozen before outer score. Ties smaller gain then key then multiplier.",
+  "acceptance": "Original all3dataset all3metric independent,incremental,16group complementarity,paired uncertainty andrisk stability requirements unchanged",
+  "controls": "Same branch/key/gain with gate removed,plus original independently selected ungated screen",
+  "limits": ["No gate fitting labels or target-query statistics; fixed source-neighborhood scale", "Source encoder remains trained on full original source budget; distances are not encoder-crossfitted generalization estimates", "Near training features need not mean accurateSOH; gate is not calibrated probability", "Reused development data after failed ungated screen,not independent confirmation", "No new labels or CALCE; originalM1-M3unchanged"]
+}

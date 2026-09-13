@@ -13,6 +13,9 @@ portable frozen evidence for the manuscript:
 - `figures_*`, `tables`, `tables_revision`: source assets used by the two documents.
 - `evidence/`: public, derived result records and scripts for checking reported
   values and regenerating selected supplementary figures.
+- `reproduction/`: the M1--M4 research implementation, protocol files, tests,
+  data-preparation utilities and deployment scripts recovered from the paper's
+  experiment environment.
 
 The original battery measurements, trained model checkpoints and private
 research-tree files are not redistributed. The datasets must be obtained from
@@ -50,6 +53,8 @@ original private training run.
 ## Reproducibility scope
 
 This release supports document compilation, table-value auditing and selected
-figure regeneration. Full end-to-end retraining requires the original battery
-datasets and the research implementation, which are not included in this
-public release.
+figure regeneration. The recovered implementation is included, but full
+end-to-end retraining still requires the original battery datasets and local
+cache/result directories, which are not redistributed. The scripts retain the
+original relative-directory assumptions; see `reproduction/README.md` before
+running them.

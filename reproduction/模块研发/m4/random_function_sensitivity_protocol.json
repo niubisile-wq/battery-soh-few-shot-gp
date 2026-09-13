@@ -1,0 +1,10 @@
+{
+  "phase": "Post-screen development sensitivity, registered before evaluating new global steps",
+  "source": "m4_random_function_screen_v1 with independent17520row audit",
+  "families": ["function_uniform", "function_private", "function_shared", "slope_uniform", "matched_slope"],
+  "global_steps": [0.1, 0.25, 0.5, 0.75, 1.0],
+  "formula": "parent + step * (saved_child - parent); same global step for every fold/dataset/parent, original selected per-fold gains unchanged",
+  "reason": "New smooth private-function control independently improves GPR and fullB123 across all9pointmetrics but fails only M3's XMAE incremental edge. Exact decomposition shows nonlinear interaction reverses old M3 benefit. Check whether reduced new-candidate blend restores complementarity; not a repeat run of old branch fitting.",
+  "report": "All five families and five steps, all32addition edges with all9metrics, full and independent effects, no dataset-specific winner mixing. Originalfunction_uniform remains original screen primary; function_private remains its predeclared control. Any new nomination is exploratory and requires dedicated stability and uncertainty/controls before acceptance.",
+  "limits": ["No new source fitting or target labels used for predictions; cached prediction sensitivity is not retraining", "All cohorts repeatedly exposed; cannot claim independent confirmation", "Standard shrinkage is not a new innovation module", "No step inferred from query-specific zero crossing, no threshold refinement", "No original M1/M2/M3 change, no CALCE tuning", "A point-pass does not satisfy final acceptance by itself"]
+}

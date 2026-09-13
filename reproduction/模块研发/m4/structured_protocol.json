@@ -1,0 +1,14 @@
+{
+  "phase": "Separate local signed-shape and energy encoders with joint/additive kernel control",
+  "encoders": ["pca8", "pls4"],
+  "kernels": ["joint", "additive"],
+  "modes": ["source_bias", "posterior"],
+  "gains": [0, 0.1, 0.25, 0.5, 1],
+  "representation": "Same168local multiscale features. Split signed shape96 and local energy72 columns, separate source scalers and encoders. PCA4per block orPLS2per block, same total maximum dimensions8/4as mixed encoding.",
+  "kernel": "Joint RBF across both blocks versus sum of independent amplitude/lengthscale RBFs over each block. Same source noise model and labels.",
+  "selection": "Original B123 domain-equal validation MAE,all8branch combinations*5gains,shared choice across8parents; all21choices frozen before query scoring",
+  "labels": "Original exactsource_keys<=1000,directSOH minusfirst10mean,first10targetadaptation only",
+  "acceptance": "Original all3dataset all3metric independent/incremental gains,16group complementarity,paired intervals andriskstability unchanged",
+  "controls": "Both joint/additive candidates reported; if promising compare same-config mixed encoder and separately validation-selected blocks/kernel families",
+  "limits": ["Separate encoding andadditiveGP are standard techniques,not invented modules", "Same maximum latent dimensions does not equal same parameter count; additivekernel has more parameters", "Shape/energy could both encode nuisance; no guaranteed complementarity", "Reused development cohorts,not independent confirmation; noCALCE tuning; originalM1-M3unchanged"]
+}

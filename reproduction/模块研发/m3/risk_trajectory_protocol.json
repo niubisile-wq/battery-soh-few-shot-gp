@@ -1,0 +1,10 @@
+{
+  "phase": "Query-only trajectory with validation-domain multimetric no-regression constraint",
+  "candidates": ["identity", "linear_5", "linear_15", "linear_31", "median_5", "median_15", "ema_0.2", "ema_0.5", "holt_0.4_0.1", "holt_0.4_0.3"],
+  "weights": [0, 0.25, 0.5, 1],
+  "clip": 0.05,
+  "risk_constraint": "Every validation domain MAE,RMSE,P95 must not increase (tolerance 1e-10 pp); among eligible candidates choose domain-equal MAE; identity always eligible",
+  "information": "Query-only causal predictions; no target query truth at inference; no future length switches",
+  "acceptance": "Unchanged all-dataset three-metric eight-group gates; identity equality cannot count as improvement",
+  "limits": ["Exploratory response to prior development failures, not independent preregistration", "No guarantee of test no-regression", "No CALCE", "Ordinary-filter novelty unproven"]
+}

@@ -1,0 +1,29 @@
+{
+  "status": "SELECTED_EXPERIMENTAL_M3_RELEASE",
+  "decision_source": "Agent selection under the user's active request to develop M3 with comprehensive improvements and ablations; not an assertion of explicit user approval of this version",
+  "candidate": "模块研发/results/m3_waveform_candidate_v1",
+  "variant": "wave_pair_pca8_global_step_0.5",
+  "candidate_manifest_sha256": "e5b3ab7511b3b4d2006d569fd50a5e54db30b2bf55230b93d83848bc5f05c6f1",
+  "acceptance": "模块研发/results/m3_waveform_release_v1/acceptance.json",
+  "acceptance_sha256": "78466fdf15474e41caffde2234b915b569f26147ef4bf2b161db9898a80e48af",
+  "parent": "m2_reference_candidate_v3",
+  "parent_selection_unchanged": "模块研发/m2/selected_candidate.json",
+  "report": "心路历程/第三模块候选_配对曲线PCA_完整消融与审核.md",
+  "all_dataset_all_metric_point_gates": "All12 single-module addition edges pass across XJTU, MATR, Tongji MAE/RMSE/P95",
+  "risk_sensitivity": {
+    "kind": "Fixed-GP source risk reweighting, not full retraining",
+    "draws": 10,
+    "m3_independent_passes": 10,
+    "m3_incremental_passes": 10,
+    "joint_seven_gate_passes": 9,
+    "failure": "Seed103 XJTU B123-B13 MAE +0.0570095248 SOH percentage points"
+  },
+  "limits": [
+    "Experimental module release, not a claim of complete paper or journal readiness",
+    "Global step chosen after development sensitivity; development results are not independent confirmation",
+    "XJTU and MATR incremental MAE intervals cross zero; all-dataset statistical significance not achieved",
+    "Reference-paired waveform engineering supplement; PCA, GPR and curve differencing are not claimed as inventions",
+    "Individually validation-tuned absolute PCA control is better on MATR; matched controls are fully reported",
+    "No external independent M3 confirmation claimed; exposed CALCE cohort excluded from selection"
+  ]
+}

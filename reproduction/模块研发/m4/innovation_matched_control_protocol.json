@@ -1,0 +1,13 @@
+{
+  "phase": "Registered while primary innovation screen running,before its complete metrics",
+  "execution_condition": "Execute after successful independent primary screen audit if innovation candidate remains worth pursuing; not a new selection search",
+  "fixed": "Use each fold's already selected cv_innovation kernel and gain for every matched control and all8parents. Keep source fits,encoder,labelbudget and first10 support identical.",
+  "arms": {
+    "innovation_cv": "p+a*(q_cv-r), exact primary cv_innovation replay",
+    "blend_cv_matched": "p+a*(q_cv-p), same q_cv/kernel/a; isolates additive versus blend rule conditional on this configuration",
+    "innovation_uniform_matched": "p+a*(q_uniform-r), same kernel/a; isolates inner-support weight versus fixed0.5",
+    "zero_update": "p, exact existing parent"
+  },
+  "scope": "All21folds,all3datasets,8parents and MAE/RMSE/P95; paired cell/domain uncertainty; no control discarded by result",
+  "limits": ["Configuration selected for primary,not symmetric independently optimized comparison; report together with existing separately validation-tuned controls", "Repeated development data,not independent confirmation", "No change to main candidate or selected settings", "Algebraic parent-difference preservation alone does not prove mechanism benefit"]
+}

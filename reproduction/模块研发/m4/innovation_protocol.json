@@ -1,0 +1,12 @@
+{
+  "phase": "Development original validation; fixed before new validation or query scoring",
+  "families": ["cv_innovation", "uniform_innovation", "cv_blend"],
+  "kernels": ["rbf", "matern"],
+  "gains": [0, 0.1, 0.25, 0.5, 1],
+  "source": "Same audited single-level MixedEffectsGP and exact original source-label budgets; no new GP fitting",
+  "innovation": "q is anchored conditional shared/private mixture, r is same source branch with first10 mean anchoring only. New prediction p+gain*(q-r), unlike old blend p+gain*(q-p). CV uses fixed audited first10 inner-support weights; uniform uses0.5.",
+  "controls": "cv_blend must replay previous support_cv validation predictions and selections. Report cv and uniform innovation completely, no datasetwise mixing.",
+  "selection": "Independently select each family kernel/gain on original B123 validation domain-equal MAE, ties lower gain then key. Same fold choice and correction all8parents. Freeze all21fold choices before scoring.",
+  "acceptance": "Independent and full incremental all3datasets all3metrics, full16 complementarity, mechanism controls, paired uncertainty and risk stability",
+  "limits": ["Additive correction preserves raw differences between parent predictions but not their error ranking", "Correction is relative to auxiliary branch r, not a posterior update conditioned on actual parent p", "First10 support may not identify later correction reliably", "Additive residual updates and GP conditioning are standard,not basic algorithm inventions", "Repeated development cohorts; not independent confirmation", "No CALCE tuning,original3modules unchanged"]
+}
