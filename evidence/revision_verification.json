@@ -1,0 +1,16 @@
+{
+  "source_hashes_checked": 30,
+  "aggregate_rows": 48,
+  "dataset_module_edges": 96,
+  "m3_control_rows": 30,
+  "calce_trajectory_rows": 210,
+  "tongji_reduction_pct": 57.255925955539766,
+  "tongji_m3_reduction_pp": 0.21825037691443017,
+  "calce_delta_pp": 0.045956593761182774,
+  "m4_initialization_ranges_pp": {
+    "XJTU": 3.447268555056837e-07,
+    "MATR": 7.85136122782859e-08,
+    "Tongji": 3.138274642378036e-06
+  },
+  "scope": "Read-only source-summary and manuscript checks; no training, inference replay or new bootstrap."
+}

@@ -1,0 +1,218 @@
+{
+  "manifest": {
+    "records": 898,
+    "by_kind": {
+      "data": 365,
+      "predictions": 365,
+      "manifest": 168
+    },
+    "mismatches": []
+  },
+  "metric_recalculation": {
+    "cell_rows": 5840,
+    "query_points": 221805,
+    "cell_max_abs_error_pp": {
+      "mae": 1.7763568394002505e-15,
+      "rmse": 1.7763568394002505e-15,
+      "p95_ae": 3.552713678800501e-15,
+      "low_mae": 3.552713678800501e-15,
+      "low_rmse": 3.552713678800501e-15,
+      "low_p95_ae": 7.105427357601002e-15,
+      "n": 0.0,
+      "low_n": 0.0
+    },
+    "aggregate_max_abs_error_pp": {
+      "mae": 8.881784197001252e-16,
+      "rmse": 3.552713678800501e-15,
+      "p95_ae": 3.552713678800501e-15,
+      "low_mae": 1.7763568394002505e-15,
+      "low_rmse": 1.7763568394002505e-15,
+      "low_p95_ae": 1.7763568394002505e-15
+    },
+    "limits": "Recalculation from saved predictions, not inference replay or model refitting."
+  },
+  "all_96_dataset_edges_improve_all_three": true,
+  "m4_zero_gain_folds": [
+    "MATR:b2",
+    "MATR:b4",
+    "XJTU:3C",
+    "XJTU:R3",
+    "XJTU:R2.5"
+  ],
+  "m4_zero_gain_cells": 119,
+  "external": {
+    "prediction_files": 210,
+    "cell_metric_max_error_pp": {
+      "mae": 3.552713678800501e-15,
+      "rmse": 3.552713678800501e-15,
+      "p95_ae": 7.105427357601002e-15
+    },
+    "protocol_metric_max_error_pp": {
+      "mae": 3.552713678800501e-15,
+      "rmse": 3.552713678800501e-15,
+      "p95_ae": 7.105427357601002e-15
+    },
+    "base_constant_trajectories": 42,
+    "full_constant_trajectories": 0,
+    "trajectories_per_group": 42,
+    "mean_delta_pp": 0.045956593761182774,
+    "base_max_pred_range_pp": 0.0,
+    "full_max_pred_range_pp": 1.9427302760673837,
+    "true_range_min_pp": 5.423128604888916,
+    "true_range_max_pp": 70.89278101921082,
+    "limits": "Constant predictions describe output behavior; without a kernel replay they do not establish its unique cause. Four protocol groups are not a controlled rate experiment."
+  },
+  "gp_initialization": {
+    "passed_edges_by_init": {
+      "init_1.0": 32,
+      "init_0.5": 32,
+      "init_0.8": 32,
+      "init_1.25": 32,
+      "init_2.0": 32
+    },
+    "full_model_mae_range_pp": {
+      "XJTU": 3.447268555056837e-07,
+      "MATR": 7.85136122782859e-08,
+      "Tongji": 3.138274642378036e-06
+    },
+    "limits": "Fixed representation, kernel choice, gain, and target mode. Source GP optimization sensitivity, not whole-pipeline random retraining."
+  },
+  "stage_summary": [
+    {
+      "dataset": "XJTU",
+      "group": "B",
+      "mae_pp": 3.011538768507011,
+      "gain_vs_B_pp": 0.0,
+      "relative_reduction_vs_B_pct": 0.0,
+      "fraction_of_full_gain_pct": 0.0,
+      "single_query_ms": 1.0340261893967788
+    },
+    {
+      "dataset": "XJTU",
+      "group": "B1",
+      "mae_pp": 2.922438798325432,
+      "gain_vs_B_pp": 0.08909997018157911,
+      "relative_reduction_vs_B_pct": 2.95861939794157,
+      "fraction_of_full_gain_pct": 23.825818123850688,
+      "single_query_ms": 1.567168937375148
+    },
+    {
+      "dataset": "XJTU",
+      "group": "B12",
+      "mae_pp": 2.656696458890733,
+      "gain_vs_B_pp": 0.35484230961627805,
+      "relative_reduction_vs_B_pct": 11.782757483550288,
+      "fraction_of_full_gain_pct": 94.88676948303237,
+      "single_query_ms": 8.791464380919933
+    },
+    {
+      "dataset": "XJTU",
+      "group": "B123",
+      "mae_pp": 2.645903491119178,
+      "gain_vs_B_pp": 0.3656352773878333,
+      "relative_reduction_vs_B_pct": 12.14114462717341,
+      "fraction_of_full_gain_pct": 97.77286794768507,
+      "single_query_ms": 11.53551647439599
+    },
+    {
+      "dataset": "XJTU",
+      "group": "B1234",
+      "mae_pp": 2.637574820161472,
+      "gain_vs_B_pp": 0.37396394834553925,
+      "relative_reduction_vs_B_pct": 12.417703277017225,
+      "fraction_of_full_gain_pct": 100.0,
+      "single_query_ms": 15.399475737164416
+    },
+    {
+      "dataset": "MATR",
+      "group": "B",
+      "mae_pp": 2.6862495902500902,
+      "gain_vs_B_pp": 0.0,
+      "relative_reduction_vs_B_pct": 0.0,
+      "fraction_of_full_gain_pct": 0.0,
+      "single_query_ms": 0.7673054933547974
+    },
+    {
+      "dataset": "MATR",
+      "group": "B1",
+      "mae_pp": 2.183739348951797,
+      "gain_vs_B_pp": 0.5025102412982934,
+      "relative_reduction_vs_B_pct": 18.706759160510828,
+      "fraction_of_full_gain_pct": 65.57378721197881,
+      "single_query_ms": 2.002463210374117
+    },
+    {
+      "dataset": "MATR",
+      "group": "B12",
+      "mae_pp": 1.9853111601217923,
+      "gain_vs_B_pp": 0.7009384301282979,
+      "relative_reduction_vs_B_pct": 26.093570481030408,
+      "fraction_of_full_gain_pct": 91.4671656187151,
+      "single_query_ms": 5.767688155174255
+    },
+    {
+      "dataset": "MATR",
+      "group": "B123",
+      "mae_pp": 1.9513851550470225,
+      "gain_vs_B_pp": 0.7348644352030678,
+      "relative_reduction_vs_B_pct": 27.356521071992113,
+      "fraction_of_full_gain_pct": 95.89425278011863,
+      "single_query_ms": 6.838551489636302
+    },
+    {
+      "dataset": "MATR",
+      "group": "B1234",
+      "mae_pp": 1.919921667670538,
+      "gain_vs_B_pp": 0.7663279225795523,
+      "relative_reduction_vs_B_pct": 28.527800445684093,
+      "fraction_of_full_gain_pct": 100.0,
+      "single_query_ms": 8.832861669361591
+    },
+    {
+      "dataset": "Tongji",
+      "group": "B",
+      "mae_pp": 6.669480265471827,
+      "gain_vs_B_pp": 0.0,
+      "relative_reduction_vs_B_pct": 0.0,
+      "fraction_of_full_gain_pct": 0.0,
+      "single_query_ms": 0.736479986120354
+    },
+    {
+      "dataset": "Tongji",
+      "group": "B1",
+      "mae_pp": 5.38813549233913,
+      "gain_vs_B_pp": 1.2813447731326972,
+      "relative_reduction_vs_B_pct": 19.21206334122123,
+      "fraction_of_full_gain_pct": 33.554715988943634,
+      "single_query_ms": 1.382553441957994
+    },
+    {
+      "dataset": "Tongji",
+      "group": "B12",
+      "mae_pp": 3.2965140531587083,
+      "gain_vs_B_pp": 3.3729662123131186,
+      "relative_reduction_vs_B_pct": 50.57314930182946,
+      "fraction_of_full_gain_pct": 88.32823582505748,
+      "single_query_ms": 6.782169961793856
+    },
+    {
+      "dataset": "Tongji",
+      "group": "B123",
+      "mae_pp": 3.078263676244278,
+      "gain_vs_B_pp": 3.5912165892275487,
+      "relative_reduction_vs_B_pct": 53.84552388316409,
+      "fraction_of_full_gain_pct": 94.04358236207042,
+      "single_query_ms": 9.371714835817164
+    },
+    {
+      "dataset": "Tongji",
+      "group": "B1234",
+      "mae_pp": 2.8508075830539408,
+      "gain_vs_B_pp": 3.818672682417886,
+      "relative_reduction_vs_B_pct": 57.255925955539766,
+      "fraction_of_full_gain_pct": 100.0,
+      "single_query_ms": 14.25956485962326
+    }
+  ],
+  "limits": "New results are descriptive calculations from frozen files. No training, tuning, cohort changes, ensemble construction, or manuscript edits."
+}

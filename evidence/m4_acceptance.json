@@ -1,0 +1,49 @@
+{
+  "status": "SELECTED_EXPERIMENTAL_M4_RELEASE",
+  "family": "function_private",
+  "global_step": 0.5,
+  "decision_source": "Agent experimental selection under user's active M4-development goal; not an assertion of explicit user approval of this exact version",
+  "evidence_sha256": {
+    "candidate.json": "7517e80acfeed0d73b2d56a2e5a9834711b77accd6711ed66b0813c971a89540",
+    "request.json": "e853b4393c40d0fa91b1d3ccf745cba8475d63634415731e0fce889875fa9cfa",
+    "evidence.json": "bf23859c2af6ccd879615c2a6b1ea6345d038e45aa7b788e868ad8ef8b98cb90",
+    "verification.json": "f6f35fd3bde7a6dc117fd6700b2be9c9d03e2ec92c7d6eb98a6d2069cdbf6b21",
+    "runtime_verification.json": "c93b9f9225ccd40da52dd218f5ffe9d97e5b90f5e9fd0a6fe1f66ca7dbc5201c",
+    "runtime_snapshot_supplement.json": "ed78f8ba6b38693df0c5ae67cebb744b9f87ca02b362f9c81c438ee714f066cd",
+    "cells.csv": "81f90312a66070b3bea0a7222c91ec70c21bb22a6ab7c53f82b574d884d680da",
+    "comparison.csv": "f015b82bf208d42e4202cfe5031766c932cbf1e6c73f4f628ff31f08eb5c0d93",
+    "README.md": "289ce556387b9bb799d5b788d419311711650880ecd62a242ccd52b805d5ea9c"
+  },
+  "report_sha256": "0c9478a159c8e31535270074cf7063a12d267ca4ce46ae5c73b1b20c8824297b",
+  "finalizer_sha256": "77681643b6c8e6f35e66c524bda46707341a64669fc78ddf0df2bd4729f33a08",
+  "verified_scope": {
+    "folds": 21,
+    "cells": 365,
+    "adapters": 168,
+    "metric_rows": 5840,
+    "full_ablation_groups": 16,
+    "passing_edges": 32
+  },
+  "risk_counts": {
+    "independent": 10,
+    "full": 10,
+    "all_m4_additions": 10,
+    "all32": 8
+  },
+  "initialization_all32_passes": 5,
+  "parent_selections_sha256": {
+    "m2/selected_candidate.json": "1ff2fad42bffb1c45ecf431ebbac5e3e5e3dd011c12a3e6bd2a6c2da7dacc4ef",
+    "m3/selected_candidate.json": "82761702ab9b611897863d87d85f70ba2dfa5f039cec73683dc05412a5d6f7fe"
+  },
+  "limits": [
+    "Exploratory post-screen private0.5 nomination; original screen primary was function_uniform.",
+    "XJTU and MATR have incremental confidence intervals crossing zero; not all-dataset significance.",
+    "Risk all32 passes8of10, with M2-related failures reported, although all8M4 additions pass10of10.",
+    "Not superior to every matched-control metric; no independent confirmation or mathematical novelty claim.",
+    "Source initialization sensitivity is not whole-pipeline random retraining.",
+    "Original M1/M2/M3 unchanged, CALCE excluded from selection.",
+    "Export boundary probes cover one cell/fold; full branch boundary checks were separately audited on365cells."
+  ],
+  "remaining_m4_delivery_work": [],
+  "historical_status_note": "candidate.json and evidence.json preserve pre-audit stage statuses; this separate record registers final experimental acceptance."
+}

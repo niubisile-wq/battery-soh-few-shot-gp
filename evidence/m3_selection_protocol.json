@@ -1,0 +1,28 @@
+{
+  "protocol": {
+    "phase": "Global waveform M3 step-size sensitivity after development screen",
+    "source_run": "m3_waveform_screen_v1/matched_controls",
+    "families": [
+      "wave_absolute_pca8",
+      "wave_absolute_pls4",
+      "wave_pair_pca8",
+      "wave_pair_pls4"
+    ],
+    "steps": [
+      0.25,
+      0.5,
+      0.75,
+      1
+    ],
+    "rule": "parent + global_step*(original validation-selected M3 prediction-parent). Same step for all datasets, folds, cells and four parent combinations.",
+    "selection": "No per-dataset or per-cell step selection. Report all16 sensitivity candidates; any adoption is exploratory development selection and needs separate stability/verification.",
+    "acceptance": "Unchanged all-dataset all-metric independent/incremental/complementarity gates",
+    "limits": [
+      "Motivated by observed development overcorrection; not independent preregistration",
+      "No new source labels or GP fits",
+      "Original M1/M2 unchanged",
+      "Ordinary shrinkage is not a novelty claim"
+    ]
+  },
+  "code_sha256": "5b3340118e193791df84a68ba9dafd70413bf6ae5c0cdc61e1fd43c3e6c75bf9"
+}

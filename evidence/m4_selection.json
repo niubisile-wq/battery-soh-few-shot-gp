@@ -1,0 +1,20 @@
+{
+  "status": "SELECTED_EXPERIMENTAL_M4_RELEASE",
+  "decision_source": "Agent experimental selection under user's active M4-development goal; not an assertion of explicit user approval of this exact version",
+  "candidate": "模块研发/results/m4_random_function_candidate_v1",
+  "variant": "function_private_global_step_0.5",
+  "candidate_manifest_sha256": "7517e80acfeed0d73b2d56a2e5a9834711b77accd6711ed66b0813c971a89540",
+  "parent": "m3_waveform_candidate_v1",
+  "acceptance": "模块研发/results/m4_random_function_candidate_v1/acceptance.json",
+  "report": "心路历程/第四模块候选_平滑个体函数_完整消融与审核.md",
+  "limits": [
+    "Exploratory post-screen private0.5 nomination; original screen primary was function_uniform.",
+    "XJTU and MATR have incremental confidence intervals crossing zero; not all-dataset significance.",
+    "Risk all32 passes8of10, with M2-related failures reported, although all8M4 additions pass10of10.",
+    "Not superior to every matched-control metric; no independent confirmation or mathematical novelty claim.",
+    "Source initialization sensitivity is not whole-pipeline random retraining.",
+    "Original M1/M2/M3 unchanged, CALCE excluded from selection.",
+    "Export boundary probes cover one cell/fold; full branch boundary checks were separately audited on365cells."
+  ],
+  "acceptance_sha256": "ba538b464f22fd7cbc7dda1f3cabf06c72ac1999254597d5138fd4011b173dbe"
+}

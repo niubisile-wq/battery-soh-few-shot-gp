@@ -34,8 +34,22 @@ related-work-*.png
 related-work-build.txt
 results-*.txt
 
-# Local audit material containing machine paths or intermediate arrays
-evidence/
+# Local audit material containing machine paths or private intermediate records
+evidence/provenance.json
+evidence/archive/
+evidence/regenerated_figures/
+evidence/m2_fixed_source_protocol.json
+evidence/m3_candidate.json
+evidence/m4_candidate.json
+evidence/neural_metric_audit.json
+evidence/supplement_completion.json
+evidence/*_fit_request.json
+evidence/*_fit_result.json
+evidence/*_checkpoint_audit.json
+evidence/historical_baseline_scope.md
+evidence/prior_asset_audit.md
+evidence/prior_inventory.json
+evidence/prior_scan_summary.json
 核验/
 layout_*/
 

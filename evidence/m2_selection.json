@@ -1,0 +1,21 @@
+{
+  "status": "SELECTED_FOR_SUBSEQUENT_EXPERIMENTS",
+  "decision_source": "User explicitly selected v3",
+  "candidate": "模块研发/results/m2_reference_candidate_v3",
+  "variant": "source_lodo_reference_bagged_pca8",
+  "candidate_manifest_sha256": "a513e88448b09226cb21d0ec23fae0fce38f3f44002e9c0c12de73d26fdb9306",
+  "model_artifacts_hash_verified": 42,
+  "record": "心路历程/第二模块v3选用决定与消融表.md",
+  "further_m2_repair": "Do not automatically resume prior repair plans or replace v3 without user confirmation",
+  "independent_final_validation": "COMPLETED_SMALL_UNSCORED_CELL_COHORT_WITH_LIMITATIONS",
+  "final_confirmation_report": "心路历程/v3四项评估最终结论_20260908.md",
+  "final_confirmation_result": "模块研发/results/calce_frozen_confirmation_v2/summary.json",
+  "final_confirmation_limit": "Same CALCE source, four previously unscored cells according to workspace audit; data-continuity correction disclosed after preliminary scoring; no model retuning. Relative improvement but large absolute MAE 16.9630 pp; not a broad performance acceptance.",
+  "risk_sensitivity": {
+    "kind": "Fixed-GP source risk reweighting, not full retraining",
+    "draws": 10,
+    "independent_passes": 8,
+    "incremental_passes": 10,
+    "complementary_passes": 10
+  }
+}

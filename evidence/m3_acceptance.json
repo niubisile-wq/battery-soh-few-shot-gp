@@ -1,0 +1,74 @@
+{
+  "status": "VERIFIED_EXPERIMENTAL_RELEASE",
+  "candidate": "模块研发/results/m3_waveform_candidate_v1",
+  "candidate_sha256": "e5b3ab7511b3b4d2006d569fd50a5e54db30b2bf55230b93d83848bc5f05c6f1",
+  "variant": "wave_pair_pca8_global_step_0.5",
+  "requirements": {
+    "full_eight_group_ablation": true,
+    "all12_single_module_addition_edges": {
+      "B1<B": true,
+      "B2<B": true,
+      "B12<B1": true,
+      "B12<B2": true,
+      "B3<B": true,
+      "B13<B1": true,
+      "B13<B3": true,
+      "B23<B2": true,
+      "B23<B3": true,
+      "B123<B12": true,
+      "B123<B13": true,
+      "B123<B23": true
+    },
+    "original_models_unchanged": 42,
+    "new_adapters_hash_verified": 84,
+    "training_folds_verified": 21,
+    "prediction_rows_independently_audited": 29200,
+    "paired_comparisons_reported": 63,
+    "risk_pass_counts": {
+      "B3<B": 10,
+      "B123<B12": 10,
+      "B123<B13": 9,
+      "B123<B23": 10,
+      "B123<B3": 10,
+      "B13<B1": 10,
+      "B23<B2": 10
+    },
+    "controls_reported": true,
+    "source_budget_and_query_boundaries_verified": true
+  },
+  "evidence": {
+    "candidate": {
+      "path": "模块研发/results/m3_waveform_candidate_v1/candidate.json",
+      "sha256": "e5b3ab7511b3b4d2006d569fd50a5e54db30b2bf55230b93d83848bc5f05c6f1"
+    },
+    "stability": {
+      "path": "模块研发/results/m3_waveform_stability_v2/summary.json",
+      "sha256": "4133a5d1bd63c95eb3652285387c2809f06d58cf5beb17673a3f9d9019c81e3b"
+    },
+    "prediction_audit": {
+      "path": "模块研发/results/m3_waveform_audit_v1/audit.json",
+      "sha256": "51087da4217e4ec1262ded826a91e9a8468e55fefeafcd3a959c8fd133fc5312"
+    },
+    "training_audit": {
+      "path": "模块研发/results/m3_waveform_training_audit_v1/audit.json",
+      "sha256": "ca3394053bbb09189d0a481988baeabd903e11ce09703cd264edc6b34faf2b31"
+    },
+    "controls": {
+      "path": "模块研发/results/m3_waveform_screen_v1/matched_controls/summary.json",
+      "sha256": "e04a782de5b24f7388aa706e0acf2c2fbb6049a662b38f7daecbf7457a34a424"
+    },
+    "sensitivity": {
+      "path": "模块研发/results/m3_waveform_shrink_v1/summary.json",
+      "sha256": "cb7caaa9fb7d0d1cf7a46cfee521eaabd0ca95bc608bd3dce56f4ccfac687769"
+    }
+  },
+  "limits": [
+    "Development datasets reused in model search; global step0.5 chosen after sensitivity, not independent test.",
+    "XJTU/MATR incremental MAE intervals cross zero; significance on every dataset not achieved.",
+    "Risk sensitivity is fixed-GP risk reweighting, not full retraining; joint7 gates9/10, seed103 retained.",
+    "Same-config paired control wins all9 metrics, but independently tuned absolute PCA wins MATR.",
+    "Engineering reference-paired supplement, not a claim to invent PCA, GPR, curve differencing or guarantee journal acceptance.",
+    "CALCE excluded from M3 selection; this release does not claim independent external M3 confirmation."
+  ],
+  "code_sha256": "994bd6f61109ee12132edb4ee9869a4ec85ce5eb82e1d14459a1093fd246fef1"
+}

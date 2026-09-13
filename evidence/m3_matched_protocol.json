@@ -1,0 +1,7 @@
+{
+  "candidate_sha256": "e5b3ab7511b3b4d2006d569fd50a5e54db30b2bf55230b93d83848bc5f05c6f1",
+  "stability_sha256": "4133a5d1bd63c95eb3652285387c2809f06d58cf5beb17673a3f9d9019c81e3b",
+  "code_sha256": "944ac6add0abd9f784dff002fae0171b8fb35e15ab5500315409a39c2c7c2f86",
+  "control": "Replace paired PCA8 by absolute PCA8, holding fold kernel, support mode, rank and gain fixed. No query-driven selection.",
+  "limit": "Mechanism diagnostic after development selection; not independent confirmation."
+}
