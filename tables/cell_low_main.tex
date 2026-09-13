@@ -1,0 +1,27 @@
+% Original numerical entries retained; two evidence tables presented as panels.
+\begin{table}[!htbp]\renewcommand{\arraystretch}{1.15}\centering
+\caption{Condition- and cell-level improvement and low-SOH errors. Negative paired differences favour B1234.}\label{tab:cellmain}
+\papertablesize\setlength{\tabcolsep}{3pt}
+\textit{A. Whole-trajectory MAE changes and domain-bootstrap intervals}\\[4pt]
+\begin{tabular}{lrrrrc}
+\toprule
+Dataset & Group wins/total & Cell wins/total & Cell losses & $\Delta$ (pp) & 95\% domain CI \\
+\midrule
+XJTU & 4/6 & 37/55 & 18 & -0.3740 & [-1.1125, 0.3646] \\
+MATR & 4/4 & 120/180 & 60 & -0.7663 & [-1.1098, -0.4575] \\
+Tongji & 10/11 & 123/130 & 7 & -3.8187 & [-5.3130, -2.3369] \\
+\bottomrule
+\end{tabular}
+\par\medskip
+\textit{B. Errors for stored SOH values below 0.90; entries are MAE/RMSE/P95 (pp)}\\[4pt]
+\begin{tabular}{lrrcc}
+\toprule
+Dataset & Cells & Points & B & B1234 \\
+\midrule
+XJTU & 55 & 1,297 & 6.2969/6.8644/9.8549 & 5.7260/6.1290/8.4431 \\
+MATR & 179 & 20,010 & 5.2571/5.8625/9.0908 & 4.0161/4.3270/6.1864 \\
+Tongji & 112 & 38,474 & 8.2427/9.3741/15.4786 & 4.1693/4.5105/6.3587 \\
+\bottomrule
+\end{tabular}
+\par\smallskip\begin{minipage}{\columnwidth}\papertablesize Panel A uses 5,000 paired domain-bootstrap resamples of fixed development predictions, without correction for model selection. Panel B includes only cells with qualifying low-SOH observations and follows the same cell--domain weighting.\end{minipage}
+\end{table}

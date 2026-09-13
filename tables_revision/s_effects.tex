@@ -1,0 +1,21 @@
+% Generated from unrounded frozen evidence by build_revision.py.
+\begin{table}[H]\centering
+\caption{Three distinct summaries of module effects on MAE (SOH pp).}\label{tab:seffects}
+\papertablesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{llrrr}\toprule
+Dataset & Module & Progressive & Leave-one-out & Average marginal \\ \midrule
+XJTU & M1 & -0.0891 & 0.2537 & -0.1924 \\
+XJTU & M2 & -0.2657 & 0.1638 & -0.1406 \\
+XJTU & M3 & -0.0108 & 0.0027 & -0.0461 \\
+XJTU & M4 & -0.0083 & 0.0083 & -0.0166 \\
+MATR & M1 & -0.5025 & 0.1593 & -0.3204 \\
+MATR & M2 & -0.1984 & 0.1436 & -0.3234 \\
+MATR & M3 & -0.0339 & 0.0268 & -0.0634 \\
+MATR & M4 & -0.0315 & 0.0315 & -0.0478 \\
+Tongji & M1 & -1.2813 & 0.1856 & -0.6403 \\
+Tongji & M2 & -2.0916 & 1.5118 & -2.1921 \\
+Tongji & M3 & -0.2183 & 0.1635 & -0.4006 \\
+Tongji & M4 & -0.2275 & 0.2275 & -0.4792 \\
+\bottomrule\end{tabular}
+\par\smallskip\begin{minipage}{\linewidth}\papertablesize Progressive increments and average marginal effects are new minus parent error (negative favours addition). Leave-one-module-out loss is error without the module minus full-model error (positive favours retention). The columns are alternative summaries and are not additive independent causal contributions.\end{minipage}
+\end{table}

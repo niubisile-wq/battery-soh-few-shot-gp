@@ -1,0 +1,12 @@
+% Generated from unrounded frozen evidence by build_revision.py.
+\begin{table}[!htbp]\centering
+\caption{Progressive MAE increments and 95\% domain-bootstrap intervals (SOH pp). Negative changes favour the added branch.}\label{tab:branchintervals}
+\papertablesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{lrrrr}\toprule
+Dataset & $\Delta_3$ & 95\% interval & $\Delta_4$ & 95\% interval \\ \midrule
+XJTU & -0.0108 & [-0.1150, 0.1065] & -0.0083 & [-0.0340, 0.0146] \\
+MATR & -0.0339 & [-0.1261, 0.0465] & -0.0315 & [-0.0977, 0.0033] \\
+Tongji & -0.2183 & [-0.3688, -0.0688] & -0.2275 & [-0.3372, -0.1244] \\
+\bottomrule\end{tabular}
+\par\smallskip\begin{minipage}{\linewidth}\papertablesize $\Delta_3=\mathrm{MAE}_{B123}-\mathrm{MAE}_{B12}$ and $\Delta_4=\mathrm{MAE}_{B1234}-\mathrm{MAE}_{B123}$. The 5,000 whole-domain resamples concern fixed selected predictions, not repeated training, and do not correct for development selection.\end{minipage}
+\end{table}

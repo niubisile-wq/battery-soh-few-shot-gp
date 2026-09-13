@@ -1,0 +1,16 @@
+% Generated from unrounded frozen evidence by build_revision.py.
+\begin{table}[H]\centering
+\caption{Scope and numerical differences in the retained neural checkpoint audit.}\label{tab:sneural}
+\papertablesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{ll}\toprule
+Check & Coverage / maximum difference \\ \midrule
+Source-validation task scores & 189 \\
+Primary cell--seed predictions & 3,285 \\
+Cell--seed--setting predictions & 9,855 \\
+Applicable support-fit-state replays & 93 \\
+Source-validation score difference & $3.17\times10^{-9}$ SOH ratio \\
+Saved-prediction replay difference & $4.77\times10^{-7}$ SOH ratio \\
+Current-query numerical difference & $1.73\times10^{-6}$ SOH ratio \\
+\bottomrule\end{tabular}
+\par\smallskip\begin{minipage}{\linewidth}\papertablesize Differences are in normalized SOH units, not percentage points; multiply by 100 for pp. The saved-prediction maximum is therefore approximately $4.77\times10^{-5}$ pp. Counts describe distinct audit operations and must not be added as independent experiments.\end{minipage}
+\end{table}

@@ -1,0 +1,46 @@
+% Original numerical entries retained; cohort and cell results presented together.
+\begin{table}[!p]\renewcommand{\arraystretch}{1.15}\centering
+\caption{Frozen XJTU-to-CALCE evaluation. Errors are SOH pp.}\label{tab:calcemain}
+\papertablesize\setlength{\tabcolsep}{3pt}
+\textit{A. Equal protocol-group and source-model weighting}\\[4pt]
+\begin{tabular}{lrrr}
+\toprule
+Configuration & MAE & RMSE & P95 \\
+\midrule
+B & 13.7358 & 16.3646 & 29.8797 \\
+B1 & 13.8244 & 16.4608 & 30.0304 \\
+B12 & 13.8535 & 16.4864 & 30.0643 \\
+B123 & 13.7812 & 16.4215 & 29.9881 \\
+B1234 & 13.7817 & 16.4220 & 29.9888 \\
+\bottomrule
+\end{tabular}
+\par\medskip
+\textit{B. Cell MAE averaged over six frozen source models}\\[4pt]
+\begin{tabular}{lrccccc}
+\toprule
+Cell & Queries & B & B1 & B12 & B123 & B1234 \\
+\midrule
+CS2\_5 & 59 & 3.4475 & 3.7040 & 3.5342 & 3.4869 & 3.4953 \\
+CS2\_6 & 55 & 15.5305 & 14.7379 & 14.2676 & 14.2248 & 14.2343 \\
+CX2\_3 & 1750 & 24.6673 & 24.2247 & 24.1338 & 24.0111 & 24.0156 \\
+PL11 & 870 & 9.3276 & 9.1544 & 8.8574 & 8.7604 & 8.7725 \\
+PL12 & 972 & 15.6624 & 17.9360 & 19.4745 & 19.4378 & 19.3949 \\
+PL13 & 871 & 8.3137 & 8.2983 & 8.0672 & 7.9676 & 7.9762 \\
+PL14 & 986 & 8.2699 & 8.3152 & 8.3592 & 8.3500 & 8.3494 \\
+\bottomrule
+\end{tabular}
+\par\smallskip\begin{minipage}{\columnwidth}\papertablesize Every cell supplies ten support measurements in addition to the listed queries. Source models are scored separately; predictions are not ensembled. Panel A weights four protocol groups equally, rather than taking a direct average of the seven cell rows.\end{minipage}
+\par\vspace{16pt}
+\caption{CALCE protocol-group decomposition of MAE (SOH pp).}\label{tab:calceprotocols}
+\papertablesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{lrrrr}\toprule
+Protocol group & Cells & B & B1234 & $\Delta$ \\ \midrule
+CS2 low-SOC RPT & 2 & 9.4890 & 8.8648 & -0.6242 \\
+CX2 alternating pulse & 1 & 24.6673 & 24.0156 & -0.6517 \\
+PL full-SOC 0.5C discharge & 2 & 8.8206 & 8.3744 & -0.4462 \\
+PL full-SOC 2C discharge & 2 & 11.9661 & 13.8721 & +1.9060 \\
+Equal protocol mean & 7 & 13.7358 & 13.7817 & +0.0460 \\
+\bottomrule\end{tabular}
+\par\smallskip\begin{minipage}{\linewidth}\papertablesize $\Delta=\mathrm{MAE}_{B1234}-\mathrm{MAE}_B$. Errors are averaged over six separately scored source models, equally over cells within each group and then equally over the four groups. Protocol differences do not isolate a causal discharge-rate effect.\end{minipage}
+
+\end{table}

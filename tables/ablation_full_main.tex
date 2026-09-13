@@ -1,0 +1,32 @@
+% Mechanically assembled from all sixteen rows of each source ablation table.
+\begin{table}[!htbp]\centering
+\caption{Full ablation of the four modules. All entries are SOH pp; shading identifies the progressive chain.}\label{tab:fullablation}
+\papertablesize\setlength{\tabcolsep}{1.5pt}\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{lcccc*{9}{r}}\toprule
+&\multicolumn{4}{c}{Modules}&\multicolumn{3}{c}{XJTU}&\multicolumn{3}{c}{MATR}&\multicolumn{3}{c}{Tongji}\\
+\cmidrule(lr){2-5}\cmidrule(lr){6-8}\cmidrule(lr){9-11}\cmidrule(lr){12-14}
+Model & M1 & M2 & M3 & M4 & MAE & RMSE & P95 & MAE & RMSE & P95 & MAE & RMSE & P95\\\midrule
+\rowcolor{gray!12}
+B & -- & -- & -- & -- & 3.0115 & 3.8271 & 7.2310 & 2.6862 & 3.6212 & 7.2182 & 6.6695 & 8.2345 & 15.2312 \\
+\rowcolor{gray!12}
+B1 & $\checkmark$ & -- & -- & -- & 2.9224 & 3.7282 & 7.2124 & 2.1837 & 3.1234 & 6.6841 & 5.3881 & 6.4951 & 11.3309 \\
+B2 & -- & $\checkmark$ & -- & -- & 2.9366 & 3.6885 & 7.0619 & 2.1611 & 2.8885 & 5.8674 & 3.5974 & 4.3876 & 7.3134 \\
+B3 & -- & -- & $\checkmark$ & -- & 2.9480 & 3.7166 & 6.9629 & 2.5715 & 3.4661 & 6.9091 & 5.8459 & 7.2338 & 13.3477 \\
+B4 & -- & -- & -- & $\checkmark$ & 3.0067 & 3.8057 & 7.1692 & 2.6116 & 3.5270 & 7.0551 & 5.8714 & 7.2682 & 13.4175 \\
+\rowcolor{gray!12}
+B12 & $\checkmark$ & $\checkmark$ & -- & -- & 2.6567 & 3.3496 & 6.3713 & 1.9853 & 2.6866 & 5.5691 & 3.2965 & 4.0776 & 6.9048 \\
+B13 & $\checkmark$ & -- & $\checkmark$ & -- & 2.8325 & 3.5723 & 6.8041 & 2.1041 & 2.9979 & 6.3772 & 4.9346 & 5.9624 & 10.3128 \\
+B14 & $\checkmark$ & -- & -- & $\checkmark$ & 2.8840 & 3.6648 & 7.0632 & 2.1332 & 3.0490 & 6.5016 & 4.7224 & 5.7195 & 9.9121 \\
+B23 & -- & $\checkmark$ & $\checkmark$ & -- & 2.9033 & 3.6248 & 6.8738 & 2.1172 & 2.8137 & 5.6628 & 3.3151 & 4.0763 & 6.8063 \\
+B24 & -- & $\checkmark$ & -- & $\checkmark$ & 2.9165 & 3.6560 & 6.9687 & 2.1153 & 2.8147 & 5.6765 & 3.2516 & 3.9946 & 6.6133 \\
+B34 & -- & -- & $\checkmark$ & $\checkmark$ & 2.9460 & 3.7012 & 6.9073 & 2.5091 & 3.3878 & 6.7718 & 5.1825 & 6.4325 & 11.8371 \\
+\rowcolor{gray!12}
+B123 & $\checkmark$ & $\checkmark$ & $\checkmark$ & -- & 2.6459 & 3.3067 & 6.2701 & 1.9514 & 2.6258 & 5.3850 & 3.0783 & 3.8408 & 6.4840 \\
+B124 & $\checkmark$ & $\checkmark$ & -- & $\checkmark$ & 2.6403 & 3.3198 & 6.2976 & 1.9467 & 2.6274 & 5.4142 & 3.0143 & 3.7474 & 6.2864 \\
+B134 & $\checkmark$ & -- & $\checkmark$ & $\checkmark$ & 2.8014 & 3.5221 & 6.6852 & 2.0635 & 2.9371 & 6.2296 & 4.3626 & 5.2968 & 9.0885 \\
+B234 & -- & $\checkmark$ & $\checkmark$ & $\checkmark$ & 2.8913 & 3.5986 & 6.8000 & 2.0792 & 2.7520 & 5.5018 & 3.0364 & 3.7575 & 6.2139 \\
+\rowcolor{gray!12}
+B1234 & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ & 2.6376 & 3.2841 & 6.2063 & 1.9199 & 2.5773 & 5.2583 & 2.8508 & 3.5726 & 5.9563 \\
+\bottomrule\end{tabular}
+\par\smallskip\begin{minipage}{\columnwidth}\papertablesize All sixteen subsets use the same target support and evaluation cells. Metrics are averaged within cells, then equally across cells within domains and across domains. The highlighted chain is B, B1, B12, B123 and B1234.\end{minipage}
+\end{table}

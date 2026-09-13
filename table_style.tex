@@ -1,0 +1,15 @@
+% Consistent fixed type size; never stretch tables to fill the column.
+\newcommand{\papertablesize}{\fontsize{9}{11}\selectfont}
+
+% Align dedicated float pages at the top with a fixed gap between floats.
+\makeatletter
+\setlength{\@fptop}{0pt}
+\setlength{\@fpsep}{18pt}
+\setlength{\@fpbot}{0pt plus 1fil}
+\makeatother
+
+% Prefer figures/tables accompanied by text over sparsely filled float pages.
+\renewcommand{\topfraction}{.9}
+\renewcommand{\bottomfraction}{.8}
+\renewcommand{\textfraction}{.1}
+\renewcommand{\floatpagefraction}{.8}

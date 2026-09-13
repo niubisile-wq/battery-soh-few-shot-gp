@@ -1,0 +1,42 @@
+# LaTeX build products
+*.aux
+*.log
+*.out
+*.spl
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# Local revision records and temporary previews
+*.bak
+*.diff
+*-build.txt
+*-preview-*.png
+check*.png
+font-check*.png
+submission-check-*.png
+main.before-*
+main.updated*
+main_updated*
+abstract-build.txt
+conclusion-build.txt
+discussion-build.txt
+final_check.log
+final_story_v2_compile.log*
+integrated_*.log
+strict_baselines_compile*.log
+method-*.png
+method-*.txt
+related-work-*.png
+related-work-build.txt
+results-*.txt
+
+# Local audit material containing machine paths or intermediate arrays
+evidence/
+核验/
+layout_*/
+
+# Keep the final manuscript PDFs and source figures under version control.

@@ -1,0 +1,29 @@
+\begin{table}[!htbp]
+\centering
+\caption{Strict few-shot baseline comparison under the same ten-label budget. Each entry reports MAE/RMSE/P95 in SOH percentage points; a standard deviation is shown only when five or three independent seeds were run. All methods use the same 21 held-out groups, 365 cells and query sets. UDA methods using all target signals are excluded from this table.}
+\label{tab:newstrict}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{lccc}
+\toprule
+Method & XJTU & MATR & Tongji \\
+\midrule
+Source mean & 4.541/5.934/12.513 & 4.077/6.506/16.555 & 8.920/10.438/17.440 \\
+Support mean & 5.068/6.614/14.275 & 4.684/7.625/18.920 & 12.438/13.800/21.464 \\
+GPR & 3.012/3.827/7.231 & 2.686/3.621/7.218 & 6.669/8.234/15.231 \\
+B1234 (frozen) & 2.638/3.284/6.206 & 1.920/2.577/5.258 & 2.851/3.573/5.956 \\
+AT-GPR & 3.013/3.954/7.901 & 2.574/3.540/7.226 & 7.241/8.796/15.970 \\
+Enhanced MAML & 4.386 $\pm$ 0.433/5.759 $\pm$ 0.543/12.098 $\pm$ 1.175 & 3.523 $\pm$ 0.388/4.649 $\pm$ 0.471/9.694 $\pm$ 1.138 & 6.022 $\pm$ 0.557/6.586 $\pm$ 0.614/9.613 $\pm$ 0.966 \\
+ANIL & 6.375 $\pm$ 3.723/7.741 $\pm$ 3.632/14.543 $\pm$ 3.667 & 4.684 $\pm$ 0.883/5.592 $\pm$ 0.825/9.851 $\pm$ 1.135 & 16.937 $\pm$ 8.439/17.463 $\pm$ 8.463/20.886 $\pm$ 8.791 \\
+Transfer-stacking SVR & 4.975/6.546/14.202 & 4.674/7.610/18.883 & 12.311/13.673/21.316 \\
+PatchTSTLite & 5.969 $\pm$ 1.042/7.159 $\pm$ 1.159/13.806 $\pm$ 2.214 & 3.003 $\pm$ 0.458/4.174 $\pm$ 0.502/8.661 $\pm$ 0.715 & 21.674 $\pm$ 2.889/22.263 $\pm$ 2.908/25.618 $\pm$ 3.215 \\
+TCN & 18.216 $\pm$ 4.964/19.356 $\pm$ 5.067/26.522 $\pm$ 5.304 & 3.853 $\pm$ 0.3362/4.976 $\pm$ 0.552/9.814 $\pm$ 1.404 & 19.861 $\pm$ 9.437/20.462 $\pm$ 9.354/23.448 $\pm$ 9.291 \\
+MAML--MLP & 3.623 $\pm$ 0.098/4.752 $\pm$ 0.173/9.801 $\pm$ 0.599 & 2.769 $\pm$ 0.070/3.750 $\pm$ 0.143/7.749 $\pm$ 0.631 & 3.907 $\pm$ 0.446/4.464 $\pm$ 0.426/6.123 $\pm$ 0.466 \\
+\bottomrule
+\end{tabular}%
+}
+\begin{flushleft}
+\scriptsize Entries are MAE/RMSE/P95. Seed deviations are sample standard deviations across the stated seeds; a blank deviation denotes a single frozen or deterministic run. Source mean and support mean are fixed references. B1234 is the frozen complete model. The new MAML/ANIL run used a fixed pre-registered 200-update source episodic budget and 30 support-adaptation steps; its results are reported as an additional development comparison, not as a claim of equal optimization effort across all methods.
+\end{flushleft}
+\end{table}

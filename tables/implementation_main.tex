@@ -1,0 +1,22 @@
+\begin{table}[!htbp]\centering
+\caption{Key implementation and selection settings.}\label{tab:implementation}
+\papertablesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{p{.30\columnwidth}p{.64\columnwidth}}\toprule
+Item & Setting\\\midrule
+Input & Voltage/current/elapsed time; 128 points per channel\\
+Target support & First ten eligible labelled measurements\\
+Source training & At most 1,000 labels and 60 cells; additional source-validation labels\\
+Base GP & 21 health indicators; source scaling; RBF plus white noise; source-only mode\\
+M1 & Source PLS components: 2/4/8; source-only, bias or posterior mode selected on source validation\\
+M2 & 40 discrete experts; 24 bagged risk-weight draws\\
+M3/M4 & Selected representation dimension 8; global blend shrinkage 0.5\\
+PatchTSTLite & Patch length 16, stride 8, 15 tokens; joint-channel 48-to-32 embedding; 2 Transformer layers, 4 heads, feed-forward width 64, dropout 0.1; mean pooling and scalar readout; no positional embedding\\
+TCN & 3 convolutions of width 32/64/64, kernel size 5, dilation 1/2/4; symmetric padding, GELU, global mean pooling and scalar readout; no residual blocks\\
+MAML--MLP & Flattened 384-to-128-to-32-to-1 network with GELU; one source-cell task per outer update; one differentiable inner gradient step at learning rate 0.01\\
+Neural optimization & MSE; AdamW, weight decay $10^{-4}$, gradient norm cap 1; source batch size 64 for PatchTSTLite/TCN; source-only channel normalization\\
+Support optimization & Learning rate $5\times10^{-4}$, 10/50/200 steps; target-only candidates use 0.001/0.003 and 50/200/500 steps\\
+Neural selection & Fold-local source validation with seed 0; options fixed for seeds 1 and 2\\
+Repetitions & Neural methods: 3 seeds; RF/XGBoost: 10; deterministic references: 1; complete predictor: 1 frozen configuration\\
+CPU timing & Xeon Platinum 8352V, 2.10 GHz; Python 3.12.3; single-threaded numerical computation in each process\\\bottomrule
+\end{tabular}
+\end{table}

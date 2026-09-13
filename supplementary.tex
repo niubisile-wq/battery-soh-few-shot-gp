@@ -1,0 +1,212 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{newtxtext,newtxmath}
+\usepackage[margin=25mm]{geometry}
+\usepackage{booktabs,graphicx,array,float}
+\usepackage[table]{xcolor}
+\usepackage{microtype}
+\usepackage[section]{placeins}
+\usepackage[hidelinks]{hyperref}
+\setlength{\emergencystretch}{2em}
+\renewcommand{\thesection}{S\arabic{section}}
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\renewcommand{\theequation}{S\arabic{equation}}
+\hypersetup{pdftitle={Supplementary material: Support-conditioned prediction combination for few-shot battery state-of-health estimation},pdfauthor={Zixuan Liu}}
+\title{Supplementary material\\[5pt]\large Support-conditioned prediction combination for few-shot battery state-of-health estimation under operating-condition shift}
+\author{Zixuan Liu}
+\date{}
+\input{table_style.tex}
+\begin{document}
+\maketitle
+This supplement presents selected design comparisons, effect-size analyses and reproducibility records for the frozen predictor reported in the main text. XJTU, MATR and Tongji remain development datasets. The seven-cell CALCE evaluation remains a frozen evaluation within a previously used public source, without overall MAE improvement. No model, training budget, eligibility rule or deployment weight was changed to prepare this supplement. Additional tables are generated from retained unrounded summaries; existing audit results are identified separately from new calculations on those summaries.
+
+\section{Selected source-representation and expert-selection routes}
+\label{sec:sdevelopment}
+\subsection{M1 development alternatives}
+Table~\ref{tab:sm1} selects ordinary GP enhancements and a PLS representation from the archived development screen. The pruned GP improves over the reported M1 on XJTU but performs worse on Tongji; ordinary PLS has lower MAE on XJTU and Tongji. Thus, the reported M1 is not a uniformly best standalone representation. Its main-text contribution includes representation learning and a source-selected adaptation mode, so the improvement cannot be attributed to representation alone. These routes document design alternatives and dataset-level trade-offs; they are not additional independent tests.
+
+\input{tables_revision/s_m1.tex}
+
+\paragraph{Historical source-GPR diagnostic.}
+The retained XJTU development diagnosis reports that all 3,577 query predictions in the 3C condition lie within 0.1 SOH pp of the source mean, approximately 99.077\%. The largest RBF correlation with any source sample is below 0.01, and current indicators account for 82.51\% of the summed standardized squared distances to nearest source samples. Distance shares are calculated by finding each query's nearest source point in the 21-indicator space, grouping squared coordinate differences by signal channel and summing across queries. This descriptive diagnostic does not establish a causal effect of current features. The same record identifies low-SOH overestimation in some conditions with closer source neighbours, so distance alone is not a complete explanation. Its query-pooled diagnostic errors must not replace the cell--domain aggregate errors of the main tables. The original report, including its historical hypotheses and subsequent-work proposals, is retained as \path{evidence/historical_gpr_diagnosis.md}; those proposals are not the definition of the final model.
+
+\subsection{M2 reference-risk alternatives and frozen identity}
+The reported M2 configuration is the frozen v3 candidate recorded in the selection manifest, with variant \texttt{source\_lodo\_reference\_bagged\_pca8}. Table~\ref{tab:sm2} compares fixed source LODO, HI-reference, unbagged PCA8-reference and bagged PCA8-reference candidates at the B12 stage. The unbagged candidate has lower XJTU MAE, fixed source LODO has the lowest MATR MAE in this comparison, and the frozen bagged candidate has lower Tongji MAE. These development outcomes document a trade-off rather than uniform dominance by v3.
+
+\input{tables_revision/s_m2.tex}
+
+The fixed-source row uses the archived extended source-LODO configuration, without the later reference-risk aggregation. Its unrounded SOH-ratio metrics are converted to percentage points only when formatting Table~\ref{tab:sm2}.
+
+The selection manifest records an explicit decision to retain v3. Earlier candidates are retained as development evidence; they are not substituted into individual dataset rows of B1234. This comparison changes historical candidate configurations and should not be interpreted as a matched causal ablation of bagging alone. The M3 selection manifest identifies \texttt{wave\_pair\_pca8\_global\_step\_0.5}, with the v3 M2 parent. Its candidate manifest and release-acceptance record are supplied separately; their hashes match the selection manifest. The unchanged M4 identity is the private-function candidate with global strength 0.5, recorded as \texttt{function\_private\_global\_step\_0.5}. Selection manifests and original candidate metrics are included in the evidence directory, with source paths and SHA-256 hashes in \path{evidence/provenance.json}.
+
+\section{Paired and absolute waveform controls}
+\label{sec:swaveform}
+The M3 audit replaces paired PCA8 by absolute PCA8 while retaining the selected fold kernel, support-adaptation mode, latent dimension and gain. The paired input combines the current waveform and its difference from the early-support mean; the absolute control omits this pairing. These comparisons use the same permitted support and query information. The retained matched settings were selected for the paired candidate, so the matched comparison isolates the representation replacement at that operating point, not the best achievable result of each representation.
+
+\input{tables_revision/s_m3_all.tex}
+
+Table~\ref{tab:sm3all} retains all four M3 parent configurations. In B123, pairing improves MAE, RMSE and P95 on all three datasets. Other configurations contain exceptions: for example, the absolute representation has lower XJTU MAE in B3 and B13, and lower MATR MAE in B23. The full results therefore support a configuration-dependent benefit rather than universal necessity.
+
+Table~\ref{tab:sm3selected} provides the complementary comparison in which each representation uses its own source-validation-selected configuration, followed by the same global multiplier 0.5. The absolute representation has lower MATR MAE, RMSE and P95, while the paired representation has lower errors on XJTU and Tongji. These settings remain exploratory development choices. Both comparison types are reported without selecting a dataset-specific winner for the final predictor.
+
+\input{tables_revision/s_m3_selected.tex}
+
+\section{Module effect sizes and paired uncertainty}
+\label{sec:seffects}
+Let $m(A)$ be the dataset-level MAE of the base predictor with module subset $A\subseteq\{1,2,3,4\}$, using the main-text cell--domain weighting. Three summaries answer different questions:
+\begin{align}
+\text{Progressive increment:}\quad
+\Delta_m^{\mathrm{prog}}&=m(\{1,\ldots,m\})-m(\{1,\ldots,m-1\}),\\
+\text{Leave-one-module-out loss:}\quad
+L_m&=m(\{1,2,3,4\}\setminus\{m\})-m(\{1,2,3,4\}),\\
+\text{Average marginal effect:}\quad
+\overline\Delta_m&=\frac{1}{8}\sum_{A\subseteq\{1,2,3,4\}\setminus\{m\}}
+\big[m(A\cup\{m\})-m(A)\big].
+\end{align}
+The empty subset denotes B. Progressive increments and average marginal effects are error changes, so negative values favour adding the module. Leave-one-module-out loss is positive when removing the module worsens the full model. These summaries depend on their parent configurations and must not be added together or interpreted as independent causal contributions. The eight parent configurations are not eight independent experiments.
+
+\input{tables_revision/s_effects.tex}
+
+The full sixteen-configuration, three-metric table is retained in the main text and as \path{evidence/aggregate.csv}. Table~\ref{tab:seffects} derives its three summaries from those unrounded entries. It shows much larger M1/M2 than M3/M4 leave-one-out losses on XJTU and MATR, and a particularly large M2 loss on Tongji. The sign of all aggregate additions alone does not establish equal necessity or equal effect size.
+
+
+\input{tables_revision/branch_intervals.tex}
+
+Table~\ref{tab:branchintervals} gives the retained progressive M3/M4 intervals, with 5,000 whole-domain resamples and seed 91010. The resampling preserves cells within each selected domain; there are only 6, 4 and 11 domains. Both Tongji intervals lie below zero, whereas both intervals on XJTU and MATR cross zero. These intervals measure variation of fixed selected predictions over observed domains, not full-training variability, and do not correct for architecture or global-strength selection. Crossing zero does not prove absence of an effect.
+
+For the reported complete predictor, the M4 source-selected gain is zero in five folds: XJTU 3C, R3 and R2.5, and MATR b2 and b4. They contain 119 cells. B1234 therefore equals B123 on those folds by the selected zero-weight setting; M4 is not an active adjustment for every target cell. Figure~\ref{fig:sdomains} shows the progressive reductions for all 21 held-out groups. Its positive reduction convention is the negative of the progressive error-change convention above.
+\begin{figure}[!htbp]\centering
+\includegraphics[width=.96\linewidth,height=.76\textheight,keepaspectratio]{figures_revision/domain_effects.pdf}
+\caption{All 21 development groups. Values are parent MAE minus new-stage MAE (SOH pp), so positive values favour the added module. The final column is B minus B1234. These are repeated development cohorts; the entries are not independent confirmatory trials.}\label{fig:sdomains}
+\end{figure}
+
+\section{Optimization sensitivity and reproducibility scope}
+\label{sec:saudit}
+\subsection{Source-GP initialization and risk resampling}
+The retained source-GP experiment evaluates length-scale initialization multipliers 0.5, 0.8, 1.0, 1.25 and 2.0 relative to the original prior across the 21 outer folds. The 105 fixed-branch source fits include the audited pilot fold reused by the batch; all five outcomes per fold are retained instead of selecting the best initialization. The representation, label budget, selected kernel, blend strength, target mode and outer selections remain fixed. Table~\ref{tab:sinit} shows the complete-model MAE for each initialization.
+
+\input{tables_revision/s_initialization.tex}
+
+The maximum-minus-minimum MAE ranges are approximately $3.45\times10^{-7}$, $7.85\times10^{-8}$ and $3.14\times10^{-6}$ pp for XJTU, MATR and Tongji. The archived screen retains all 32 module-addition checks under all five initializations. This supports numerical stability with respect to the tested source-GP initialization; it is not five complete pipeline random-seed repetitions. Preparing this supplement reuses those fitted results and does not refit the GPs. The prior asset audit also records that the signal-amplitude parameter reaches its bound for all five initializations in the Tongji1\_CY25-1\_1 fold. Consequently, numerical agreement of final predictions does not establish an unconstrained optimum or the absence of fitting-boundary issues.
+
+The separate ten-draw risk-resampling analysis retains the fitted GPs and changes reference-risk weights. All eight M4 additions pass the three-dataset, three-metric checks in all ten draws; all 32 additions pass in eight draws, with remaining failures involving M2. Risk resampling and source-GP initialization probe different sources of sensitivity. Neither repeats the full architecture-selection process.
+
+\subsection{Leave-one-dataset-out selection audit}
+The main text reports a sensitivity analysis for the fact that XJTU, MATR and Tongji informed architecture and global-strength selection. The audit contains 35 frozen candidates, formed by seven architecture families crossed with five global steps. In each of three rounds, one complete dataset is excluded from candidate selection; the other two datasets select the candidate and global step, which are then evaluated on the held-out dataset. The selected candidates are plain/1.0 for XJTU, condition\_mixed/1.0 for MATR and plain/0.5 for Tongji. Their LODO MAEs are 2.6855, 2.0178 and 2.9666 pp, versus base-GPR MAEs of 3.0115, 2.6862 and 6.6695 pp. The corresponding relative reductions are 10.83\%, 24.89\% and 55.52\%.
+
+\input{tables_revision/lodo_selection_audit.tex}
+
+This result indicates that the relative advantage does not disappear when the dataset used for evaluation is excluded from candidate selection. The scope must be stated precisely: the audit reuses frozen candidate outputs and probes selection sensitivity at the dataset level; it is not a complete nested cross-validation that retrains every architecture from raw data within each outer loop. The original run report, candidate results, selection records and verification record are identified in \path{evidence/lodo_selection_audit.md} and the accompanying experiment archive.
+
+\subsection{Neural training records and checkpoint replay}
+The neural comparison comprises three methods, 21 folds and three seeds, giving 189 source-training task records. The supplemental baseline study reused 54 verified XJTU source checkpoints and generated the remaining 135 MATR/Tongji source-checkpoint fits, together with the source-validation candidate fits. The retained audit reports validation-patience stopping for all 189 tasks; it does not establish that all architecture families received identical optimization effort.
+
+\input{tables_revision/s_neural_audit.tex}
+
+The 3,285 primary cell--seed predictions correspond to 365 cells, three methods and three seeds. Three evaluated settings (source-selected, source-only and support-bias-corrected) give 9,855 cell--seed--setting predictions. Applicable support-fit-state reconstruction was checked in 93 cases using early support, not in every cell. Source-validation score replay, saved-prediction replay and current-query checks are separate operations with separate numerical tolerances. Replaying a saved source checkpoint does not retrain it.
+
+The nine historical reference/classical families do not have equivalent per-query and checkpoint-replay coverage. Their retained cell metrics can be reaggregated, but the neural replay counts cannot be extended to those families. Numerical agreement supports reproduction of the recorded local implementations; it does not establish equal search budgets, globally optimal training or faithful reproduction of every published architecture.
+
+\subsection{Historical baseline coverage}
+The earlier XJTU screen contains 19 strict-track method families, whereas the main three-dataset table contains 12. The seven additional neural families are MLP, CNN1D, LSTM, GRU, CNN--LSTM, Transformer and PatchTST-CI-SOH. Their retained results cover XJTU only; they were not extended to MATR and Tongji in the supplemental baseline study. The historical screen also contains separate cycle-information routes, whose additional inputs prevent pooling them with the strict waveform comparison.
+
+The original historical comparison and the subsequent coverage report are retained in \path{evidence/historical_xjtu_comparison.md} and \path{evidence/historical_baseline_scope.md}. Their setting and seed counts describe those historical runs, not the current source-selected three-dataset comparison. We retain adverse results and incomplete coverage without selecting the best historical setting to replace a primary-table entry. The 189-task neural replay audit above applies to its three stated methods, not to all 19 historical families.
+
+\subsection{Frozen-model acceptance and information-boundary scope}
+The retained M4 acceptance record covers 21 folds, 365 cells, 168 adapters and 5,840 cell--configuration metric rows. It explicitly distinguishes exported-model boundary probes on one cell per fold from separately audited branch boundary checks on all 365 cells. The record links metric verification, runtime replay and snapshot checks by hashes; these cover different operations and are not interchangeable. \path{evidence/m4_acceptance.json} records this scope and the final experimental release. Reading that acceptance record for this revision does not repeat its historical checks. The early-label and future-signal restrictions tested by such probes concern information access, not robustness to measurement noise or missing charge windows.
+
+\subsection{What each verification establishes}
+\begin{itemize}
+\item \textbf{Metric recalculation} reads saved labels and predictions and reconstructs errors. The existing asset audit reports agreement for 5,840 development cell--configuration rows and all 210 CALCE stage/source/cell prediction files. This is not an inference replay.
+\item \textbf{Inference replay} loads a saved checkpoint or adapter and recomputes predictions. The neural scope is given in Table~\ref{tab:sneural}; source training is not repeated.
+\item \textbf{Source-GP initialization sensitivity} reuses the results of fitting the fixed branch from five starting length scales. It does not vary the complete pipeline.
+\item \textbf{Domain bootstrap} resamples whole observed domains for fixed predictions. It does not remove development-selection bias.
+\item \textbf{Risk resampling} changes empirical reference-risk draws with fitted GPs held fixed. It is not a substitute for training-seed or measurement-noise experiments.
+\end{itemize}
+Different support budgets, label and signal noise, missing charge windows, full-pipeline retraining, calibrated predictive intervals and independent acquisition sources remain outside these verification claims.
+
+\section{CALCE protocol and trajectory diagnostics}
+\label{sec:scalce}
+This section reports the detailed frozen XJTU-to-CALCE boundary analysis omitted from the main text. The purpose is to assess transfer under a different acquisition source and protocol while keeping the source models, model identity and deployment weights fixed. CALCE measurements are available from the Center for Advanced Life Cycle Engineering battery archive at \url{https://web.calce.umd.edu/batteries/data/}.
+\subsection{Frozen evaluation protocol}
+The frozen XJTU models were applied to fourteen candidate cells: CS2\_5/6/7/8/21/24/25, CX2\_3/4/31 and PL11--PL14. Seven met the input and capacity requirements: CS2\_5, CS2\_6, CX2\_3 and PL11--PL14. They provide 5,633 eligible measurement pairs, consisting of 70 support and 5,563 query pairs.
+
+Eligibility requires a 3.9--4.1 V charge segment, an interpretable full-discharge capacity and more than ten eligible pairs in chronological order. CS2\_7 fails the complete-window/discharge checks; CS2\_24 and CS2\_25 supply only one and two qualified pairs, respectively. For CS2\_8/21 and CX2\_4/31, the interpretation of capacity units and chronology remains unresolved. Two unverified TXT records within CX2\_3 are excluded at the file level. Exclusions are based on measurement interpretation and availability, not model error.
+
+The complete-charge gate requires at least 4.18 V. The CS2/CX2 full-reference discharge gate uses an under-load voltage at or below 2.72 V; PL follows its 2.75-V cutoff with a 0.02-V tolerance. Capacity is based on full-discharge counter increments checked against current integrals. Missing labels are not interpolated. The first ten eligible reference measurements need not be the first ten physical ageing cycles, and labels remain discharge-rate-specific.
+
+The seven cells form four protocol groups: CS2 low-SOC-ageing reference tests, CX2 alternating-pulse full references, PL full-SOC 0.5C discharge and PL full-SOC 2C discharge. All six XJTU source-fold models are evaluated separately; errors are averaged over source models, equally over cells within a group and then equally over the four groups. Predictions are not ensembled, and the six source models do not create 42 independent target cells. Source models, blend weights and the complete-model identity are fixed before this evaluation. Local records contain no earlier model scores for the seven selected cells, although other CALCE cells had been used in the project.
+
+\input{tables/calce_main.tex}
+
+\subsection{Protocol-dependent error changes}
+Table~\ref{tab:calceprotocols} separates CS2 low-SOC RPT, CX2 alternating-pulse full references, PL full-SOC 0.5C discharge and PL full-SOC 2C discharge. Three groups improve, while the last worsens by 1.9060 pp. Equal protocol weighting yields a $+0.0460$-pp MAE difference, as illustrated in Figure~\ref{fig:scalceprotocol}. Protocol, cell population and capacity definition are confounded, so this comparison does not identify a causal discharge-rate effect. The four protocol groups are not a controlled rate experiment.
+\begin{figure}[!htbp]\centering
+\includegraphics[width=\linewidth]{figures_revision/calce_protocols.pdf}
+\caption{Protocol-group MAE changes for B1234 relative to B. Errors are averaged over six separately scored frozen source models and equally over cells within each protocol group. Bars are descriptive means, not confidence intervals.}\label{fig:scalceprotocol}
+\end{figure}
+
+\subsection{Prediction-range definition and all-cell results}
+For each frozen source fold and eligible CALCE cell, the prediction range is computed over the same query interval used for the error metrics:
+\begin{equation}
+R_{fc}^{\mathrm{pred}}=100\left(\max_{j>K}\widehat y_{fcj}-\min_{j>K}\widehat y_{fcj}\right),\qquad
+R_c^{\mathrm{obs}}=100\left(\max_{j>K}y_{cj}-\min_{j>K}y_{cj}\right).
+\end{equation}
+The base-GPR trajectories have zero range in all 42 saved source-fold/cell arrays. For B1234, the overall maximum is the maximum of $R_{fc}^{\mathrm{pred}}$ over six source folds and seven cells, without averaging predictions into a new ensemble. Table~\ref{tab:sranges} shows the minimum and maximum over source models for each cell. The largest B1234 range is 1.9427 pp, whereas observed query ranges span 5.4231--70.8928 pp.
+
+\input{tables_revision/s_ranges.tex}
+
+Figure~\ref{fig:scalcetrajectories} retains all seven eligible cells and plots each source model separately. The complete predictor introduces nonzero variation but does not recover the observed external capacity-change amplitude. Some cell-level MAE reductions therefore cannot be taken as evidence of successful degradation tracking. These are diagnostics of stored output behaviour; they do not establish a unique kernel-distance, representation or physical failure mechanism.
+\begin{figure}[!htbp]\centering
+\includegraphics[width=\linewidth,height=.78\textheight,keepaspectratio]{figures_revision/calce_trajectories.pdf}
+\caption{Observed query SOH and saved B/B1234 predictions for all seven eligible CALCE cells. Each of the six frozen XJTU source models is plotted separately; overlapping lines may be indistinguishable. Measurement indices are display axes, not model inputs. No prediction ensemble is evaluated.}\label{fig:scalcetrajectories}
+\end{figure}
+
+\section{Accuracy--cost operating points and evidence provenance}
+\label{sec:scost}
+\subsection{Measured operating points}
+Table~\ref{tab:scost} relates B12 and B1234 to their shared baseline B. B12 retains most of the aggregate reduction, while additional conditioning achieves lower complete-model errors at additional query cost. Figure~\ref{fig:scost} places all five measured stages on the same accuracy--latency axes. These are fixed operating points, not a new target-adaptive stage selector; no stage is retrospectively selected for each held-out group. Timings describe the specified CPU implementation and exclude signal acquisition and capacity-label measurement.
+
+\input{tables_revision/s_cost.tex}
+
+\begin{figure}[!htbp]\centering
+\includegraphics[width=\linewidth]{figures_revision/stage_cost.pdf}
+\caption{Aggregate MAE and measured single-query CPU time for B, B1, B12, B123 and B1234. The stages reuse the existing timing protocol; connecting lines indicate the progressive construction order, not a continuous fitted trade-off curve.}\label{fig:scost}
+\end{figure}
+
+\subsection{Source records, hashes and reproduction boundary}
+The prior asset audit reports 129,192 files and 77,110,506,591 bytes, with streamed file hashing and type-specific parsing. This revision uses that retained audit and targeted source checks; it does not repeat the full-directory scan or claim manual semantic review of every file. The original scope report and inventory summaries accompany the evidence records.
+
+The accompanying \path{evidence/} directory contains the unrounded summaries and selection records used for the added tables. \path{evidence/provenance.json} maps every supplied source record to its original project-relative location and SHA-256 digest. Table~\ref{tab:sprovenance} gives the reading guide. These are portable numerical evidence records, not a public release of the original datasets, source checkpoints or complete training pipeline.
+\begin{table}[H]\centering\papertablesize
+\caption{Evidence records accompanying this revision. File names are relative to \texttt{evidence/}.}\label{tab:sprovenance}
+\begin{tabular}{>{\raggedright\arraybackslash}p{.30\linewidth}>{\raggedright\arraybackslash}p{.62\linewidth}}\toprule
+Evidence & Records\\\midrule
+Frozen development metrics & \path{aggregate.csv}, \path{full_ablation_original.csv}, \path{domain_ablation.csv}\\
+Module summaries and intervals & \path{module_effects.csv}, \path{paired_intervals.csv}\\
+M1/M2 development identity & \path{m2_fixed_source.json}, \path{m2_fixed_source_protocol.json},  \path{m1_screen.json}, \path{m2_v1.json}, \path{m2_v2.json}, \path{m2_v3.json}, \path{m2_selection.json}\\
+M3 identity and waveform controls & \path{m3_selection.json}, \path{m3_candidate.json}, \path{m3_acceptance.json},  \path{m3_matched_original.csv}, \path{m3_selection_original.csv}, \path{m3_controls.csv}, corresponding protocol JSON files\\
+M4 identity and initialization & \path{m4_selection.json}, \path{m4_candidate.json}, \path{m4_initializations.csv}, \path{m4_initialization_summary.json}, \path{m4_fit_request.json}, \path{m4_fit_result.json}\\
+Neural verification & \path{neural_checkpoint_audit.json}, \path{neural_metric_audit.json}\\
+CALCE and operating points & \path{calce_protocols.csv}, \path{calce_protocols_original.csv}, \path{calce_ranges.csv}, \path{calce_210_trajectories.csv}, \path{stage_cost.csv}\\
+Historical coverage and audit & \path{historical_baseline_scope.md}, \path{historical_xjtu_comparison.md}, \path{prior_asset_audit.md}, \path{prior_inventory.json}, \path{prior_scan_summary.json},  \path{recalculation_summary.json}, \path{supplement_completion.json}\\
+Selection-level audit & \path{lodo_selection_audit.md}\\\bottomrule
+\end{tabular}\end{table}
+The supplied verification script checks hashes, derives the added effect sizes and percentages from unrounded summaries, and checks source identities. It does not rerun saved models or train new ones. The existing audit's saved-array recalculation is a separate historical check, whose scope is stated in Section~\ref{sec:saudit}. Historical status fields in development manifests describe the stage at which those records were created; the seven-cell CALCE conclusion reported in this supplement is the frozen result for this boundary cohort, not an earlier cohort mentioned in a selection record.
+
+The portable \path{evidence/regenerate_figures.py} script regenerates Figures~\ref{fig:sdomains}--\ref{fig:scost} from the supplied summaries and saved query arrays. It writes to a separate output directory by default. The 84 array files contain B and B1234 outputs for 42 source-fold/cell combinations; they are saved numerical evidence, not new inference or training runs. \path{evidence/REPRODUCTION.md} maps each figure and table to its inputs and distinguishes the portable script from the archived audit program, which requires the original project tree.
+
+\FloatBarrier
+\section{Development-group identities and cell counts}
+\label{sec:sgroups}
+This section expands the group definitions summarized in the main experimental settings. The memberships and eligibility rules are unchanged.
+
+The six XJTU archive groups are 2C, 3C, R2.5, R3, RW and Sim\_satellite, containing 8, 15, 8, 8, 8 and 8 cells, respectively; the original experiments use room-temperature cycling with different loading protocols. The four MATR archive batches b1--b4 contain 46, 43, 46 and 45 cells. Batch holdout is not equivalent to holding out each individual fast-charge policy: policies can differ within a batch, and no claim of disjoint policy sets across batches is made.
+
+Tongji group identifiers retain the material subset, temperature and charge/discharge C-rates. For subset 1 (NCA), the five $(^{\circ}\mathrm C, C_{\rm ch}, C_{\rm dis})$ groups are $(25,0.25,1)$, $(25,0.5,1)$, $(25,1,1)$, $(35,0.5,1)$ and $(45,0.5,1)$, with 7/19/9/3/28 cells. Subset 2 (NCM) contains $(25,0.5,1)$, $(35,0.5,1)$ and $(45,0.5,1)$, with 23/4/28 cells. Subset 3 (mixed NCM+NCA) contains $(25,0.5,1)$, $(25,0.5,2)$ and $(25,0.5,4)$, with three cells each. These 11 groups, rather than material subset alone, define the held-out units.
+The evaluated cohorts contain the cells that meet the eligibility criteria, not every cell released with each dataset.
+
+\end{document}

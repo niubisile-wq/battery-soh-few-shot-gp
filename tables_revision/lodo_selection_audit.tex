@@ -1,0 +1,19 @@
+\begin{table}[!htbp]
+\centering
+\caption{Leave-one-dataset-out selection-level audit. Each held-out dataset is excluded from candidate selection; the other two development datasets select among 35 frozen candidates (seven architecture families by five global steps).}
+\label{tab:lodo}
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lccrr}
+\toprule
+Held-out dataset & Selected candidate & Global step & LODO MAE & Base GPR MAE \\
+\midrule
+XJTU & plain & 1.0 & 2.6855 & 3.0115 \\
+MATR & condition\_mixed & 1.0 & 2.0178 & 2.6862 \\
+Tongji & plain & 0.5 & 2.9666 & 6.6695 \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+\scriptsize Relative reductions are 10.83\%, 24.89\% and 55.52\%, respectively. This is a frozen-candidate selection-level audit, not complete nested cross-validation with retraining from raw data.
+\end{flushleft}
+\end{table}

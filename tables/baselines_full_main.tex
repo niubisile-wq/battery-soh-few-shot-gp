@@ -1,0 +1,28 @@
+% Mechanically assembled from the three source tables; numerical entries unchanged.
+\begin{table}[!htbp]\centering
+\caption{Comparison with twelve baseline families across three development datasets. Lower errors are better.}\label{tab:baselines}
+\papertablesize\setlength{\tabcolsep}{2.0pt}\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{l*{9}{c}}\toprule
+&\multicolumn{3}{c}{XJTU}&\multicolumn{3}{c}{MATR}&\multicolumn{3}{c}{Tongji}\\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}\cmidrule(lr){8-10}
+Method & MAE & RMSE & P95 & MAE & RMSE & P95 & MAE & RMSE & P95\\\midrule
+Source mean & 4.5413 & 5.9337 & 12.5133  & 4.0773 & 6.5057 & 16.5546  & 8.9197 & 10.4378 & 17.4397  \\
+Support mean & 5.0675 & 6.6143 & 14.2753  & 4.6844 & 7.6253 & 18.9196  & 12.4375 & 13.7999 & 21.4642  \\
+Last support & 5.2319 & 7.0292 & 15.2231  & 4.7501 & 7.6780 & 19.0073  & 11.9073 & 13.3230 & 20.9335  \\
+\midrule
+Ridge & 4.8870 & 6.1718 & 12.1998  & 32.0714 & 42.3528 & 77.4378  & 12.1648 & 16.3266 & 19.1512  \\
+PLSR & 4.1068 & 5.2606 & 10.4105  & 33.8354 & 44.4944 & 77.5108  & 28.8819 & 32.6543 & 35.2630  \\
+SVR-RBF & 3.2358 & 4.0402 & 7.6898  & 2.4770 & 3.6950 & 8.2961  & 4.2611 & 5.0695 & 8.0831  \\
+Random Forest & \shortstack{3.3594\\$\pm0.0284$} & \shortstack{4.2643\\$\pm0.0272$} & \shortstack{8.2979\\$\pm0.0478$} & \shortstack{3.2961\\$\pm0.0217$} & \shortstack{4.8500\\$\pm0.0288$} & \shortstack{10.6652\\$\pm0.0687$} & \shortstack{6.3220\\$\pm0.0653$} & \shortstack{7.5897\\$\pm0.0703$} & \shortstack{13.2785\\$\pm0.0998$} \\
+XGBoost & \shortstack{3.3507\\$\pm0.0438$} & \shortstack{4.2172\\$\pm0.0479$} & \shortstack{8.1634\\$\pm0.0928$} & \shortstack{3.1686\\$\pm0.0358$} & \shortstack{4.7122\\$\pm0.0481$} & \shortstack{10.5116\\$\pm0.1279$} & \shortstack{6.8279\\$\pm0.0767$} & \shortstack{7.8576\\$\pm0.0816$} & \shortstack{12.5878\\$\pm0.1454$} \\
+GPR & 3.0115 & 3.8271 & 7.2310  & 2.6862 & 3.6212 & 7.2182  & 6.6695 & 8.2345 & 15.2312  \\
+\midrule
+PatchTSTLite & \shortstack{5.9686\\$\pm1.0420$} & \shortstack{7.1594\\$\pm1.1594$} & \shortstack{13.8060\\$\pm2.2139$} & \shortstack{3.0029\\$\pm0.4582$} & \shortstack{4.1737\\$\pm0.5024$} & \shortstack{8.6608\\$\pm0.7155$} & \shortstack{21.6735\\$\pm2.8894$} & \shortstack{22.2635\\$\pm2.9084$} & \shortstack{25.6180\\$\pm3.2150$} \\
+TCN & \shortstack{18.2163\\$\pm4.9641$} & \shortstack{19.3564\\$\pm5.0672$} & \shortstack{26.5225\\$\pm5.3044$} & \shortstack{3.8535\\$\pm0.3618$} & \shortstack{4.9756\\$\pm0.5520$} & \shortstack{9.8143\\$\pm1.4035$} & \shortstack{19.8610\\$\pm9.4374$} & \shortstack{20.4617\\$\pm9.3538$} & \shortstack{23.4482\\$\pm9.2908$} \\
+MAML--MLP & \shortstack{3.6229\\$\pm0.0979$} & \shortstack{4.7524\\$\pm0.1733$} & \shortstack{9.8006\\$\pm0.5986$} & \shortstack{2.7688\\$\pm0.0700$} & \shortstack{3.7498\\$\pm0.1428$} & \shortstack{7.7487\\$\pm0.6314$} & \shortstack{3.9068\\$\pm0.4456$} & \shortstack{4.4635\\$\pm0.4261$} & \shortstack{6.1226\\$\pm0.4658$} \\
+\midrule
+\rowcolor{gray!12}
+B1234 (frozen) & 2.6376 & 3.2841 & 6.2063  & 1.9199 & 2.5773 & 5.2583  & 2.8508 & 3.5726 & 5.9563  \\
+\bottomrule\end{tabular}
+\par\smallskip\begin{minipage}{\columnwidth}\papertablesize Errors are SOH pp. Neural entries show mean and sample SD over three seeds; Random Forest and XGBoost use ten seeds. Deterministic references have one evaluation and B1234 is one frozen configuration. Source-selected neural modes are primary; Table~\ref{tab:bias} reports fixed bias-correction diagnostics.\end{minipage}
+\end{table}

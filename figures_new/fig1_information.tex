@@ -1,0 +1,42 @@
+% Editable vector artwork. Coordinates in cm; colour is reinforced by labels.
+\begin{tikzpicture}[x=1cm,y=1cm,font=\fontsize{8.5}{10.5}\selectfont,align=center,
+  box/.style={draw=black!45,line width=.65pt,rounded corners=2pt,fill=white,inner sep=6pt},
+  flow/.style={-{Latex[length=2mm]},line width=.85pt,draw=black!70},
+  tag/.style={font=\fontsize{8.5}{10.5}\selectfont\bfseries,anchor=west},
+  note/.style={font=\fontsize{7.5}{9}\selectfont,text=black!70}]
+\definecolor{srcblue}{HTML}{285A80}
+\definecolor{targetgreen}{HTML}{247A73}
+\definecolor{evalorange}{HTML}{A96326}
+\fill[fill=srcblue!5,rounded corners=3pt] (0,0) rectangle (4.25,-6.15);
+\fill[fill=targetgreen!5,rounded corners=3pt] (4.55,0) rectangle (10.35,-6.15);
+\fill[fill=evalorange!5,rounded corners=3pt] (10.65,0) rectangle (14.9,-6.15);
+\node[tag,text=srcblue] at (.2,-.35) {(a) Source fitting};
+\node[tag,text=targetgreen] at (4.75,-.35) {(b) Target prediction};
+\node[tag,text=evalorange] at (10.85,-.35) {(c) Evaluation only};
+\node[box,draw=srcblue,text width=3.25cm,minimum height=1.15cm] (source) at (2.125,-1.5)
+  {\textbf{Source cells}\\Training and validation\\signals + capacity labels};
+\node[box,draw=srcblue,text width=3.25cm,minimum height=1.2cm] (state) at (2.125,-4.35)
+  {\textbf{Fitted source state}\\Transforms and GPs\\Risk table and options};
+\draw[flow,draw=srcblue] (source)--node[right,note,text width=1.5cm]{Fit and\\select} (state);
+\node[box,draw=targetgreen,text width=2.15cm,minimum height=1.35cm] (support) at (6.05,-1.6)
+  {\textbf{Support $S_c$}\\Ten early eligible\\signal--label pairs};
+\node[box,draw=targetgreen,text width=2.15cm,minimum height=1.35cm] (query) at (8.85,-1.6)
+  {\textbf{Query $x_{cj}$}\\Charge segment\\$j>10$; label withheld};
+\node[box,draw=targetgreen,fill=targetgreen!9,text width=4.4cm,minimum height=1.2cm] (predict) at (7.45,-4.35)
+  {\textbf{SOH prediction}\\$\widehat y_{cj}=F(D_s,S_c,x_{cj};\theta_s)$\\Fixed deployment weights};
+\draw[flow,draw=targetgreen] (support.south)--(support.south |- predict.north);
+\draw[flow,draw=targetgreen] (query.south)--(query.south |- predict.north);
+\draw[flow,draw=srcblue] (state.east)--(predict.west);
+\node[box,draw=evalorange,dashed,text width=3.15cm,minimum height=1.15cm] (truth) at (12.775,-1.6)
+  {\textbf{Query reference $y_{cj}$}\\Measured capacity label\\Withheld from prediction};
+\node[box,draw=evalorange,text width=3.15cm,minimum height=1.2cm] (metrics) at (12.775,-4.35)
+  {\textbf{Error calculation}\\MAE / RMSE / P95\\Aggregate by cell and group};
+\draw[flow,draw=evalorange,dashed] (truth)--(metrics);
+\draw[flow] (predict.east)--(metrics.west);
+\node[note,text width=3.65cm] at (2.125,-5.65) {No target-query labels\\in fold-level fitting};
+\node[note,text width=5.15cm] at (7.45,-5.65) {No future signals or query-label updates\\No cycle index as a predictive feature};
+\node[note,text width=3.65cm] at (12.775,-5.65) {No label-feedback path\\to target prediction};
+\node[anchor=north west,align=left,font=\fontsize{7.5}{9}\selectfont,text=black!75,text width=14.6cm] at (.05,-6.4)
+  {\textbf{Development scope.} XJTU, MATR and Tongji scores informed architecture and global-strength selection.\\
+   \textbf{Frozen evaluation.} The selected XJTU models and weights were fixed before the CALCE evaluation.};
+\end{tikzpicture}

@@ -1,0 +1,45 @@
+% Shared style with Figure 1; solid arrows carry predictions, dashed arrows inputs.
+\begin{tikzpicture}[x=1cm,y=1cm,font=\fontsize{8.5}{10.5}\selectfont,align=center,
+ box/.style={draw=black!45,line width=.7pt,rounded corners=2pt,fill=white,inner sep=6pt},
+ flow/.style={-{Latex[length=2mm]},line width=1pt,draw=black!75},
+ info/.style={-{Latex[length=1.8mm]},line width=.65pt,dashed,draw=black!50},
+ note/.style={font=\fontsize{7.5}{9}\selectfont,text=black!70}]
+\definecolor{srcblue}{HTML}{285A80}
+\definecolor{targetgreen}{HTML}{247A73}
+\definecolor{funcpurple}{HTML}{73568A}
+\node[box,fill=black!3,text width=14cm,minimum height=.9cm] (inputs) at (7.45,.3)
+ {\textbf{Common information for prediction}\\Fitted source state\quad +\quad early target support $S_c$ ($K=10$)\quad +\quad current query signal $x_{cj}$};
+\fill[srcblue!5,rounded corners=3pt] (.05,-.85) rectangle (4.65,-4.95);
+\fill[targetgreen!5,rounded corners=3pt] (5.15,-.85) rectangle (9.75,-4.95);
+\fill[funcpurple!5,rounded corners=3pt] (10.25,-.85) rectangle (14.85,-4.95);
+\node[font=\fontsize{8.5}{10.5}\selectfont\bfseries,text=srcblue] at (2.35,-1.15) {Source prediction};
+\node[font=\fontsize{8.5}{10.5}\selectfont\bfseries,text=targetgreen] at (7.45,-1.15) {Waveform conditioning};
+\node[font=\fontsize{8.5}{10.5}\selectfont\bfseries,text=funcpurple] at (12.55,-1.15) {Function conditioning};
+\node[box,draw=srcblue,text width=3.65cm,minimum height=1.05cm] (m1) at (2.35,-2.1)
+ {\textbf{B1: B + M1}\\Health indicators + PLS GP\\Source-selected adaptation};
+\node[box,draw=srcblue,text width=3.65cm,minimum height=1.2cm] (m2) at (2.35,-4.05)
+ {\textbf{M2}\quad Reference-risk selection\\Parent, bias and physical GP\\Early-support descriptors\\40 candidates; 24 risk bags};
+\draw[flow,draw=srcblue] (m1)--(m2);
+\node[box,draw=targetgreen,text width=3.65cm,minimum height=2.35cm] (m3) at (7.45,-3.05)
+ {\textbf{M3}\quad Paired-waveform GP\\[5pt]Query waveform\\Difference from support mean\\Source-fitted PCA and GP\\[5pt]Support-anchored estimate $q_3$};
+\node[box,draw=funcpurple,text width=3.65cm,minimum height=2.35cm] (m4) at (12.55,-3.05)
+ {\textbf{M4}\quad Random-function GP\\[5pt]Multiscale signal encoding\\Shared/private covariance\\Early-label Helmert contrasts\\[5pt]Conditional SOH estimate $q_4$};
+\draw[info] (inputs.south -| m1.north)--(m1.north);
+\draw[info] (inputs.south -| m3.north)--(m3.north);
+\draw[info] (inputs.south -| m4.north)--(m4.north);
+\node[box,draw=targetgreen,fill=targetgreen!8,text width=3.9cm,minimum height=1.1cm] (blend3) at (7.45,-6.05)
+ {\textbf{B123}\quad Waveform blend\\$(1-\gamma_{3f})p_{B12}+\gamma_{3f}q_3$};
+\node[box,draw=funcpurple,fill=funcpurple!8,text width=3.9cm,minimum height=1.1cm] (blend4) at (12.55,-6.05)
+ {\textbf{B1234}\quad Function blend\\$(1-\gamma_{4f})p_{B123}+\gamma_{4f}q_4$};
+\draw[flow,draw=srcblue] (m2.south)--(2.35,-6.05)--node[above,note,text=srcblue] {$p_{B12}$} (blend3.west);
+\draw[flow,draw=targetgreen] (m3.south)--node[right,note,text=targetgreen] {$q_3$} (blend3.north);
+\draw[flow,draw=funcpurple] (m4.south)--node[right,note,text=funcpurple] {$q_4$} (blend4.north);
+\draw[flow] (blend3.east)--(blend4.west);
+\node[box,draw=black!70,text width=3.9cm,minimum height=.65cm] (out) at (12.55,-7.65)
+ {\textbf{Current-query SOH}\quad $\widehat y_{cj}$};
+\draw[flow] (blend4)--(out);
+\node[align=left,anchor=west,font=\fontsize{7.5}{9}\selectfont,text=black!75,text width=9.3cm] at (.25,-7.55)
+ {\textbf{Fixed blending:} $\gamma_{3f}=0.5w_{3f}$; $\gamma_{4f}=0.5w_{4f}$.\\
+ Source validation selects $w_{3f}$ and $w_{4f}$; development selects global multipliers.\\
+ Solid arrows: predictions. Dashed arrows: permitted input information.};
+\end{tikzpicture}
