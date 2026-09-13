@@ -1,38 +1,42 @@
-% Editable vector artwork. Coordinates in cm; colour is reinforced by labels.
-\begin{tikzpicture}[x=1cm,y=1cm,font=\fontsize{8.5}{10.5}\selectfont,align=center,
-  box/.style={draw=black!45,line width=.65pt,rounded corners=1.5pt,fill=white,inner sep=6pt},
-  flow/.style={-{Latex[length=2mm]},line width=.85pt,draw=black!70},
-  tag/.style={font=\fontsize{8.5}{10.5}\selectfont\bfseries,anchor=west},
-  note/.style={font=\fontsize{7.5}{9}\selectfont,text=black!70}]
-\definecolor{srcblue}{HTML}{1F5A85}
-\definecolor{targetgreen}{HTML}{1F756F}
-\definecolor{evalorange}{HTML}{A65E24}
-\fill[fill=srcblue!4,draw=srcblue!18,line width=.4pt,rounded corners=3pt] (0,0) rectangle (4.25,-6.15);
-\fill[fill=targetgreen!4,draw=targetgreen!18,line width=.4pt,rounded corners=3pt] (4.55,0) rectangle (10.35,-6.15);
-\fill[fill=evalorange!4,draw=evalorange!18,line width=.4pt,rounded corners=3pt] (10.65,0) rectangle (14.9,-6.15);
-\node[tag,text=srcblue] at (.2,-.35) {(a) Source fitting};
-\node[tag,text=targetgreen] at (4.75,-.35) {(b) Target prediction};
-\node[tag,text=evalorange] at (10.85,-.35) {(c) Evaluation only};
-\node[box,draw=srcblue,text width=3.25cm,minimum height=1.15cm] (source) at (2.125,-1.5)
-  {\textbf{Source cells}\\Training and validation\\signals + capacity labels};
-\node[box,draw=srcblue,text width=3.25cm,minimum height=1.2cm] (state) at (2.125,-4.35)
-  {\textbf{Fitted source state}\\Transforms and GPs\\Risk table and options};
-\draw[flow,draw=srcblue] (source)--node[right,note,text width=1.5cm]{Fit and\\select} (state);
-\node[box,draw=targetgreen,text width=2.15cm,minimum height=1.35cm] (support) at (6.05,-1.6)
-  {\textbf{Support $S_c$}\\Ten early eligible\\signal--label pairs};
-\node[box,draw=targetgreen,text width=2.15cm,minimum height=1.35cm] (query) at (8.85,-1.6)
-  {\textbf{Query $x_{cj}$}\\Charge segment\\$j>10$; label withheld};
-\node[box,draw=targetgreen,fill=targetgreen!9,text width=4.4cm,minimum height=1.2cm] (predict) at (7.45,-4.35)
-  {\textbf{SOH prediction}\\$\widehat y_{cj}=F(D_s,S_c,x_{cj};\theta_s)$\\Fixed deployment weights};
-\draw[flow,draw=targetgreen] (support.south)--(support.south |- predict.north);
-\draw[flow,draw=targetgreen] (query.south)--(query.south |- predict.north);
-\draw[flow,draw=srcblue] (state.east)--(predict.west);
-\node[box,draw=evalorange,dashed,text width=3.15cm,minimum height=1.15cm] (truth) at (12.775,-1.6)
-  {\textbf{Query reference $y_{cj}$}\\Measured capacity label\\Withheld from prediction};
-\node[box,draw=evalorange,text width=3.15cm,minimum height=1.2cm] (metrics) at (12.775,-4.35)
-  {\textbf{Error calculation}\\MAE / RMSE / P95\\Aggregate by cell and group};
-\draw[flow,draw=evalorange,dashed] (truth)--(metrics);
-\draw[flow] (predict.east)--(metrics.west);
-% Information restrictions are stated in the caption and main text; the diagram
-% retains only the computational information flow.
+% Publication-style vector diagram: information boundary and evaluation flow.
+\begin{tikzpicture}[x=1cm,y=1cm,font=\fontsize{8.2}{9.8}\selectfont,align=center,
+  box/.style={draw=black!55,line width=.65pt,fill=white,inner sep=5pt,rounded corners=1pt},
+  arr/.style={-{Latex[length=2mm]},line width=.85pt,draw=black!75},
+  hdr/.style={font=\bfseries\fontsize{8.5}{10}\selectfont,anchor=west},
+  small/.style={font=\fontsize{7.4}{8.8}\selectfont,text=black!72}]
+\definecolor{navy}{HTML}{1F5A85}
+\definecolor{teal}{HTML}{1F756F}
+\definecolor{orange}{HTML}{A65E24}
+\definecolor{lightblue}{HTML}{EAF1F7}
+\definecolor{lightteal}{HTML}{EAF5F3}
+\definecolor{lightorange}{HTML}{FBF1E8}
+\fill[lightblue] (0,0) rectangle (4.55,-5.25);
+\fill[lightteal] (4.8,0) rectangle (10.15,-5.25);
+\fill[lightorange] (10.4,0) rectangle (14.95,-5.25);
+\draw[navy!40,line width=.55pt] (0,0) rectangle (4.55,-5.25);
+\draw[teal!40,line width=.55pt] (4.8,0) rectangle (10.15,-5.25);
+\draw[orange!40,line width=.55pt] (10.4,0) rectangle (14.95,-5.25);
+\node[hdr,text=navy] at (.18,-.28) {(a) SOURCE FITTING};
+\node[hdr,text=teal] at (4.98,-.28) {(b) TARGET QUERY};
+\node[hdr,text=orange] at (10.58,-.28) {(c) EVALUATION};
+\node[box,draw=navy,text width=3.35cm,minimum height=1.05cm] (src) at (2.275,-1.55)
+  {\textbf{Source cells}\\Signals and capacity labels\\Training and validation};
+\node[box,draw=navy,text width=3.35cm,minimum height=1.05cm] (fit) at (2.275,-3.85)
+  {\textbf{Fitted source state}\\Transforms, GPs and risk table\\Deployment options};
+\draw[arr,draw=navy] (src)--(fit);
+\node[box,draw=teal,text width=2.15cm,minimum height=1.18cm] (sup) at (5.95,-1.55)
+  {\textbf{Support }$S_c$\\$K=10$ early\\signal--label pairs};
+\node[box,draw=teal,text width=2.15cm,minimum height=1.18cm] (qry) at (8.85,-1.55)
+  {\textbf{Query }$x_{cj}$\\Current partial-charge\\signal; $j>K$};
+\node[box,draw=teal,text width=4.35cm,minimum height=1.08cm] (pred) at (7.4,-3.85)
+  {\textbf{Prediction }$\widehat y_{cj}=F(D_s,S_c,x_{cj};\theta_s)$\\Fixed source state and deployment weights};
+\draw[arr,draw=navy] (fit.east)--(pred.west);
+\draw[arr,draw=teal] (sup.south)--(sup.south |- pred.north);
+\draw[arr,draw=teal] (qry.south)--(qry.south |- pred.north);
+\node[box,draw=orange,dashed,text width=3.35cm,minimum height=1.18cm] (truth) at (12.675,-1.55)
+  {\textbf{Query label }$y_{cj}$\\Measured capacity\\Unavailable to prediction};
+\node[box,draw=orange,text width=3.35cm,minimum height=1.08cm] (eval) at (12.675,-3.85)
+  {\textbf{Error calculation}\\MAE, RMSE and P95\\Cell/group aggregation};
+\draw[arr,draw=orange,dashed] (truth)--(eval);
+\draw[arr] (pred.east)--(eval.west);
 \end{tikzpicture}

@@ -1,44 +1,47 @@
-% Shared style with Figure 1; solid arrows carry predictions, dashed arrows inputs.
-\begin{tikzpicture}[x=1cm,y=1cm,font=\fontsize{8.5}{10.5}\selectfont,align=center,
- box/.style={draw=black!45,line width=.7pt,rounded corners=1.5pt,fill=white,inner sep=6pt},
- flow/.style={-{Latex[length=2mm]},line width=1pt,draw=black!75},
- info/.style={-{Latex[length=1.8mm]},line width=.7pt,dashed,draw=black!50},
- note/.style={font=\fontsize{7.5}{9}\selectfont,text=black!70}]
-\definecolor{srcblue}{HTML}{1F5A85}
-\definecolor{targetgreen}{HTML}{1F756F}
-\definecolor{funcpurple}{HTML}{73568A}
-\node[box,fill=black!2,text width=14cm,minimum height=.9cm] (inputs) at (7.45,.3)
- {\textbf{Permitted information for query prediction}\\Fitted source state\quad +\quad early target support $S_c$ ($K=10$)\quad +\quad current query signal $x_{cj}$};
-\fill[srcblue!4,draw=srcblue!16,line width=.4pt,rounded corners=3pt] (.05,-.85) rectangle (4.65,-4.95);
-\fill[targetgreen!4,draw=targetgreen!16,line width=.4pt,rounded corners=3pt] (5.15,-.85) rectangle (9.75,-4.95);
-\fill[funcpurple!4,draw=funcpurple!16,line width=.4pt,rounded corners=3pt] (10.25,-.85) rectangle (14.85,-4.95);
-\node[font=\fontsize{8.5}{10.5}\selectfont\bfseries,text=srcblue] at (2.35,-1.15) {Main branch};
-\node[font=\fontsize{8.5}{10.5}\selectfont\bfseries,text=targetgreen] at (7.45,-1.15) {Auxiliary branch I};
-\node[font=\fontsize{8.5}{10.5}\selectfont\bfseries,text=funcpurple] at (12.55,-1.15) {Auxiliary branch II};
-\node[box,draw=srcblue,text width=3.65cm,minimum height=1.05cm] (m1) at (2.35,-2.1)
- {\textbf{B1: B + M1}\\Health indicators + PLS GP\\Source-selected adaptation};
-\node[box,draw=srcblue,text width=3.65cm,minimum height=1.2cm] (m2) at (2.35,-4.05)
- {\textbf{M2}\quad Reference-risk selection\\Parent, bias and physical GP\\Early-support descriptors\\40 candidates; 24 risk bags};
-\draw[flow,draw=srcblue] (m1)--(m2);
-\node[box,draw=targetgreen,text width=3.65cm,minimum height=2.35cm] (m3) at (7.45,-3.05)
- {\textbf{M3}\quad Paired-waveform GP\\[5pt]Query waveform\\Difference from support mean\\Source-fitted PCA and GP\\[5pt]Support-anchored estimate $q_3$};
-\node[box,draw=funcpurple,text width=3.65cm,minimum height=2.35cm] (m4) at (12.55,-3.05)
- {\textbf{M4}\quad Random-function GP\\[5pt]Multiscale signal encoding\\Shared/private covariance\\Early-label Helmert contrasts\\[5pt]Conditional SOH estimate $q_4$};
-\draw[info] (inputs.south -| m1.north)--(m1.north);
-\draw[info] (inputs.south west) .. controls (.00,-1.05) and (.00,-3.45) .. (m2.west);
-\draw[info] (inputs.south -| m3.north)--(m3.north);
-\draw[info] (inputs.south -| m4.north)--(m4.north);
-\node[box,draw=targetgreen,fill=targetgreen!8,text width=3.9cm,minimum height=1.1cm] (blend3) at (7.45,-6.05)
- {\textbf{B123}\quad Waveform blend\\$(1-\gamma_{3f})p_{B12}+\gamma_{3f}q_3$};
-\node[box,draw=funcpurple,fill=funcpurple!8,text width=3.9cm,minimum height=1.1cm] (blend4) at (12.55,-6.05)
- {\textbf{B1234}\quad Function blend\\$(1-\gamma_{4f})p_{B123}+\gamma_{4f}q_4$};
-\draw[flow,draw=srcblue] (m2.south)--(2.35,-6.05)--node[above,note,text=srcblue] {$p_{B12}$} (blend3.west);
-\draw[flow,draw=targetgreen] (m3.south)--node[right,note,text=targetgreen] {$q_3$} (blend3.north);
-\draw[flow,draw=funcpurple] (m4.south)--node[right,note,text=funcpurple] {$q_4$} (blend4.north);
-\draw[flow] (blend3.east)--(blend4.west);
-\node[box,draw=black!70,text width=3.9cm,minimum height=.65cm] (out) at (12.55,-7.65)
- {\textbf{Current-query SOH}\quad $\widehat y_{cj}$};
-\draw[flow] (blend4)--(out);
-% Blending and arrow conventions are defined in the caption and equations;
-% the diagram retains only the prediction flow and permitted inputs.
+% Publication-style vector diagram: main and auxiliary prediction branches.
+\begin{tikzpicture}[x=1cm,y=1cm,font=\fontsize{8.0}{9.5}\selectfont,align=center,
+  box/.style={draw=black!55,line width=.7pt,fill=white,inner sep=4pt,rounded corners=1pt},
+  arr/.style={-{Latex[length=2mm]},line width=.85pt,draw=black!75},
+  inarr/.style={-{Latex[length=1.8mm]},line width=.65pt,dashed,draw=black!52},
+  hdr/.style={font=\bfseries\fontsize{8.4}{10}\selectfont,anchor=west}]
+\definecolor{navy}{HTML}{1F5A85}
+\definecolor{teal}{HTML}{1F756F}
+\definecolor{purple}{HTML}{73568A}
+\definecolor{lightblue}{HTML}{EAF1F7}
+\definecolor{lightgray}{HTML}{F3F4F5}
+\definecolor{lightteal}{HTML}{EAF5F3}
+\definecolor{lightpurple}{HTML}{F2EDF5}
+\fill[lightblue] (0,0) rectangle (15,-2.25);
+\fill[lightgray] (0,-2.25) rectangle (15,-6.55);
+\draw[black!20,line width=.55pt] (0,0) rectangle (15,-6.55);
+\node[hdr,text=navy] at (.18,-.28) {AUXILIARY BRANCHES};
+\node[hdr,text=black!75] at (.18,-2.53) {MAIN BRANCH: SOURCE PREDICTION AND COMBINATION};
+\node[box,text width=8.0cm,minimum height=.42cm,font=\fontsize{7.2}{8.4}\selectfont] (info) at (7.5,-.62)
+  {\textbf{Permitted inputs:} fitted source state $+$ support $S_c$ ($K=10$) $+$ query $x_{cj}$};
+\node[box,draw=teal,fill=lightteal,text width=3.05cm,minimum height=.92cm] (m3) at (5.0,-1.62)
+  {\textbf{M3: paired-waveform GP}\\Query/support difference\\Source PCA/GP $\rightarrow q_3$};
+\node[box,draw=purple,fill=lightpurple,text width=3.05cm,minimum height=.92cm] (m4) at (10.0,-1.62)
+  {\textbf{M4: random-function GP}\\Multiscale covariance\\Support contrasts $\rightarrow q_4$};
+\draw[inarr] (info.south -| m3.north)--(m3.north);
+\draw[inarr] (info.south -| m4.north)--(m4.north);
+\node[box,draw=navy,text width=2.7cm,minimum height=.85cm] (m1) at (1.7,-3.62)
+  {\textbf{B1: B + M1}\\Indicators, PLS GP\\and adaptation};
+\node[box,draw=navy,text width=2.7cm,minimum height=1.0cm] (m2) at (1.7,-5.02)
+  {\textbf{M2: risk selection}\\Parent, bias and physical experts\\40 candidates; 24 bags};
+\draw[arr,draw=navy] (m1)--(m2);
+\draw[inarr] (info.south west) .. controls (-.08,-2.15) and (-.08,-4.8) .. (m2.west);
+\node[box,draw=navy,fill=lightblue,text width=2.15cm,minimum height=.7cm] (p12) at (4.45,-5.45)
+  {\textbf{$p_{B12}$}\\Source prediction};
+\draw[arr,draw=navy] (m2.east)--(p12.west);
+\node[box,draw=teal,fill=lightteal,text width=2.35cm,minimum height=.72cm] (b123) at (7.05,-5.45)
+  {\textbf{B123}\\$(1-\gamma_{3f})p_{B12}+\gamma_{3f}q_3$};
+\draw[arr,draw=navy] (p12.east)--(b123.west);
+\draw[arr,draw=teal] (m3.south)--(b123.north);
+\node[box,draw=purple,fill=lightpurple,text width=2.35cm,minimum height=.72cm] (b1234) at (9.75,-5.45)
+  {\textbf{B1234}\\$(1-\gamma_{4f})p_{B123}+\gamma_{4f}q_4$};
+\draw[arr,draw=teal] (b123.east)--(b1234.west);
+\draw[arr,draw=purple] (m4.south)--(b1234.north);
+\node[box,text width=2.1cm,minimum height=.7cm] (out) at (12.65,-5.45)
+  {\textbf{Current-query SOH}\\$\widehat y_{cj}$};
+\draw[arr] (b1234.east)--(out.west);
 \end{tikzpicture}
